@@ -14,8 +14,8 @@ on the clusters.
 
 Docker images can be built on any host running EL7 or better, so the easiest
 way is to start up an EL7 instance on Anvil to use.  [Docker install 
-instructions for CentOS](https://docs.docker.com/engine/installation/linux/centos/#/install-with-yum)
-The basic workflow is to create a new branch, add a folder containing the 
+instructions for CentOS](https://docs.docker.com/engine/installation/linux/centos/#/install-with-yum).
+ The basic workflow is to create a new branch, add a folder containing the 
 Dockerfile and any additonal files needed.  The folder must also contain a 
 `test.sh` script with the specific command to test the image.  Once you 
 believe it's working, commit and push the new branch.  This will trigger an
