@@ -1,0 +1,2 @@
+PATH=/opt/DREAM3D/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+LD_LIBRARY_PATH=/opt/DREAM3D/lib:
