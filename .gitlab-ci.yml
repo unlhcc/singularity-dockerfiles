@@ -31,7 +31,7 @@ test:
   stage: test
   except:
     - master
-  image: $HCC_REPO_NAME/singularity
+  image: $HCC_REPO_NAMESPACE/singularity
   tags:
     - el7
   script:
