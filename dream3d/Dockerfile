@@ -35,7 +35,7 @@ RUN wget http://dream3d.bluequartz.net/Data/Data_v6.zip -o /dev/null && \
 RUN mkdir /work
 
 # Add to path
-ENV PATH=/opt/DREAM3D/bin:$PATH \
+ENV PATH=/opt/DREAM3D/Plugins:/opt/DREAM3D/bin:$PATH \
   LD_LIBRARY_PATH=/opt/DREAM3D/lib:$LD_LIBRARY_PATH
 
 ADD environment /environment
