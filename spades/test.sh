@@ -1,0 +1,1 @@
+imageCommand="spades.py --version"
