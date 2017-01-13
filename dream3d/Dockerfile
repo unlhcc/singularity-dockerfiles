@@ -33,6 +33,7 @@ RUN wget http://dream3d.bluequartz.net/Data/Data_v6.zip -o /dev/null && \
 
 # Make the /work mount point
 RUN mkdir /work
+RUN ln -s /opt/DREAM3D/Plugins/* /opt/DREAM3D-6.3.29-Linux-x86_64/bin/
 
 # Add to path
 ENV PATH=/opt/DREAM3D/Plugins:/opt/DREAM3D/bin:$PATH \
