@@ -37,7 +37,7 @@ RUN ln -s /opt/DREAM3D/Plugins/* /opt/DREAM3D-6.3.29-Linux-x86_64/bin/
 
 # Add to path
 ENV PATH=/opt/DREAM3D/Plugins:/opt/DREAM3D/bin:$PATH \
-  LD_LIBRARY_PATH=/opt/DREAM3D/lib:$LD_LIBRARY_PATH
+  LD_LIBRARY_PATH=/opt/DREAM3D/lib:/usr/lib/x86_64-linux-gnu/mesa:$LD_LIBRARY_PATH
 
 ADD environment /environment
 ADD docker_environment /docker_environment

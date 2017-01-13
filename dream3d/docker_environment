@@ -1,2 +1,2 @@
 PATH=/opt/DREAM3D/Plugins:/opt/DREAM3D/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-LD_LIBRARY_PATH=/opt/DREAM3D/lib:
+LD_LIBRARY_PATH=/opt/DREAM3D/lib:/usr/lib/x86_64-linux-gnu/mesa
