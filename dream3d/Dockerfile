@@ -41,3 +41,5 @@ ENV PATH=/opt/DREAM3D/Plugins:/opt/DREAM3D/bin:$PATH \
 
 ADD environment /environment
 ADD docker_environment /docker_environment
+ADD dream3d.conf /etc/ld.so.conf.d
+RUN ldconfig -v && ln -s /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1 /opt/DREAM3D/lib
