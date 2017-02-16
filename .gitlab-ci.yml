@@ -2,9 +2,10 @@ variables:
   REGISTRY_IP: "10.71.103.108"
   REGISTRY_HOSTNAME: "docker-build-proxy.novalocal"
   REGISTRY_PORT: "5000"
+  DOCKER_HOST: "tcp://unlhcc__docker:2375"
 
 services:
-  - docker:hccdind
+  - unlhcc/docker:hccdind
 
 stages:
   - build
