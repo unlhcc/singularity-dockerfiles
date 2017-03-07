@@ -2,7 +2,6 @@ variables:
   REGISTRY_IP: "10.71.103.108"
   REGISTRY_HOSTNAME: "docker-build-proxy.novalocal"
   REGISTRY_PORT: "5000"
-  DOCKER_HOST: "tcp://unlhcc__docker:2375"
 
 services:
   - unlhcc/docker:hccdind
@@ -21,6 +20,7 @@ build:
     - docker
   variables:
     SW_NAMESPACE: "$REGISTRY_HOSTNAME:$REGISTRY_PORT"
+    DOCKER_HOST: "tcp://unlhcc__docker:2375"
   before_script:
     - apk add --no-cache python py-pip git
     - pip install shipwright
