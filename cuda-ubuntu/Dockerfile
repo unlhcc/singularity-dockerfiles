@@ -22,7 +22,8 @@ RUN cd /tmp && chmod +x cuda_8.0.44_linux-run NVIDIA-Linux-x86_64-367.57.run && 
     rm -rf /tmp/cuda* /tmp/NVIDIA*
 
 ENV PATH=/usr/local/cuda/bin:$PATH \
-  LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+  LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH \
+  CUDA_HOME=/usr/local/cuda
 
 ADD environment /environment
 ADD docker_environment /docker_environment
