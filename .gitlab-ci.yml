@@ -23,7 +23,7 @@ build:
     SW_NAMESPACE: "$REGISTRY_HOSTNAME:$REGISTRY_PORT"
   before_script:
     - apk add --no-cache python py-pip git
-    - pip install git+https://github.com/unlhcc/shipwright.git@hcc
+    - pip install shipwright==0.9.0a
   script:
     - shipwright build --pull-cache
     - shipwright push --pull-cache
@@ -51,7 +51,7 @@ deploy:
     SW_NAMESPACE: "$HCC_REPO_NAMESPACE"
   before_script:
     - apk add --no-cache python py-pip git
-    - pip install git+https://github.com/unlhcc/shipwright.git@hcc
+    - pip install shipwright==0.9.0a
   script:
     - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
     - shipwright build --pull-cache
