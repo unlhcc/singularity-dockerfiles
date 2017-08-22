@@ -6,7 +6,7 @@ imageList=`ls -1d */ | cut -f1 -d '/'`
 for image in $imageList
 do
     source ${image}/test.sh
-    testCommand="singularity exec -r $REGISTRY_HOSTNAME:$REGISTRY_PORT docker://$HCC_REPO_NAMESPACE/${image} ${imageCommand}"
+    testCommand="singularity exec docker://$REGISTRY_HOSTNAME:$REGISTRY_PORT/$HCC_REPO_NAMESPACE/${image} ${imageCommand}"
     echo "Running test command '$testCommand'"
     eval $testCommand
 
