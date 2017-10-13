@@ -7,3 +7,4 @@
 | TensorFlow GPU | 1.3          | `singularity exec docker://unlhcc/tensorflow-gpu python /path/to/my_tf_code.py` | Use `python3` for Python3 code |
 | Keras w/Tensorflow GPU backend| 2.0.4     | `singularity exec docker://unlhcc/keras-tensorflow-gpu python /path/to/my_keras_code.py` | Use `python3` for Python3 code |
 | Octave         | 4.2.1     | `singularity exec docker://unlhcc/octave octave` | |
+| Sonnet GPU     | 1.13      | `singularity exec docker://unlhcc/sonnet-gpu python /path/to/my_sonnet_code.py` | Use `python3` for Python3 code |
