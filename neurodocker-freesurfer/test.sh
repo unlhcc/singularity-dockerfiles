@@ -1,0 +1,1 @@
+imageCommand="recon-all --version"

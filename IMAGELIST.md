@@ -11,3 +11,4 @@
 | Neurodocker w/ANTs | 2.2.0 | `singularity exec docker://unlhcc/neurodocker-ants <ants script>` | Replace `<ants script>` with the desired ANTs program |
 | GNU Radio      | 3.7.11    | `singularity exec docker://unlhcc/gnuradio python /path/to/my_gnuradio_code.py` | Replace `python /path/to/my_gnuradio_code.py` with other GNU Radio commands to run |
 | Neurodocker w/AFNI | 17.3.00 | `singularity exec docker://unlhcc/neurodocker-afni <AFNI program>` | Replace `<AFNI program>` with the desired AFNI program |
+| Neurodocker w/FreeSurfer | 6.0.0 | `singularity exec docker://unlhcc/neurodocker-freesurfer recon-all` | Replace `recon-all` with other FreeSurfer commands to run |
