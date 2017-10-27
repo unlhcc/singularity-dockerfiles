@@ -1,1 +1,1 @@
-imageCommand="recon-all --version"
+imageCommand="/neurodocker/startup.sh recon-all --version"
