@@ -55,7 +55,7 @@ ENV FREESURFER_HOME=/opt/freesurfer
 # Create new user: neuro
 #RUN useradd --no-user-group --create-home --shell /bin/bash neuro
 #USER neuro
-RUN mkdir -p /work
+RUN mkdir -p /work && touch /opt/freesurfer/license.txt
 
 #------------------
 # Install Miniconda
