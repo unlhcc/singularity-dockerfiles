@@ -15,6 +15,10 @@ RUN source /opt/rh/devtoolset-2/enable && cd /tmp/octave-4.2.1 && \
     ./configure --prefix=/usr/local --with-blas="-L/usr/lib64/atlas -lf77blas -latlas" --with-lapack="-L/usr/lib64/atlas -llapack" && \
     make -j 4 && make install && rm -rf /tmp/octave-4.2.1
 
-RUN chmod u+w /bin /lib /lib64 /usr/bin /usr/sbin /usr/lib /usr/lib64 && \
+RUN chmod u+w /sbin /bin /lib /lib64 /usr/bin /usr/sbin /usr/lib /usr/lib64 && \
     rm -rf /tmp/octave-4.2.1 && yum clean all && \
-    echo "source /opt/rh/devtoolset-2/enable" >> /etc/profile.d/gcc48.sh
+    echo "source /opt/rh/devtoolset-2/enable" >> /etc/profile.d/gcc48.sh && \
+    ln -s /usr/lib64/atlas/liblapack.so.3 /usr/lib64/liblapack.so.3 && \
+    ln -s /usr/lib64/atlas/libf77blas.so.3 /usr/lib64/libf77blas.so.3 && \
+    ln -s /usr/lib64/atlas/libatlas.so.3 /usr/lib64/libatlas.so.3 && \
+    ln -s /usr/lib64/atlas/libcblas.so.3 /usr/lib64/libcblas.so.3
