@@ -27,6 +27,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && if [ ! -f "$ND_ENTRYPOINT" ]; then \
          echo '#!/usr/bin/env bash' >> $ND_ENTRYPOINT \
          && echo 'set +x' >> $ND_ENTRYPOINT \
+         && echo 'source $FREESURFER_HOME/SetUpFreeSurfer.sh' >>  $ND_ENTRYPOINT \
          && echo 'if [ -z "$*" ]; then /usr/bin/env bash; else $*; fi' >> $ND_ENTRYPOINT; \
        fi \
     && chmod -R 777 /neurodocker && chmod a+s /neurodocker
@@ -48,8 +49,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends bc libgomp
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && echo "Downloading minimized FreeSurfer ..." \
-    && curl -sSL https://dl.dropbox.com/s/nnzcfttc41qvt31/recon-all-freesurfer6-3.min.tgz | tar xz -C /opt \
-    && sed -i '$isource $FREESURFER_HOME/SetUpFreeSurfer.sh' $ND_ENTRYPOINT
+    && curl -sSL https://dl.dropbox.com/s/nnzcfttc41qvt31/recon-all-freesurfer6-3.min.tgz | tar xz -C /opt
 ENV FREESURFER_HOME=/opt/freesurfer
 
 # Create new user: neuro
