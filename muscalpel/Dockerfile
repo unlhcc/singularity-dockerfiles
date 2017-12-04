@@ -16,9 +16,9 @@ RUN cp /usr/bin/gfortran-4.8 /usr/bin/gfortran>/dev/null || :
 
 RUN mkdir -p /work /home /output
 # Download the software and untar in /usr/local
-RUN cd /tmp && wget https://unl.box.com/shared/static/54bdf1ri76w601b1st7gnlx7z6omngcn.tgz -o /dev/null && \
-  tar -C /usr/local -zxf 54bdf1ri76w601b1st7gnlx7z6omngcn.tgz && \
-  rm /tmp/54bdf1ri76w601b1st7gnlx7z6omngcn.tgz
+RUN cd /tmp && wget https://unl.box.com/shared/static/81oikx7ojn0ye6s1jjwdvft7iyj7aopz.tgz -o /dev/null && \
+  tar -C /usr/local -zxf 81oikx7ojn0ye6s1jjwdvft7iyj7aopz.tgz && \
+  rm /tmp/81oikx7ojn0ye6s1jjwdvft7iyj7aopz.tgz
 
 # Add the top-level package directory to the PATH
 ENV PATH=/usr/local/SharedFolder/AllScripts:$PATH
