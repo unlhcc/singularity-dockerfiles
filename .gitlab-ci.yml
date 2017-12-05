@@ -51,7 +51,7 @@ deploy:
   tags:
     - docker
   variables:
-    SW_NAMESPACE: "$HCC_REPO_NAMESPACE"
+    SW_NAMESPACE: "docker.io/$HCC_REPO_NAMESPACE"
   before_script:
     - apk add --no-cache python py-pip git
     - pip install git+https://github.com/acaprez/docker-registry-client.git@hcc git+https://github.com/unlhcc/shipwright.git@hcc
