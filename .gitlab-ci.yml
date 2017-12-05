@@ -57,6 +57,6 @@ deploy:
     - pip install git+https://github.com/acaprez/docker-registry-client.git@hcc git+https://github.com/unlhcc/shipwright.git@hcc
   script:
     - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-    - shipwright build --registry-login
-    - shipwright push --registry-login
+    - shipwright build --registry-login "https://docker.io --username=$DOCKERHUB_USER --password=$DOCKERHUB_PASSWORD"
+    - shipwright push --registry-login "https://docker.io --username=$DOCKERHUB_USER --password=$DOCKERHUB_PASSWORD"
 
