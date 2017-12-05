@@ -24,7 +24,7 @@ build:
     SW_NAMESPACE: "$REGISTRY_HOSTNAME:$REGISTRY_PORT/$HCC_REPO_NAMESPACE"
   before_script:
     - apk add --no-cache python py-pip git
-    - pip install shipwright==0.9.0a docker docker-registry-client
+    - pip install git+https://github.com/acaprez/docker-registry-client.git@hcc git+https://github.com/unlhcc/shipwright.git@hcc
     - echo "$REGISTRY_IP $REGISTRY_HOSTNAME" >> /etc/hosts
     - export REQUESTS_CA_BUNDLE=${CI_PROJECT_DIR}/ca.crt
   script:
@@ -54,7 +54,7 @@ deploy:
     SW_NAMESPACE: "$HCC_REPO_NAMESPACE"
   before_script:
     - apk add --no-cache python py-pip git
-    - pip install shipwright==0.9.0a docker docker-registry-client
+    - pip install git+https://github.com/acaprez/docker-registry-client.git@hcc git+https://github.com/unlhcc/shipwright.git@hcc
   script:
     - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
     - shipwright build --registry-login
