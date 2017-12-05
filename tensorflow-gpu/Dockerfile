@@ -11,8 +11,8 @@ RUN cd /tmp && wget https://unl.box.com/shared/static/y92g0umhpcre3qr2siiqi56aos
 RUN cd /tmp && tar -zxvf y92g0umhpcre3qr2siiqi56aos9k7yk1.tgz && mv cuda/lib64/* /usr/local/cuda/lib64 && mv cuda/include/* /usr/local/cuda/include
 
 # Install TensorFlow (and friends) for both Python 2.7 and 3.5
-RUN pip install tensorflow-gpu==1.3.0 numpy scipy matplotlib pandas scikit-learn scikit-image
-RUN pip3 install tensorflow-gpu==1.3.0 numpy scipy matplotlib pandas scikit-learn scikit-image
+RUN pip install tensorflow-gpu==1.4.0 numpy scipy matplotlib pandas scikit-learn scikit-image
+RUN pip3 install tensorflow-gpu==1.4.0 numpy scipy matplotlib pandas scikit-learn scikit-image
 
 # Env setup
 ADD environment /environment
