@@ -7,5 +7,8 @@ COPY /opt/conda/envs/neuro/bin/* /usr/local/bin
 # add to path
 ENV PATH=/opt/conda/envs/neuro/bin/:$PATH
 
+ADD environment /environment
+ADD docker_environment /docker_environment
+
 # mount work
 RUN mkdir -p /work
