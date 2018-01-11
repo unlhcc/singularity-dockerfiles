@@ -1,21 +1,23 @@
 FROM ubuntu:trusty
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 ## Install the validator
-RUN apt-get update && \
-    apt-get install -y curl && \
+RUN apt-get -qq update > /dev/null && \
+    apt-get install -qq -y curl > /dev/null && \
     curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
-    apt-get remove -y curl && \
-    apt-get install -y nodejs && \
+    apt-get -qq remove -y curl > /dev/null && \
+    apt-get install -qq -y nodejs > /dev/null && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN npm install -g bids-validator@0.19.2  2>&1 > /dev/null 2>&1
 
 # Update system
-RUN apt-get -qq update && apt-get -qq install -y \
+RUN apt-get -qq update > /dev/null && apt-get install -qq -y \
     unzip \
     xorg \
     octave \
-    wget && \
+    wget > /dev/null && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install MATLAB MCR
