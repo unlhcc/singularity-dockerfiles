@@ -1,2 +1,1 @@
-#imageCommand="caffe train --help"
-imageCommand="python -c 'import caffe'"
+imageCommand="test -e /opt/caffe/build/tools/caffe"
