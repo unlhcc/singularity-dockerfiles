@@ -105,3 +105,7 @@ ENV PATH=/opt/caffe/build/tools:$PATH
 
 # mount work
 RUN mkdir -p /work
+
+# Add custom environment files
+ADD environment /environment
+ADD docker_environment /docker_environment
