@@ -1,1 +1,1 @@
-imageCommand="test -e /opt/caffe/build/tools/caffe"
+imageCommand="python -c 'import caffe'"
