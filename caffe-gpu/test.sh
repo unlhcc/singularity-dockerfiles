@@ -1,1 +1,1 @@
-imageCommand="python -c 'import caffe'"
+imageCommand="caffe -version"
