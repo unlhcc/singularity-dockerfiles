@@ -100,12 +100,6 @@ for req in $(cat requirements.txt); do pip install $req; done
 # Build Caffe python bindings
 RUN cd /opt/caffe && make py
 
-# Env setup
-ADD environment /environment
-ADD docker_environment /docker_environment
-ADD cuda.conf /etc/ld.so.conf.d
-RUN ldconfig -v
-
 # add to path
 ENV PATH=/opt/caffe/build/tools:$PATH
 
