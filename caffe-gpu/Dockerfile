@@ -56,7 +56,7 @@ RUN cd /opt && git clone https://github.com/BVLC/caffe.git
 RUN cd /opt && wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/google-glog/glog-0.3.3.tar.gz && \
 tar zxvf glog-0.3.3.tar.gz && \
 cd /opt/glog-0.3.3 && \
-./configure && \
+./configure --prefix=/usr && \
 make && \
 make install
 
