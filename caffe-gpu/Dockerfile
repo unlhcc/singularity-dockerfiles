@@ -2,9 +2,9 @@
 FROM unlhcc/cuda-ubuntu
 
 # Install both 2.7/3.5 version of Python and pip
-RUN apt-get update && apt-get install -y software-properties-common
-RUN apt-add-repository multiverse && apt-get update
-RUN apt-get install -y libcupti-dev python-pip python-dev python3-dev python3-pip
+RUN apt-get -qq update && apt-get install -qq -y software-properties-common > /dev/null
+RUN apt-add-repository multiverse && apt-get update -qq
+RUN apt-get install -qq -y libcupti-dev python-pip python-dev python3-dev python3-pip > /dev/null
 
 # Download cuDNN from Box since it requires a CUDA developer account
 RUN cd /tmp && wget https://unl.box.com/shared/static/y92g0umhpcre3qr2siiqi56aos9k7yk1.tgz
@@ -71,7 +71,6 @@ mkdir build && \
 cd /opt/gflags-master/build && \
 export CXXFLAGS="-fPIC" && \
 cmake .. && \
-make VERBOSE=1 && \
 make && \
 make install
 
