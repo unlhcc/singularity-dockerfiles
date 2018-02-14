@@ -7,7 +7,7 @@ RUN apt-add-repository multiverse && apt-get update -qq
 RUN apt-get install -qq -y libcupti-dev python-pip python-dev python3-dev python3-pip > /dev/null
 
 # Download cuDNN from Box since it requires a CUDA developer account
-RUN cd /tmp && wget https://unl.box.com/shared/static/y92g0umhpcre3qr2siiqi56aos9k7yk1.tgz
+RUN cd /tmp && wget -q https://unl.box.com/shared/static/y92g0umhpcre3qr2siiqi56aos9k7yk1.tgz
 RUN cd /tmp && tar -zxvf y92g0umhpcre3qr2siiqi56aos9k7yk1.tgz && mv cuda/lib64/* /usr/local/cuda/lib64 && mv cuda/include/* /usr/local/cuda/include
 
 # Setup Environment for Caffe
@@ -53,7 +53,7 @@ RUN echo "/usr/local/cuda/lib64" > /etc/ld.so.conf.d/cuda.conf && ldconfig
 RUN cd /opt && git clone https://github.com/BVLC/caffe.git
 
 # Glog
-RUN cd /opt && wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/google-glog/glog-0.3.3.tar.gz && \
+RUN cd /opt && wget -q https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/google-glog/glog-0.3.3.tar.gz && \
 tar zxvf glog-0.3.3.tar.gz && \
 cd /opt/glog-0.3.3 && \
 ./configure --prefix=/usr && \
@@ -64,7 +64,7 @@ RUN ldconfig
 
 # Gflags
 RUN cd /opt && \
-wget https://github.com/schuhschuh/gflags/archive/master.zip && \
+wget -q https://github.com/schuhschuh/gflags/archive/master.zip && \
 unzip master.zip && \
 cd /opt/gflags-master && \
 mkdir build && \
