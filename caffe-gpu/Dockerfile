@@ -15,7 +15,7 @@ ENV PYTHONPATH /opt/caffe/python
 # Add caffe binaries to path
 ENV PATH $PATH:/opt/caffe/.build_release/tools
 # Get dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get -qq update && apt-get install -qq -y \
 bc \
 cmake \
 curl \
@@ -44,7 +44,7 @@ python-numpy \
 unzip \
 wget \
 libhdf5-dev \
-python-tables
+python-tables > /dev/null
 
 # Allow it to find CUDA libs
 RUN echo "/usr/local/cuda/lib64" > /etc/ld.so.conf.d/cuda.conf && ldconfig
