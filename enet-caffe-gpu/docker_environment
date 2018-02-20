@@ -1,0 +1,5 @@
+export PATH=/opt/ENet/caffe-enet/python/:/opt/ENet/caffe-enet/build/tools/:/opt/ENet/scripts:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PYTHONPATH=/opt/ENet/caffe-enet/python:$PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export CUDA_HOME=/usr/local/cuda
+export LC_ALL=C

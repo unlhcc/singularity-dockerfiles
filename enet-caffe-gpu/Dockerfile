@@ -1,0 +1,96 @@
+# Start with our CUDA Ubuntu image
+FROM unlhcc/cuda-ubuntu
+
+# Install both 2.7/3.5 version of Python and pip
+RUN apt-get -qq update && apt-get install -qq -y software-properties-common > /dev/null
+RUN apt-add-repository multiverse && apt-get update -qq
+RUN apt-get install -qq -y libcupti-dev python-pip python-dev python3-dev python3-pip > /dev/null
+
+# Download cuDNN, cudnn-8.0-linux-x64-v5.1, from Box since it requires a CUDA developer account
+RUN cd /tmp && wget -q https://unl.box.com/shared/static/4sdb6lv5kzieu25akrvmuuy0s3p1jetc.tgz
+RUN cd /tmp && tar -zxvf 4sdb6lv5kzieu25akrvmuuy0s3p1jetc.tgz && mv cuda/lib64/* /usr/local/cuda/lib64 && mv cuda/include/* /usr/local/cuda/include
+
+# Get dependencies
+RUN apt-get -qq update && apt-get install -qq -y \
+bc \
+cmake \
+curl \
+#gcc-4.6 \
+#g++-4.6 \
+#gcc-4.6-multilib \
+#g++-4.6-multilib \
+gfortran \
+git \
+libprotobuf-dev \
+libleveldb-dev \
+libsnappy-dev \
+libopencv-dev \
+libboost-all-dev \
+libhdf5-serial-dev \
+liblmdb-dev \
+libjpeg62 \
+libfreeimage-dev \
+libatlas-base-dev \
+pkgconf \
+protobuf-compiler \
+python-dev \
+python-pip \
+python-yaml \
+python-numpy \
+unzip \
+wget \
+libhdf5-dev \
+libgflags-dev \
+libgoogle-glog-dev \
+liblmdb-dev \
+doxygen \
+python-tables > /dev/null
+
+# Allow it to find CUDA libs
+RUN echo "/usr/local/cuda/lib64" > /etc/ld.so.conf.d/cuda.conf && ldconfig
+RUN ldconfig
+
+# Set hdf5 library correctly
+RUN cd /usr/lib/x86_64-linux-gnu && \
+ln -s libhdf5_serial.so.10.1.0 libhdf5.so && \
+ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so
+RUN ldconfig
+
+# Clone the ENet repo
+RUN cd /opt && git clone --recursive https://github.com/TimoSaemann/ENet.git
+
+# Install dependencies for ENet
+RUN pip install \
+        scikit-image \
+        google \
+        protobuf \
+        opencv-python \
+        configargparse
+
+# Build ENet
+RUN cd /opt/ENet/caffe-enet && \
+mkdir build && cd build && \
+cmake -DUSE_CUDNN=1 .. && \
+find . -type f -exec sed -i -e 's^"hdf5.h"^"hdf5/serial/hdf5.h"^g' -e 's^"hdf5_hl.h"^"hdf5/serial/hdf5_hl.h"^g' '{}' \; && \
+sed -i 's/CXX :=/CXX ?=/' Makefile && \
+make all -j8 && \
+make pycaffe
+
+# Run ldconfig again (not sure if needed)
+RUN ldconfig
+
+# add to path
+ENV PATH /opt/ENet/caffe-enet/python:/opt/ENet/caffe-enet/build/tools:/opt/ENet/scripts:$PATH
+ENV PYTHONPATH /opt/ENet/caffe-enet/python/
+
+# set permissions to python and help scripts
+RUN chmod a+xwr /opt/ENet/caffe-enet/python/*.py
+RUN chmod a+xwr /opt/ENet/caffe-enet/build/tools/*
+RUN chmod a+xwr /opt/ENet/scripts/*.py
+
+# mount work
+RUN mkdir -p /work
+
+# Add custom environment files
+ADD environment /environment
+ADD docker_environment /docker_environment
