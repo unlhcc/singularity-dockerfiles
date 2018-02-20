@@ -1,0 +1,1 @@
+imageCommand="caffe -version"
