@@ -74,7 +74,11 @@ cmake -DUSE_CUDNN=1 .. && \
 find . -type f -exec sed -i -e 's^"hdf5.h"^"hdf5/serial/hdf5.h"^g' -e 's^"hdf5_hl.h"^"hdf5/serial/hdf5_hl.h"^g' '{}' \; && \
 sed -i 's/CXX :=/CXX ?=/' Makefile && \
 make all -j8 && \
-make pycaffe
+make pycaffe && \
+# set permissions to python and help scripts
+chmod a+xwr /opt/ENet/caffe-enet/python/*.py && \
+chmod a+xwr /opt/ENet/caffe-enet/build/tools/* && \
+chmod a+xwr /opt/ENet/scripts/*.py
 
 # Run ldconfig again (not sure if needed)
 RUN ldconfig
@@ -82,11 +86,6 @@ RUN ldconfig
 # add to path
 ENV PATH /opt/ENet/caffe-enet/python:/opt/ENet/caffe-enet/build/tools:/opt/ENet/scripts:$PATH
 ENV PYTHONPATH /opt/ENet/caffe-enet/python/
-
-# set permissions to python and help scripts
-RUN chmod a+xwr /opt/ENet/caffe-enet/python/*.py
-RUN chmod a+xwr /opt/ENet/caffe-enet/build/tools/*
-RUN chmod a+xwr /opt/ENet/scripts/*.py
 
 # mount work
 RUN mkdir -p /work
