@@ -12,3 +12,10 @@
 | GNU Radio      | 3.7.11    | `singularity exec docker://unlhcc/gnuradio python /path/to/my_gnuradio_code.py` | Replace `python /path/to/my_gnuradio_code.py` with other GNU Radio commands to run |
 | Neurodocker w/AFNI | 17.3.00 | `singularity exec docker://unlhcc/neurodocker-afni <AFNI program>` | Replace `<AFNI program>` with the desired AFNI program |
 | Neurodocker w/FreeSurfer | 6.0.0 | `singularity -B <path to your FS license>:/opt/freesurfer/license.txt run docker://unlhcc/neurodocker-freesurfer recon-all` | Substitute `<path to your FS license>` with the full path to your particular FS license file.  Replace `recon-all` with other FreeSurfer commands to run |
+| fMRIprep       | 1.0.7     | `singularity exec docker://unlhcc/fmriprep fmriprep` | |
+| ndmg           | 0.0.50    | `singularity exec docker://unlhcc/ndmg ndmg_bids` | |
+| NIPYPE (Python2)   | 1.0.0   | `singularity exec docker://unlhcc/nipype-py27 <NIPYPE program>` | Replace `<NIPYPE program>` with the desired NIPYPE program |
+| NIPYPE (Python3)   | 1.0.0   | `singularity exec docker://unlhcc/nipype-py36 <NIPYPE program>` | Replace `<NIPYPE program>` with the desired NIPYPE program |
+| DPARSF         | 4.3.12    | `singularity exec docker://unlhcc/dparsf <DPARSF program>` | Replace `<DPARSF program>` with the desired DPARSF program |
+| Caffe GPU      | 1.0       | `singularity exec docker://unlhcc/caffe-gpu caffe` | |
+| ENet Caffe GPU | 427a014   | `singularity exec docker://unlhcc/enet-caffe-gpu <ENET program>` | Replace `<ENET program>` with the desired ENET program |
