@@ -21,7 +21,6 @@ curl \
 #g++-4.6-multilib \
 gfortran \
 git \
-libprotobuf-dev \
 libleveldb-dev \
 libsnappy-dev \
 libopencv-dev \
@@ -32,7 +31,6 @@ libjpeg62 \
 libfreeimage-dev \
 libatlas-base-dev \
 pkgconf \
-protobuf-compiler \
 python-dev \
 python-pip \
 python-yaml \
@@ -48,24 +46,25 @@ python-tables > /dev/null
 
 # Allow it to find CUDA libs
 RUN echo "/usr/local/cuda/lib64" > /etc/ld.so.conf.d/cuda.conf && ldconfig
-RUN ldconfig
 
 # Set hdf5 library correctly
 RUN cd /usr/lib/x86_64-linux-gnu && \
 ln -s libhdf5_serial.so.10.1.0 libhdf5.so && \
-ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so
-RUN ldconfig
+ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so && \
+ldconfig
 
 # Clone the ENet repo
 RUN cd /opt && git clone --recursive https://github.com/TimoSaemann/ENet.git
 
 # Install dependencies for ENet
-RUN pip install \
+RUN pip install --upgrade pip \
         scikit-image \
         google \
-        protobuf \
         opencv-python \
         configargparse
+RUN apt-get -qq -y remove --purge libprotobuf-dev && \
+apt-get -qq -y install libprotobuf-dev protobuf-compiler python-protobuf && \
+ldconfig
 
 # Build ENet
 RUN cd /opt/ENet/caffe-enet && \
