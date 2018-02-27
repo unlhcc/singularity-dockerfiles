@@ -40,8 +40,7 @@ test:
     - docker
   script:
     - echo "$REGISTRY_IP $REGISTRY_HOSTNAME" >> /etc/hosts
-    - su - singularity
-    - ./testall.sh
+    - su -p singularity -c "cd $CI_PROJECT_DIR ; ./test_changed_images.sh"
 
 deploy:
   stage: deploy
