@@ -33,7 +33,6 @@ then
     printf '%s\n' "Running test on changed image(s)..."
     for image in ${imageList[@]}
     do
-        rm -rf ~/.singularity/docker/*
         source ${image}/test.sh
         testCommand="singularity exec docker://$REGISTRY_HOSTNAME:$REGISTRY_PORT/$HCC_REPO_NAMESPACE/${image} ${imageCommand}"
         echo "Running test command '$testCommand'"
