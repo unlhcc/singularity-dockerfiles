@@ -1,41 +1,29 @@
 # Start with Ubuntu base image
-FROM ubuntu:16.04
-
-# Env setup
-ADD environment /environment
-ADD docker_environment /docker_environment
-ADD cuda.conf /etc/ld.so.conf.d
+FROM ubuntu
 
 # Install wget and build-essential
-RUN apt-get update -qq  && apt-get install -y -qq \
-    build-essential \
-    wget vim  module-init-tools > /dev/null && \
-    cd /tmp && \
+RUN apt-get update && apt-get install -y \
+  build-essential \
+  wget vim  module-init-tools
+
+RUN cd /tmp && \
     # Download run file
-    wget -q https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run && \
+    wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda_8.0.44_linux-run -o /dev/null && \
     # The driver version must match exactly what's installed on the GPU nodes, so install it separately
-    wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/375.66/NVIDIA-Linux-x86_64-375.66.run && \
-    # Download patch file
-    wget -q https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda_9.0.176.1_linux-run && \
-    # Make the run files executable and extract
-    chmod +x cuda_9.0.176_384.81_linux-run NVIDIA-Linux-x86_64-375.66.run cuda_9.0.176.1_linux-run && \
-    ./cuda_9.0.176_384.81_linux-run -extract=`pwd` && \
+    wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.66/NVIDIA-Linux-x86_64-375.66.run && \
+    # Make the run file executable and extract
+    chmod +x cuda_8.0.44_linux-run NVIDIA-Linux-x86_64-375.66.run && ./cuda_8.0.44_linux-run -extract=`pwd` && \
     # Install CUDA drivers (silent, no kernel)
     ./NVIDIA-Linux-x86_64-375.66.run -s --no-kernel-module && \
-    # Install toolkit (silent)
-    ./cuda-linux.9.0.176-22781540.run -noprompt && \
-    # Install patch
-    ./cuda_9.0.176.1_linux-run --silent --accept-eula && \
-    # Install cuDNN v7
-    cd /tmp && wget -q https://unl.box.com/shared/static/wgczb96wddjcur0tq9c8hhnog8emcnvf.tgz && \
-    cd /tmp && tar -zxf wgczb96wddjcur0tq9c8hhnog8emcnvf.tgz && mv cuda/lib64/* /usr/local/cuda/lib64 && mv cuda/include/* /usr/local/cuda/include && \
+     # Install toolkit (silent)
+     ./cuda-linux64-rel-*.run -noprompt && \
     # Clean up
-    rm -rf /tmp/cuda* /tmp/NVIDIA* /tmp/*.tgz && \
-    # Make /work mount
-    mkdir /work && \
-    # Update lib cache
-    ldconfig
+    rm -rf /tmp/cuda* /tmp/NVIDIA*
 
 ENV PATH=/usr/local/cuda/bin:$PATH \
   LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH \
   CUDA_HOME=/usr/local/cuda
+
+ADD environment /environment
+ADD docker_environment /docker_environment
+RUN mkdir /work
