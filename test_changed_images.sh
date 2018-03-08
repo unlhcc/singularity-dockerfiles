@@ -7,7 +7,21 @@ git fetch origin master
 
 printf '%s\n' "Finding changed images according to git..."
 # Get a unique list of top-level directories for any changed files
-dirList=`git diff  --name-only master HEAD | xargs -d ' ' dirname | sort | uniq`
+# Get the directory of any changed file
+declare -a dirListA
+for entry in `git diff  --name-only master HEAD`;
+do
+  i=`dirname $entry`
+  dirListA+=("$i")
+done
+
+if [ -z "${dirListA+set}" ]
+then
+    printf '%s\n' "No files changed according to git, exiting."
+    exit 0
+fi
+# Sort and unique the directory list
+dirList=`printf '%s\n' ${dirListA[@]} | sort | uniq`
 
 # Loop through and only include images (directories) that have a file that
 # matches the 'Dockerf*' glob.
