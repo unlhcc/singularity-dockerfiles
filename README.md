@@ -88,6 +88,21 @@ the `test.sh` script has the line
 imageCommand="M2 --version"
 ```
 
+### Add a `TAGS` file to indicate the version (optional)
+To add an additional tag or tags to the image to denote the version, create a file
+called `TAGS` alongside the `Dockerfile` in the image directory.  The file format is
+one additional tag per line.  These tags will be added to the default git ref. and
+`latest` tag by Shipwright when the image is built and pushed.  Keep in mind
+this should only reflect the *current* version; it should not be a historical
+list of every version.  That list should be kept by updating the `IMAGELIST.md` file
+(in the Version column) everytime a new version is added, to provide a complete
+list of all versions available for a particular image.
+
+### Update the image list
+If you are adding a new image or updating the version for an existing one, update
+the `IMAGELIST.md` file with the appropriate information (name, version, example
+command, notes, etc.).
+
 ### Push your changes
 Once you think the image is working, commit your changes and push your new branch
 to git.unl.edu:
