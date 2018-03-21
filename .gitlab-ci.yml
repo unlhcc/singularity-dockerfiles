@@ -44,6 +44,9 @@ test:
 
 deploy:
   stage: deploy
+  environment:
+    name: dockerhub_production
+    url: https://hub.docker.com/r/unlhcc
   image: docker:latest
   only:
     - master
