@@ -1,1 +1,1 @@
-imageCommand="python -c 'rospy'"
+imageCommand="python -c 'import rospy'"
