@@ -1,2 +1,0 @@
-export PATH=/usr/bin:/opt/conda/envs/neuro/bin:/opt/conda/bin:/opt/afni:/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/bin
-export LC_ALL=C

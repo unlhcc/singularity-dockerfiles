@@ -1,1 +1,0 @@
-imageCommand="afni -ver"
