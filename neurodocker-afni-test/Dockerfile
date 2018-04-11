@@ -5,7 +5,7 @@
 # pull request on our GitHub repository:
 #     https://github.com/kaczmarj/neurodocker
 #
-# Timestamp: 2017-10-26 13:53:01
+# Timestamp: 2017-10-26 13:53:29
 
 FROM ubuntu:16.04
 
@@ -27,7 +27,6 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && if [ ! -f "$ND_ENTRYPOINT" ]; then \
          echo '#!/usr/bin/env bash' >> $ND_ENTRYPOINT \
          && echo 'set +x' >> $ND_ENTRYPOINT \
-         && echo 'source $FREESURFER_HOME/SetUpFreeSurfer.sh' >>  $ND_ENTRYPOINT \
          && echo 'if [ -z "$*" ]; then /usr/bin/env bash; else $*; fi' >> $ND_ENTRYPOINT; \
        fi \
     && chmod -R 777 /neurodocker && chmod a+s /neurodocker
@@ -40,22 +39,37 @@ RUN apt-get update -qq \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-#--------------------------
-# Install FreeSurfer v6.0.0
-#--------------------------
-# Install version minimized for recon-all
-# See https://github.com/freesurfer/freesurfer/issues/70
-RUN apt-get update -qq && apt-get install -yq --no-install-recommends bc libgomp1 libxmu6 libxt6 tcsh perl \
+#--------------------
+# Install AFNI latest
+#--------------------
+ENV PATH=/opt/afni:$PATH
+RUN apt-get update -qq && apt-get install -yq --no-install-recommends ed gsl-bin libglu1-mesa-dev libglib2.0-0 libglw1-mesa \
+    libgomp1 libjpeg62 libxm4 netpbm tcsh xfonts-base xvfb \
+    && libs_path=/usr/lib/x86_64-linux-gnu \
+    && if [ -f $libs_path/libgsl.so.19 ]; then \
+           ln $libs_path/libgsl.so.19 $libs_path/libgsl.so.0; \
+       fi \
+    && echo "Install libxp (not in all ubuntu/debian repositories)" \
+    && apt-get install -yq --no-install-recommends libxp6 \
+    || /bin/bash -c " \
+       curl --retry 5 -o /tmp/libxp6.deb -sSL http://mirrors.kernel.org/debian/pool/main/libx/libxp/libxp6_1.0.2-2_amd64.deb \
+       && dpkg -i /tmp/libxp6.deb && rm -f /tmp/libxp6.deb" \
+    && echo "Install libpng12 (not in all ubuntu/debian repositories" \
+    && apt-get install -yq --no-install-recommends libpng12-0 \
+    || /bin/bash -c " \
+       curl -o /tmp/libpng12.deb -sSL http://mirrors.kernel.org/debian/pool/main/libp/libpng/libpng12-0_1.2.49-1%2Bdeb7u2_amd64.deb \
+       && dpkg -i /tmp/libpng12.deb && rm -f /tmp/libpng12.deb" \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && echo "Downloading minimized FreeSurfer ..." \
-    && curl -sSL https://dl.dropbox.com/s/nnzcfttc41qvt31/recon-all-freesurfer6-3.min.tgz | tar xz -C /opt
-ENV FREESURFER_HOME=/opt/freesurfer
+    && echo "Downloading AFNI ..." \
+    && mkdir -p /opt/afni \
+    && curl -sSL --retry 5 https://afni.nimh.nih.gov/pub/dist/tgz/linux_openmp_64.tgz \
+    | tar zx -C /opt/afni --strip-components=1
 
 # Create new user: neuro
 #RUN useradd --no-user-group --create-home --shell /bin/bash neuro
 #USER neuro
-RUN mkdir -p /work && touch /opt/freesurfer/license.txt
+RUN mkdir -p /work
 
 #------------------
 # Install Miniconda
@@ -84,7 +98,6 @@ RUN conda create -y -q --name neuro --channel conda-forge python=3.6.2 \
     && /bin/bash -c "source activate neuro \
       && pip install -q --no-cache-dir nipype" \
     && sync
-ENV PATH=/opt/conda/envs/neuro/bin:$PATH
 
 #--------------------------------------
 # Save container specifications to JSON
@@ -106,10 +119,9 @@ RUN echo '{ \
     \n      ] \
     \n    ], \
     \n    [ \
-    \n      "freesurfer", \
+    \n      "afni", \
     \n      { \
-    \n        "version": "6.0.0", \
-    \n        "min": true \
+    \n        "version": "latest" \
     \n      } \
     \n    ], \
     \n    [ \
@@ -127,6 +139,10 @@ RUN echo '{ \
     \n      } \
     \n    ] \
     \n  ], \
-    \n  "generation_timestamp": "2017-10-26 13:53:01", \
+    \n  "generation_timestamp": "2017-10-26 13:53:29", \
     \n  "neurodocker_version": "0.3.1" \
     \n}' > /neurodocker/neurodocker_specs.json
+
+# Add custom environment files
+ADD environment /environment
+ADD docker_environment /docker_environment
