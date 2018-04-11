@@ -1,1 +1,1 @@
-imageCommand="source /opt/ros/kinetic/setup.bash; python -c 'import rospy'"
+imageCommand="catkin_create_pkg -h"
