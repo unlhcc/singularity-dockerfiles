@@ -61,7 +61,7 @@ ENV CONDA_DIR=/opt/conda \
     PATH=/opt/conda/bin:$PATH
 RUN echo "Downloading Miniconda installer ..." \
     && miniconda_installer=/tmp/miniconda.sh \
-    && curl -sSL -o $miniconda_installer https://repo.continuum.io/miniconda/Miniconda3-4.3.31-Linux-x86_64.sh \
+    && curl -sSL -o $miniconda_installer https://repo.continuum.io/miniconda/Miniconda3-4.3.21-Linux-x86_64.sh \
     && /bin/bash $miniconda_installer -b -p $CONDA_DIR \
     && rm -f $miniconda_installer \
     && conda config --system --prepend channels conda-forge \
@@ -73,7 +73,7 @@ RUN echo "Downloading Miniconda installer ..." \
 #-------------------------
 # Create conda environment
 #-------------------------
-RUN conda update conda &&  create -y -q --name neuro --channel conda-forge python=3.6.2 \
+RUN conda create -y -q --name neuro --channel conda-forge python=3.6.2 \
                                                           numpy \
                                                           pandas \
                                                           reprozip \
