@@ -19,3 +19,4 @@
 | DPARSF         | 4.3.12    | `singularity exec docker://unlhcc/dparsf <DPARSF program>` | Replace `<DPARSF program>` with the desired DPARSF program |
 | Caffe GPU      | 1.0       | `singularity exec docker://unlhcc/caffe-gpu caffe` | |
 | ENet Caffe GPU | 427a014   | `singularity exec docker://unlhcc/enet-caffe-gpu <ENET program>` | Replace `<ENET program>` with the desired ENET program |
+| ROS Kinetic | 1.3.1   | `singularity exec docker://unlhcc/ros-kinetic <ROS program>` | Replace `<ROS program>` with the desired ROS program |
