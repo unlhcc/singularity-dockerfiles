@@ -70,7 +70,7 @@ Poke around and make sure things look right, then exit.
 
 ### Add a test script
 **You must add a proper test script or the build will fail.**
-The top level `testall.sh` script looks for a `test.sh` script in each directory
+The top level `test_changed_images.sh` script looks for a `test.sh` script in each directory
 to test the image.  The `test.sh` script is a single line file which defines the
 `imageCommand` variable with the test command.  The image is tested by running it
 via `singularity exec` using the value of `imageCommand` within a Docker container.
