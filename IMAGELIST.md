@@ -1,7 +1,7 @@
 | Software       | Version  | Command to Run | Additional Notes |
 | --------       | -------- | --------       | ----- |
 | DREAM3D        | 6.3.29    | `singularity exec docker://unlhcc/dream3d PipelineRunner`        | |
-| Spades         | 3.11.0     | `singularity exec docker://unlhcc/spades spades.py` | |
+| Spades         | 3.11.0    | `singularity exec docker://unlhcc/spades spades.py` | |
 | Macaulay2      | 1.9.2     | `singularity exec docker://unlhcc/macaulay2 M2` | |
 | CUDA (Ubuntu)  | 8.0       | `singularity exec docker://unlhcc/cuda-ubuntu <my CUDA program>` | Ubuntu 16.04.1 LTS w/CUDA 8.0 |
 | TensorFlow GPU | 1.4          | `singularity exec docker://unlhcc/tensorflow-gpu python /path/to/my_tf_code.py` | Use `python3` for Python3 code |
@@ -20,3 +20,4 @@
 | Caffe GPU      | 1.0       | `singularity exec docker://unlhcc/caffe-gpu caffe` | |
 | ENet Caffe GPU | 427a014   | `singularity exec docker://unlhcc/enet-caffe-gpu <ENET program>` | Replace `<ENET program>` with the desired ENET program |
 | ROS Kinetic | 1.3.1   | `singularity exec docker://unlhcc/ros-kinetic <ROS program>` | Replace `<ROS program>` with the desired ROS program |
+| Mitsuba        | 1.5.0     | `singularity exec docker://unlhcc/mitsuba mitsuba` | |
