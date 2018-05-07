@@ -1,0 +1,1 @@
+imageCommand="mitsuba -h"
