@@ -1,1 +1,1 @@
-imageCommand="FImputee -h 2>&1 | grep "FImpute" > /dev/null"
+imageCommand="FImputee -h"
