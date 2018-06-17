@@ -1,1 +1,1 @@
-imageCommand="FImpute -h"
+imageCommand="test -f /bin/FImpute"
