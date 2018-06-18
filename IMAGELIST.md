@@ -21,3 +21,4 @@
 | ENet Caffe GPU | 427a014   | `singularity exec docker://unlhcc/enet-caffe-gpu <ENET program>` | Replace `<ENET program>` with the desired ENET program |
 | ROS Kinetic | 1.3.1   | `singularity exec docker://unlhcc/ros-kinetic <ROS program>` | Replace `<ROS program>` with the desired ROS program |
 | Mitsuba        | 1.5.0     | `singularity exec docker://unlhcc/mitsuba mitsuba` | |
+| FImpute        | 2.2       | `singularity exec docker://unlhcc/fimpute FImpute <control file>` | Replace `<control file>` with the control file you have prepared |
