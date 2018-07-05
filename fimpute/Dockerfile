@@ -1,6 +1,6 @@
 # Use Centos base image
 FROM centos:7
-
+ 
 # Copy FImpute binary
 RUN yum install -y wget zip unzip epel-release
 RUN wget http://www.aps.uoguelph.ca/~msargol/fimpute/FImpute_Linux.zip && \
