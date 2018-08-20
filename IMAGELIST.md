@@ -11,7 +11,7 @@
 | Neurodocker w/ANTs | 2.2.0 | `singularity exec docker://unlhcc/neurodocker-ants <ants script>` | Replace `<ants script>` with the desired ANTs program |
 | GNU Radio      | 3.7.11    | `singularity exec docker://unlhcc/gnuradio python /path/to/my_gnuradio_code.py` | Replace `python /path/to/my_gnuradio_code.py` with other GNU Radio commands to run |
 | Neurodocker w/AFNI | 17.3.00 | `singularity exec docker://unlhcc/neurodocker-afni <AFNI program>` | Replace `<AFNI program>` with the desired AFNI program |
-| Neurodocker w/FreeSurfer | 6.0.0 | `singularity run -B <path to your FS license>:/opt/freesurfer/license.txt docker://unlhcc/neurodocker-freesurfer recon-all` | Substitute `<path to your FS license>` with the full path to your particular FS license file.  Replace `recon-all` with other FreeSurfer commands to run |
+| Neurodocker w/FreeSurfer | 6.0.0 | `singularity run -B <path to your FS license>:/opt/freesurfer/license.txt docker://unlhcc/neurodocker-freesurfer recon-all` | Substitute `<path to your FS license>` with the full path to your particular FS license file.  Replace `recon-all` with other FreeSurfer commands to run. |
 | fMRIprep       | 1.0.7     | `singularity exec docker://unlhcc/fmriprep fmriprep` | |
 | ndmg           | 0.0.50    | `singularity exec docker://unlhcc/ndmg ndmg_bids` | |
 | NIPYPE (Python2)   | 1.0.0   | `singularity exec docker://unlhcc/nipype-py27 <NIPYPE program>` | Replace `<NIPYPE program>` with the desired NIPYPE program |
@@ -22,3 +22,4 @@
 | ROS Kinetic | 1.3.1   | `singularity exec docker://unlhcc/ros-kinetic <ROS program>` | Replace `<ROS program>` with the desired ROS program |
 | Mitsuba        | 1.5.0     | `singularity exec docker://unlhcc/mitsuba mitsuba` | |
 | FImpute        | 2.2       | `singularity exec docker://unlhcc/fimpute FImpute <control file>` | Replace `<control file>` with the control file you have prepared |
+| Neurodocker w/FSL | 5.0.11 | `singularity run docker://unlhcc/neurodocker-fsl <FSL program>` | Replace `<FSL program>` with the desired FSL program. This image includes GPU support. |
