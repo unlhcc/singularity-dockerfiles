@@ -1,6 +1,6 @@
 | Software       | Version  | Command to Run | Additional Notes |
 | --------       | -------- | --------       | ----- |
-| DREAM3D        | 6.3.29    | `singularity exec docker://unlhcc/dream3d PipelineRunner`        | |
+| DREAM3D        | 6.3.29, 6.5.36 | `singularity exec docker://unlhcc/dream3d PipelineRunner`        | |
 | Spades         | 3.11.0    | `singularity exec docker://unlhcc/spades spades.py` | |
 | Macaulay2      | 1.9.2     | `singularity exec docker://unlhcc/macaulay2 M2` | |
 | CUDA (Ubuntu)  | 8.0       | `singularity exec docker://unlhcc/cuda-ubuntu <my CUDA program>` | Ubuntu 16.04.1 LTS w/CUDA 8.0 |
