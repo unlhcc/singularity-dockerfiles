@@ -23,7 +23,7 @@ RUN apt-get install -y xorg
 # Change to the /tmp directory
 RUN cd /tmp && \
 # Download DREAM3D binary tarball
-  wget http://dream3d.bluequartz.net/binaries/DREAM3D-6.5.36-Linux-x86_64.tar.gz -o /dev/null && \
+  wget http://dream3d.bluequartz.net/binaries/previous/DREAM3D-6.5.36-Linux-x86_64.tar.gz -o /dev/null && \
   tar -zxvf DREAM3D-6.5.36-Linux-x86_64.tar.gz -C /opt && \
   ln -s /opt/DREAM3D-6.5.36-Linux-x86_64 /opt/DREAM3D
 
@@ -37,7 +37,8 @@ RUN wget http://dream3d.bluequartz.net/binaries/DREAM3D_Data.tar.gz -o /dev/null
 
 # Make the /work mount point
 RUN mkdir /work
-RUN ln -s /opt/DREAM3D/Plugins/* /opt/DREAM3D-6.5.36-Linux-x86_64/bin/
+#RUN ln -s /opt/DREAM3D/Plugins/* /opt/DREAM3D-6.5.36-Linux-x86_64/bin/
+RUN ln -s /opt/DREAM3D/lib/*.plugin /opt/DREAM3D/Plugins/
 
 # Add to path
 ENV PATH=/opt/DREAM3D/Plugins:/opt/DREAM3D/bin:$PATH \
