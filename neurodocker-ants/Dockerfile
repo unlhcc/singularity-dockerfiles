@@ -10,7 +10,7 @@
 FROM ubuntu:16.04
 
 ARG DEBIAN_FRONTEND="noninteractive"
-
+RUN mkdir /work
 ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     ND_ENTRYPOINT="/neurodocker/startup.sh"
