@@ -66,6 +66,8 @@ deploy:
 sync-to-github:
   stage: sync-to-github
   image: unlhcc/crane-build-el6
+  tags:
+    - docker
   allow_failure: yes
   only:
     - master
