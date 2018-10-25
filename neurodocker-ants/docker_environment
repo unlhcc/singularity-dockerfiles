@@ -1,2 +1,0 @@
-export PATH=/opt/conda/envs/neuro/bin:/opt/conda/bin:/opt/ants:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-export ANTSPATH=/opt/ants
