@@ -1,0 +1,1 @@
+imageCommand="gdc-client -h"
