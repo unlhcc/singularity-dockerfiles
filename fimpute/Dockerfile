@@ -3,7 +3,7 @@ FROM centos:7
  
 # Copy FImpute binary 
 RUN yum install -y wget zip unzip epel-release
-RUN wget http://www.aps.uoguelph.ca/~msargol/fimpute/FImpute_Linux.zip && \
+RUN wget http://www.aps.uoguelph.ca/~msargol/fimpute/FImpute_Linux.zip  && \
     unzip  FImpute_Linux.zip && \
     cp FImpute_Linux/FImpute /bin/ && \
     mkdir -p /fimpute && \
