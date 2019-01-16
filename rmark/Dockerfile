@@ -1,6 +1,6 @@
-FROM fedora:27
+FROM centos:7
 
-RUN dnf install -y -q gcc gcc-gfortran bzip2 libXt libgomp which && \
+RUN yum install -y -q libgfortran4 libgomp bzip2 libXt which && \
     curl --output /usr/local/bin/mark -L https://unl.box.com/shared/static/3vhqep2fu0wic1qhbpgq4lekyu9wrrim && \
     chmod +x /usr/local/bin/mark && \
     curl -O -L https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
