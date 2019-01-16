@@ -25,3 +25,4 @@
 | Neurodocker w/FSL | 5.0.11 | `singularity run docker://unlhcc/neurodocker-fsl <FSL program>` | Replace `<FSL program>` with the desired FSL program. This image includes GPU support. |
 | gdc-client     | 1.3.0     | `singularity exec docker://unlhcc/gdc-client gdc-client <sub-command>` | Replace `<sub-command>` with the desired gdc-client sub-command |
 | BLUPF90 | 1.0 | `singularity exec docker://unlhcc/blupf90 <command>` | Replace `<command>` with any command from the suite (`blupf90`, `renumf90`, etc.) |
+| RMark | 2.2.5 | `singularity exec docker://unlhcc/rmark Rscript my_r_script.r` | |
