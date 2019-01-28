@@ -1,0 +1,1 @@
+imageCommand="SURPI.sh -h"
