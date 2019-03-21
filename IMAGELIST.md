@@ -23,8 +23,8 @@
 | Mitsuba        | 1.5.0     | `singularity exec docker://unlhcc/mitsuba mitsuba` | |
 | FImpute        | 2.2       | `singularity exec docker://unlhcc/fimpute FImpute <control file>` | Replace `<control file>` with the control file you have prepared |
 | Neurodocker w/FSL | 5.0.11 | `singularity run docker://unlhcc/neurodocker-fsl <FSL program>` | Replace `<FSL program>` with the desired FSL program. This image includes GPU support. |
-| gdc-client     | 1.3.0     | `singularity exec docker://unlhcc/gdc-client gdc-client <sub-command>` | Replace `<sub-command>` with the desired gdc-client sub-command |
+| gdc-client     | 1.4.0     | `singularity exec docker://unlhcc/gdc-client gdc-client <sub-command>` | Replace `<sub-command>` with the desired gdc-client sub-command |
 | BLUPF90 | 1.0 | `singularity exec docker://unlhcc/blupf90 <command>` | Replace `<command>` with any command from the suite (`blupf90`, `renumf90`, etc.) |
 | RMark | 2.2.5 | `singularity exec docker://unlhcc/rmark Rscript my_r_script.r` | |
 | SURPI | 1.0.18 | `singularity exec docker://unlhcc/surpi SURPI.sh -f </path/to/config>` | Replace `</path/to/config>` with the full path to your config file |
-| PyTorch | 1.0.0 | `singularity exec docker://unlhcc/pytorch python /path/to/my_torch_code.py` | Use `python3` for Python3 code. This image includes both CPU and GPU support. |
+| PyTorch | 1.0.1 | `singularity exec docker://unlhcc/pytorch python /path/to/my_torch_code.py` | Use `python3` for Python3 code. This image includes both CPU and GPU support. |
