@@ -28,3 +28,4 @@
 | RMark | 2.2.5 | `singularity exec docker://unlhcc/rmark Rscript my_r_script.r` | |
 | SURPI | 1.0.18 | `singularity exec docker://unlhcc/surpi SURPI.sh -f </path/to/config>` | Replace `</path/to/config>` with the full path to your config file |
 | PyTorch | 1.0.1 | `singularity exec docker://unlhcc/pytorch python /path/to/my_torch_code.py` | Use `python3` for Python3 code. This image includes both CPU and GPU support. |
+| bioBakery | 1.1 | `singularity exec docker://unlhcc/biobakery <bioBakery program>` | Replace `<bioBakery program>` with the desired bioBakery program and its arguments |
