@@ -30,3 +30,4 @@
 | PyTorch | 1.0.1 | `singularity exec docker://unlhcc/pytorch python /path/to/my_torch_code.py` | Use `python3` for Python3 code. This image includes both CPU and GPU support. |
 | bioBakery | 1.1 | `singularity exec docker://unlhcc/biobakery <bioBakery program>` | Replace `<bioBakery program>` with the desired bioBakery program and its arguments |
 | LIONS | 0.2 | `singularity exec -B <resource directory>:/LIONS-docker/resources/<genomeName> -B <data_directory>:/LIONS-data docker://unlhcc/lions lions.sh <path/to/parameter/ctrl>` | Replace `<path/to/parameter/ctrl>` with the path to your parameter file. |
+| lyve-SET | 1.1.4f | `singularity exec docker://unlhcc/lyve-set <lyve-SET program>` | Replace `<lyve-SET program>` with any command from the lyve-SET suite |
