@@ -2,7 +2,7 @@
 FROM centos:7
 
 # Update Centos and install dependencies
-RUN yum -q -y install yum-utils make wget xz-devel unzip epel-release gcc-gfortran gcc-c++ expat-devel \
+RUN yum -q -y install yum-utils make wget xz-devel unzip epel-release gcc-gfortran gcc-c++ expat-devel java-1.8.0-openjdk-devel \
     libXt-devel libcurl-devel vim less git zlib-devel bzip2 perl-core perl-base perl-devel perl-CPAN cpanspec cpanminus && \
     yum -q -y update && \    
     yum clean all
