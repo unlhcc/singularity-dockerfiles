@@ -32,3 +32,4 @@
 | LIONS | 0.2 | `singularity exec -B <resource directory>:/LIONS-docker/resources/<genomeName> -B <data_directory>:/LIONS-data docker://unlhcc/lions lions.sh <path/to/parameter/ctrl>` | Replace `<path/to/parameter/ctrl>` with the path to your parameter file. |
 | lyve-SET | 1.1.4f | `singularity exec docker://unlhcc/lyve-set <lyve-SET program>` | Replace `<lyve-SET program>` with any command from the lyve-SET suite |
 | RASTtk | 1.3.0 | `singularity exec docker://unlhcc/rasttk <rasttk program>` | Replace `<rasttk program>` with any command from the RASTtk suite. |
+| CellRanger | 3.0.2 | `singularity exec docker://unlhcc/cellranger cellranger <cellranger program>` | Replace `<cellranger program>` with any command from the CellRanger suite. |
