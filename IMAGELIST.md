@@ -7,7 +7,7 @@
 | TensorFlow GPU | 1.4, 1.12, 1.14  | `singularity exec docker://unlhcc/tensorflow-gpu python /path/to/my_tf_code.py` | Use `python3` for Python3 code |
 | Keras w/Tensorflow GPU backend| 2.0.4, 2.1.5, 2.2.4 | `singularity exec docker://unlhcc/keras-tensorflow-gpu python /path/to/my_keras_code.py` | Use `python3` for Python3 code |
 | Octave         | 4.2.1     | `singularity exec docker://unlhcc/octave octave` | |
-| Sonnet GPU     | 1.13, 1.27      | `singularity exec docker://unlhcc/sonnet-gpu python /path/to/my_sonnet_code.py` | Use `python3` for Python3 code |
+| Sonnet GPU     | 1.13, 1.27, 1.34  | `singularity exec docker://unlhcc/sonnet-gpu python /path/to/my_sonnet_code.py` | Use `python3` for Python3 code |
 | Neurodocker w/ANTs | 2.2.0 | `singularity exec docker://unlhcc/neurodocker-ants <ants script>` | Replace `<ants script>` with the desired ANTs program |
 | GNU Radio      | 3.7.11, 3.7.13.5  | `singularity exec docker://unlhcc/gnuradio python /path/to/my_gnuradio_code.py` | Replace `python /path/to/my_gnuradio_code.py` with other GNU Radio commands to run |
 | Neurodocker w/AFNI | 17.3.00 | `singularity exec docker://unlhcc/neurodocker-afni <AFNI program>` | Replace `<AFNI program>` with the desired AFNI program |
