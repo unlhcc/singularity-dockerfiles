@@ -2,7 +2,7 @@
 FROM ubuntu:16.04
 
 # Install wget and build-essential
-RUN apt-get update && apt-get install -y \
+RUN apt-get -qq update && apt-get -qq install -y \
   build-essential \
   wget vim  module-init-tools
 
@@ -45,10 +45,10 @@ RUN ldconfig -v
 RUN mkdir /work
 
 # Install both 2.7/3.5 version of Python and pip
-RUN apt-get update && apt-get install -y software-properties-common 
-RUN apt-add-repository multiverse && apt-get update
-RUN apt-get install -y libcupti-dev python-pip python-dev python3-dev python3-pip
+RUN apt-get -qq update && apt-get -qq install -y software-properties-common
+RUN apt-add-repository multiverse && apt-get -qq update
+RUN apt-get -qq install -y libcupti-dev python-pip python-dev python3-dev python3-pip
 
 # Install TensorFlow (and friends) for both Python 2.7 and 3.5
-RUN pip install tensorflow-gpu==1.12 numpy scipy 'matplotlib<3.0' pandas scikit-learn scikit-image
-RUN pip3 install tensorflow-gpu==1.12 numpy scipy matplotlib pandas scikit-learn scikit-image
+RUN pip --no-cache-dir install numpy 'tensorflow-gpu==1.14' pandas 'scipy<1.3.0' 'matplotlib<3.0' 'scikit-learn<=0.20' 'scikit-image<0.15' 'networkx==2.2'
+RUN pip3 --no-cache-dir install numpy 'tensorflow-gpu==1.14' 'matplotlib<3.1' pandas scikit-learn scikit-image scipy
