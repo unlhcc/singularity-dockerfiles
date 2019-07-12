@@ -58,10 +58,13 @@ RUN cd /opt && git clone --recursive https://github.com/TimoSaemann/ENet.git
 
 # Install dependencies for ENet
 RUN pip install --upgrade pip \
-        scikit-image \
+        'scikit-image<0.15' \
         google \
         opencv-python \
-        configargparse
+        configargparse \
+        'scipy<1.3.0' \
+        'networkx==2.2' \
+        'matplotlib<3.0'
 RUN apt-get -qq -y remove --purge libprotobuf-dev && \
 apt-get -qq -y install libprotobuf-dev protobuf-compiler python-protobuf && \
 ldconfig
@@ -69,7 +72,10 @@ ldconfig
 # Build ENet
 RUN cd /opt/ENet/caffe-enet && \
 mkdir build && cd build && \
-cmake -DUSE_CUDNN=1 .. && \
+cmake -DUSE_CUDNN=1 \
+    -DCUDA_ARCH_NAME="Manual" \
+    -DCUDA_ARCH_BIN="30 35 50 60 61" \
+    -DCUDA_ARCH_PTX="30 35 50 60 61"  .. && \
 find . -type f -exec sed -i -e 's^"hdf5.h"^"hdf5/serial/hdf5.h"^g' -e 's^"hdf5_hl.h"^"hdf5/serial/hdf5_hl.h"^g' '{}' \; && \
 sed -i 's/CXX :=/CXX ?=/' Makefile && \
 make all -j8 && \

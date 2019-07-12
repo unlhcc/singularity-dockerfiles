@@ -1,0 +1,13 @@
+--- /wineprefix64/user.reg	2018-08-29 18:42:30.000000000 +0000
++++ /wineprefix64/user.reg.new	2019-07-04 01:28:00.754461649 +0000
+@@ -147,8 +147,8 @@
+ 
+ [Environment] 1535566184
+ #time=1d43fc376a00ac4
+-"TEMP"="C:\\users\\root\\Temp"
+-"TMP"="C:\\users\\root\\Temp"
++"TEMP"="Z:\\tmp"
++"TMP"="Z:\\tmp"
+ 
+ [Keyboard Layout\\Preload] 1535568048
+ #time=1d43fc7cd9e1740

@@ -28,6 +28,7 @@ make -j 4 all && \
 make install && \
 # Install python deps
 cd /opt/caffe/python && \
+pip3 install 'matplotlib<3.1' && \
 pip3 install -r requirements.txt && \
 # old dateutil package throws a syntax error
 pip3 install --upgrade python-dateutil && \

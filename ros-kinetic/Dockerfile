@@ -2,8 +2,8 @@
 FROM ros:kinetic-ros-core-xenial
 
 # Install ros packages
-RUN apt-get update && apt-get install -y libxt6 curl \
-    ros-kinetic-ros-base=1.3.1-0* \
+RUN apt-get -q update && apt-get -qq install -y libxt6 curl \
+    ros-kinetic-ros-base=1.3.2-0* \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Miniconda
