@@ -8,27 +8,21 @@ RUN apt-get -qq update && apt-get -qq install -y \
 
 RUN cd /tmp && \
     # Download run file
-    wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run -o /dev/null && \
+    wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux -o /dev/null && \
     # The driver version must match exactly what's installed on the GPU nodes, so install it separately
     wget http://us.download.nvidia.com/XFree86/Linux-x86_64/410.73/NVIDIA-Linux-x86_64-410.73.run -o /dev/null && \
-    # Patches a'hoy!
-    wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda_9.0.176.1_linux-run \
-    https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/2/cuda_9.0.176.2_linux-run \
-    https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/3/cuda_9.0.176.3_linux-run \
-    https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/4/cuda_9.0.176.4_linux-run -o /dev/null && \
+    # Patch 1
+    wget http://developer.download.nvidia.com/compute/cuda/10.0/Prod/patches/1/cuda_10.0.130.1_linux.run -o /dev/null && \
     # cuDNN library
     wget https://unl.box.com/shared/static/713e2o84g4yvjloyhor60bcyn40kjgnh.tgz -o /dev/null && \
     # Make the run file executable and extract
-    chmod +x *-run NVIDIA-Linux-x86_64-410.73.run && ./cuda_9.0.176_384.81_linux-run -extract=`pwd` && \
+    chmod +x *.run cuda_10.0.130_410.48_linux NVIDIA-Linux-x86_64-410.73.run && ./cuda_10.0.130_410.48_linux -extract=`pwd` && \
     # Install CUDA drivers (silent, no kernel)
     ./NVIDIA-Linux-x86_64-410.73.run -s --no-kernel-module && \
     # Install toolkit (silent)
-     ./cuda-linux.9.0.176-22781540.run -noprompt && \
-    # Patches
-    ./cuda_9.0.176.1_linux-run  --silent --accept-eula && \
-    ./cuda_9.0.176.2_linux-run --silent --accept-eula && \
-    ./cuda_9.0.176.3_linux-run --silent --accept-eula && \
-    .//cuda_9.0.176.4_linux-run --silent --accept-eula && \
+     ./cuda-linux.10.0.130-24817639.run -noprompt && \
+    # Install patch
+    ./cuda_10.0.130.1_linux.run --silent --accept-eula && \
     # Install cuDNN
     tar -zxvf 713e2o84g4yvjloyhor60bcyn40kjgnh.tgz && \
     cp -a cuda/lib64/* /usr/local/cuda/lib64 && cp -a cuda/include/* /usr/local/cuda/include && \
