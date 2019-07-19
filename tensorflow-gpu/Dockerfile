@@ -36,7 +36,7 @@ ENV PATH=/usr/local/cuda/bin:$PATH \
 
 ADD cuda.conf /etc/ld.so.conf.d
 RUN ldconfig -v
-RUN mkdir /work
+RUN mkdir /work /common
 
 # Install both 2.7/3.5 version of Python and pip
 RUN apt-get -qq update && apt-get -qq install -y software-properties-common
@@ -44,5 +44,5 @@ RUN apt-add-repository multiverse && apt-get -qq update
 RUN apt-get -qq install -y libcupti-dev python-pip python-dev python3-dev python3-pip
 
 # Install TensorFlow (and friends) for both Python 2.7 and 3.5
-RUN pip --no-cache-dir install numpy 'tensorflow-gpu==1.14' pandas 'scipy<1.3.0' 'matplotlib<3.0' 'scikit-learn<=0.20' 'scikit-image<0.15' 'networkx==2.2'
-RUN pip3 --no-cache-dir install numpy 'tensorflow-gpu==1.14' 'matplotlib<3.1' pandas scikit-learn scikit-image scipy
+RUN pip --no-cache-dir install numpy 'tensorflow-gpu==1.14' 'pandas<0.25' 'scipy<1.3.0' 'matplotlib<3.0' 'scikit-learn<=0.20' 'scikit-image<0.15' 'networkx==2.2'
+RUN pip3 --no-cache-dir install numpy 'tensorflow-gpu==1.14' 'matplotlib<3.1' 'pandas<0.25' scikit-learn scikit-image scipy
