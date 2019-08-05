@@ -99,10 +99,10 @@ RUN wget -q http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cuffli
 
 
 # Get LIONS
-RUN wget -q https://github.com/ababaian/LIONS/archive/master.zip && \
-    unzip master.zip && \
-    rm -v master.zip && \
-    mv /LIONS-master /LIONS-docker
+RUN wget -q https://github.com/ababaian/LIONS/archive/b74a2e96ae8cce41b0eedea810f069e2a5552b30.zip && \
+    unzip b74a2e96ae8cce41b0eedea810f069e2a5552b30.zip && \
+    rm -v b74a2e96ae8cce41b0eedea810f069e2a5552b30.zip && \
+    mv /LIONS-b74a2e96ae8cce41b0eedea810f069e2a5552b30 /LIONS-docker
 
 WORKDIR /LIONS-docker
 RUN mkdir -p /work /common
