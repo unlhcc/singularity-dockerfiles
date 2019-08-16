@@ -34,3 +34,4 @@
 | RASTtk | 1.3.0 | `singularity exec docker://unlhcc/rasttk <rasttk program>` | Replace `<rasttk program>` with any command from the RASTtk suite. |
 | CellRanger | 3.0.2 | `singularity exec docker://unlhcc/cellranger cellranger <cellranger program>` | Replace `<cellranger program>` with any command from the CellRanger suite. |
 | SkylineRunner | 3.0.19158 | `singularity run -B $PWD:/data -B /tmp:/mywineprefix docker://unlhcc/skylinerunner mywine SkylineCmd <options>` | Replace `$PWD` with an absolute path if not running from the directory containing data. |
+| MXNet GPU (Python only) | 1.5.0 | `singularity exec docker://unlhcc/mxnet-gpu python /path/to/my_mxnet_code.py` | Use `python3` for Python3 code |
