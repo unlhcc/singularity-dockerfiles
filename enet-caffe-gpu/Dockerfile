@@ -1,5 +1,5 @@
 # Start with our CUDA Ubuntu image
-FROM unlhcc/cuda-ubuntu
+FROM unlhcc/cuda-ubuntu:9.2
 
 # Install both 2.7/3.5 version of Python and pip
 RUN apt-get -qq update && apt-get install -qq -y software-properties-common > /dev/null
@@ -59,6 +59,7 @@ RUN cd /opt && git clone --recursive https://github.com/TimoSaemann/ENet.git
 # Install dependencies for ENet
 RUN pip install --upgrade pip \
         'scikit-image<0.15' \
+        'numpy<1.17.0' \
         google \
         opencv-python \
         configargparse \
