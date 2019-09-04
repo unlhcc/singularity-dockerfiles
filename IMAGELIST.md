@@ -10,7 +10,7 @@
 | Sonnet GPU     | 1.13, 1.27, 1.34  | `singularity exec docker://unlhcc/sonnet-gpu python /path/to/my_sonnet_code.py` | Use `python3` for Python3 code |
 | Neurodocker w/ANTs | 2.2.0 | `singularity exec docker://unlhcc/neurodocker-ants <ants script>` | Replace `<ants script>` with the desired ANTs program |
 | GNU Radio      | 3.7.11, 3.7.13.5  | `singularity exec docker://unlhcc/gnuradio python /path/to/my_gnuradio_code.py` | Replace `python /path/to/my_gnuradio_code.py` with other GNU Radio commands to run |
-| Neurodocker w/AFNI | 17.3.00, 19.2.20 | `singularity exec docker://unlhcc/neurodocker-afni <AFNI program>` | Replace `<AFNI program>` with the desired AFNI program |
+| Neurodocker w/AFNI | 17.3.00, 19.2.20, 19.2.21 | `singularity exec docker://unlhcc/neurodocker-afni <AFNI program>` | Replace `<AFNI program>` with the desired AFNI program |
 | Neurodocker w/FreeSurfer | 6.0.0 | `singularity run -B <path to your FS license>:/opt/freesurfer/license.txt docker://unlhcc/neurodocker-freesurfer recon-all` | Substitute `<path to your FS license>` with the full path to your particular FS license file.  Replace `recon-all` with other FreeSurfer commands to run. |
 | fMRIprep       | 1.0.7     | `singularity exec docker://unlhcc/fmriprep fmriprep` | |
 | ndmg           | 0.0.50    | `singularity exec docker://unlhcc/ndmg ndmg_bids` | |
