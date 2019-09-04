@@ -92,7 +92,7 @@ RUN echo '{ \
     \n    [ \
     \n      "afni", \
     \n      { \
-    \n        "version": "latest", \
+    \n        "version": "19.2.21", \
     \n      } \
     \n    ] \
     \n  ] \
