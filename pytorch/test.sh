@@ -1,1 +1,1 @@
-imageCommand="python -c 'import torch'"
+imageCommand="python3 -c 'import torch'"
