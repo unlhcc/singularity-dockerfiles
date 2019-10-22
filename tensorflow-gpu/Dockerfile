@@ -44,5 +44,8 @@ RUN apt-add-repository multiverse && apt-get -qq update
 RUN apt-get -qq install -y libcupti-dev python-pip python-dev python3-dev python3-pip
 
 # Install TensorFlow (and friends) for both Python 2.7 and 3.5
-RUN pip --no-cache-dir install numpy 'tensorflow-gpu==1.14' 'pandas<0.25' 'scipy<1.3.0' 'matplotlib<3.0' 'scikit-learn<=0.20' 'scikit-image<0.15' 'networkx==2.2'
-RUN pip3 --no-cache-dir install numpy 'tensorflow-gpu==1.14' 'matplotlib<3.1' 'pandas<0.25' scikit-learn scikit-image scipy
+# TensorFlow 2.0.0 requires pip > 19.0
+RUN python2 -m pip install --upgrade pip && \
+  pip --no-cache-dir install 'tensorflow-gpu==2.0.0' 'numpy<2.0,>=1.16.0''six>=1.10.0' pandas scipy matplotlib scikit-learn scikit-image 'setuptools>=41.0.0'
+RUN python3 -m pip install --upgrade pip && \
+  pip3 --no-cache-dir install 'tensorflow-gpu==2.0.0' 'numpy<2.0,>=1.16.0' 'six>=1.10.0' pandas scipy matplotlib scikit-learn scikit-image 'setuptools>=41.0.0'
