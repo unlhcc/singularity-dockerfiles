@@ -38,3 +38,4 @@
 | ORFfinder | 0.4.3 | `singularity exec docker://unlhcc/orffinder ORFfinder <options>` | Replace `<options>` with the available options for ORFfinder. |
 | ARG_OAP | 2.0 | `singularity exec docker://unlhcc/arg_oap <arg_oap program>` | Replace `<arg_oap program>` with the desired ARG_OAP program and its arguments. |
 | CRISPRCasFinder | 4.2.19 | `singularity exec docker://unlhcc/crisprcasfinder CRISPRCasFinder.pl -in </path/to/input/fasta> <options> -soFile /opt/CRISPRCasFinder/sel392v2.so` | Replace `<path/to/input/fasta>` with the path to your input fasta file, and replace `<options>` with the available options for CRISPRCasFinder. |
+| WINE | 5.0 | `singularity exec -B /tmp:/mywineprefix docker://unlhcc/wine-ubuntu mywine <windows program>` | Replace `<windows program>` with the full path to the Windows binary. |
