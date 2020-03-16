@@ -30,7 +30,7 @@ build:
     - echo "$REGISTRY_IP $REGISTRY_HOSTNAME" >> /etc/hosts
     - export REQUESTS_CA_BUNDLE=${CI_PROJECT_DIR}/ca.crt
   script:
-    - shipwright build --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
+    - shipwright build -b token=$PRIVATE_PACKAGE_TOKEN --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
     - shipwright push --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
 
 test:
@@ -61,7 +61,7 @@ deploy:
     - pip install git+https://github.com/acaprez/docker-registry-client.git@hcc git+https://github.com/unlhcc/shipwright.git@hcc
   script:
     - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-    - shipwright build --registry-login "https://docker.io --username=$DOCKERHUB_USER --password=$DOCKERHUB_PASSWORD"
+    - shipwright build -b token=$PRIVATE_PACKAGE_TOKEN --registry-login "https://docker.io --username=$DOCKERHUB_USER --password=$DOCKERHUB_PASSWORD"
     - shipwright push --registry-login "https://docker.io --username=$DOCKERHUB_USER --password=$DOCKERHUB_PASSWORD"
 
 sync-to-github:
@@ -100,5 +100,5 @@ sync-registry:
     - echo "$REGISTRY_IP $REGISTRY_HOSTNAME" >> /etc/hosts
     - export REQUESTS_CA_BUNDLE=${CI_PROJECT_DIR}/ca.crt
   script:
-    - shipwright build --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
+    - shipwright build -b token=$PRIVATE_PACKAGE_TOKEN --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
     - shipwright push --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
