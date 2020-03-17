@@ -31,7 +31,7 @@ build:
     - export REQUESTS_CA_BUNDLE=${CI_PROJECT_DIR}/ca.crt
   script:
     - shipwright build -b token=$PRIVATE_PACKAGE_TOKEN --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
-    - shipwright push --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
+    - shipwright push -b token=$PRIVATE_PACKAGE_TOKEN --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
 
 test:
   stage: test
@@ -62,7 +62,7 @@ deploy:
   script:
     - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
     - shipwright build -b token=$PRIVATE_PACKAGE_TOKEN --registry-login "https://docker.io --username=$DOCKERHUB_USER --password=$DOCKERHUB_PASSWORD"
-    - shipwright push --registry-login "https://docker.io --username=$DOCKERHUB_USER --password=$DOCKERHUB_PASSWORD"
+    - shipwright push -b token=$PRIVATE_PACKAGE_TOKEN --registry-login "https://docker.io --username=$DOCKERHUB_USER --password=$DOCKERHUB_PASSWORD"
 
 sync-to-github:
   stage: sync-to-github
@@ -101,4 +101,4 @@ sync-registry:
     - export REQUESTS_CA_BUNDLE=${CI_PROJECT_DIR}/ca.crt
   script:
     - shipwright build -b token=$PRIVATE_PACKAGE_TOKEN --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
-    - shipwright push --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
+    - shipwright push -b token=$PRIVATE_PACKAGE_TOKEN --registry-login https://${REGISTRY_HOSTNAME}:${REGISTRY_PORT}
