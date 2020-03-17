@@ -68,6 +68,27 @@ docker run -ti f7f37b909f44
 
 Poke around and make sure things look right, then exit.
 
+#### Building Docker images that require private conda packages (optional)
+If as part of your `Dockerfile` you need to create a `conda` environment with a package
+that is listed as private in the `hcc` conda channel, you need to declare `ARG token`
+in the `Dockerfile` and use this argument when specifying the needed conda channels:
+
+```
+ARG token
+RUN conda config --system --add channels https://conda.anaconda.org/t/${token}/hcc
+```
+
+The value of `token` is already set in the GitLab CI settings, so no further
+declarations are needed.
+
+Next, you can build and test this image locally by using `--build-arg`:
+
+```
+docker build --build-arg token=<TOKEN> .
+```
+
+where `<TOKEN>` is the actual value of the token used for private conda packages.
+
 ### Add a test script
 **You must add a proper test script or the build will fail.**
 The top level `test_changed_images.sh` script looks for a `test.sh` script in each directory
