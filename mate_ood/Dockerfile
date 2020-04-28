@@ -7,6 +7,9 @@ RUN yum install -y epel-release && \
     yum install -y https://yum.osc.edu/ondemand/1.6/compute/el7Server/x86_64/python-websockify-0.8.0-1.el7.noarch.rpm && \
     yum install -y https://yum.osc.edu/ondemand/latest/compute/el7Server/x86_64/turbovnc-2.2.3-1.el7.x86_64.rpm && \
     yum remove -y tigervnc-server python2-pip mate-power-manager && \
+    # Install Lmod dependencies
+    yum install -y lua lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl && \
+    # Clean
     yum clean all && \
     rm -rf /var/cache/yum/*
 
