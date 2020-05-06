@@ -3,7 +3,7 @@
 | DREAM3D        | 6.3.29, 6.5.36 | `singularity exec docker://unlhcc/dream3d PipelineRunner`        | |
 | Spades         | 3.11.0    | `singularity exec docker://unlhcc/spades spades.py` | |
 | Macaulay2      | 1.9.2     | `singularity exec docker://unlhcc/macaulay2 M2` | |
-| CUDA (Ubuntu)  | 9.2       | `singularity exec docker://unlhcc/cuda-ubuntu <my CUDA program>` | Ubuntu 16.04.1 LTS w/CUDA Toolkit |
+| CUDA (Ubuntu)  | 10.2       | `singularity exec docker://unlhcc/cuda-ubuntu <my CUDA program>` | Ubuntu 16.04.1 LTS w/CUDA Toolkit |
 | TensorFlow GPU | 1.4, 1.12, 1.14, 2.0.0, 2.1.0 | `singularity exec docker://unlhcc/tensorflow-gpu python /path/to/my_tf_code.py` | Use `python3` for Python3 code |
 | Keras w/Tensorflow GPU backend| 2.0.4, 2.1.5, 2.2.4, 2.3.1 | `singularity exec docker://unlhcc/keras-tensorflow-gpu python /path/to/my_keras_code.py` | Use `python3` for Python3 code |
 | Octave         | 4.2.1     | `singularity exec docker://unlhcc/octave octave` | |
