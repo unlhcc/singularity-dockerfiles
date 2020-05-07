@@ -1,11 +1,11 @@
 # Start with our CUDA Ubuntu image
-FROM unlhcc/cuda-ubuntu:9.2
+FROM unlhcc/cuda-ubuntu:10.2
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install 3.x version of Python devel and pip
 RUN apt-get -qq update && apt-get install -qq -y software-properties-common > /dev/null && \
 apt-add-repository multiverse && apt-get update -qq && \
-apt-get install -qq -y libcupti-dev python3-dev python3-pip python3-numpy > /dev/null && \
+apt-get install -qq -y libcupti-dev python3-dev python3-pip python3-numpy cython3 > /dev/null && \
 apt-get install -qq -y apt-transport-https git cmake libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler libgflags-dev libgoogle-glog-dev liblmdb-dev > /dev/null && \
 apt-get install -qq -y --no-install-recommends libboost-all-dev > /dev/null
 
@@ -23,12 +23,14 @@ ENV PYTHONPATH=/opt/caffe/python PATH=$PATH:/opt/caffe/bin LD_LIBRARY_PATH=/opt/
 RUN cd /opt && git clone https://github.com/BVLC/caffe.git caffe-src && \
 # Build Caffe core (for Python 3)
 cd caffe-src && mkdir build && cd build && \
-cmake -Dpython_version="3" -DBUILD_SHARED_LIBS=ON -DCUDA_ARCH_NAME='All' -DBUILD_docs=OFF -DBLAS="MKL" -DCMAKE_INSTALL_PREFIX="/opt/caffe" .. && \
+cmake -Dpython_version="3" -DBUILD_SHARED_LIBS=ON -DCUDA_ARCH_NAME='Manual' -DCUDA_ARCH_BIN='sm_30 sm_35 sm_50 sm_60 sm_61 sm_62 sm_70 sm_75' -DBUILD_docs=OFF -DBLAS="MKL" -DCMAKE_INSTALL_PREFIX="/opt/caffe" .. && \
 make -j 4 all && \
 make install && \
 # Install python deps
 cd /opt/caffe/python && \
+python3 -m pip install --upgrade pip && \
 pip3 install 'matplotlib<3.1' && \
+pip3 install 'scikit-image<0.15' && \
 pip3 install -r requirements.txt && \
 # old dateutil package throws a syntax error
 pip3 install --upgrade python-dateutil && \
