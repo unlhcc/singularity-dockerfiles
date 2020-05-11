@@ -27,7 +27,7 @@
 | BLUPF90 | 1.0 | `singularity exec docker://unlhcc/blupf90 <command>` | Replace `<command>` with any command from the suite (`blupf90`, `renumf90`, etc.) |
 | RMark | 2.2.5 | `singularity exec docker://unlhcc/rmark Rscript my_r_script.r` | |
 | SURPI | 1.0.18 | `singularity exec docker://unlhcc/surpi SURPI.sh -f </path/to/config>` | Replace `</path/to/config>` with the full path to your config file |
-| PyTorch | 1.0.1, 1.1.0, 1.2.0, 1.5.0 | `singularity exec docker://unlhcc/pytorch python3 /path/to/my_torch_code.py` | This image includes both CPU and GPU support. |
+| PyTorch | 1.0.1, 1.1.0, 1.2.0, 1.5.0 | `singularity exec docker://unlhcc/pytorch python /path/to/my_torch_code.py` | This image includes both CPU and GPU support, and provides Python 3.7. |
 | bioBakery | 1.1 | `singularity exec docker://unlhcc/biobakery <bioBakery program>` | Replace `<bioBakery program>` with the desired bioBakery program and its arguments |
 | LIONS | 0.2 | `singularity exec -B <resource directory>:/LIONS-docker/resources/<genomeName> -B <data_directory>:/LIONS-data docker://unlhcc/lions lions.sh <path/to/parameter/ctrl>` | Replace `<path/to/parameter/ctrl>` with the path to your parameter file. |
 | lyve-SET | 1.1.4f | `singularity exec docker://unlhcc/lyve-set <lyve-SET program>` | Replace `<lyve-SET program>` with any command from the lyve-SET suite |
