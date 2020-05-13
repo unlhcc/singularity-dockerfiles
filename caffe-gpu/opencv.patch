@@ -1,0 +1,170 @@
+--- ./modules/gpu/src/nvidia/core/NCVPixelOperations.hpp.org	2020-05-13 01:01:34.390333294 +0000
++++ ./modules/gpu/src/nvidia/core/NCVPixelOperations.hpp	2020-05-13 01:04:35.720312742 +0000
+@@ -48,24 +48,24 @@
+ #include "NCV.hpp"
+
+ template<typename TBase> inline __host__ __device__ TBase _pixMaxVal();
+-template<> static inline __host__ __device__ Ncv8u  _pixMaxVal<Ncv8u>()  {return UCHAR_MAX;}
+-template<> static inline __host__ __device__ Ncv16u _pixMaxVal<Ncv16u>() {return USHRT_MAX;}
+-template<> static inline __host__ __device__ Ncv32u _pixMaxVal<Ncv32u>() {return  UINT_MAX;}
+-template<> static inline __host__ __device__ Ncv8s  _pixMaxVal<Ncv8s>()  {return  SCHAR_MAX;}
+-template<> static inline __host__ __device__ Ncv16s _pixMaxVal<Ncv16s>() {return  SHRT_MAX;}
+-template<> static inline __host__ __device__ Ncv32s _pixMaxVal<Ncv32s>() {return   INT_MAX;}
+-template<> static inline __host__ __device__ Ncv32f _pixMaxVal<Ncv32f>() {return   FLT_MAX;}
+-template<> static inline __host__ __device__ Ncv64f _pixMaxVal<Ncv64f>() {return   DBL_MAX;}
++template<> inline __host__ __device__ Ncv8u  _pixMaxVal<Ncv8u>()  {return UCHAR_MAX;}
++template<> inline __host__ __device__ Ncv16u _pixMaxVal<Ncv16u>() {return USHRT_MAX;}
++template<> inline __host__ __device__ Ncv32u _pixMaxVal<Ncv32u>() {return  UINT_MAX;}
++template<> inline __host__ __device__ Ncv8s  _pixMaxVal<Ncv8s>()  {return  SCHAR_MAX;}
++template<> inline __host__ __device__ Ncv16s _pixMaxVal<Ncv16s>() {return  SHRT_MAX;}
++template<> inline __host__ __device__ Ncv32s _pixMaxVal<Ncv32s>() {return   INT_MAX;}
++template<> inline __host__ __device__ Ncv32f _pixMaxVal<Ncv32f>() {return   FLT_MAX;}
++template<> inline __host__ __device__ Ncv64f _pixMaxVal<Ncv64f>() {return   DBL_MAX;}
+
+ template<typename TBase> inline __host__ __device__ TBase _pixMinVal();
+-template<> static inline __host__ __device__ Ncv8u  _pixMinVal<Ncv8u>()  {return 0;}
+-template<> static inline __host__ __device__ Ncv16u _pixMinVal<Ncv16u>() {return 0;}
+-template<> static inline __host__ __device__ Ncv32u _pixMinVal<Ncv32u>() {return 0;}
+-template<> static inline __host__ __device__ Ncv8s  _pixMinVal<Ncv8s>()  {return SCHAR_MIN;}
+-template<> static inline __host__ __device__ Ncv16s _pixMinVal<Ncv16s>() {return SHRT_MIN;}
+-template<> static inline __host__ __device__ Ncv32s _pixMinVal<Ncv32s>() {return INT_MIN;}
+-template<> static inline __host__ __device__ Ncv32f _pixMinVal<Ncv32f>() {return FLT_MIN;}
+-template<> static inline __host__ __device__ Ncv64f _pixMinVal<Ncv64f>() {return DBL_MIN;}
++template<> inline __host__ __device__ Ncv8u  _pixMinVal<Ncv8u>()  {return 0;}
++template<> inline __host__ __device__ Ncv16u _pixMinVal<Ncv16u>() {return 0;}
++template<> inline __host__ __device__ Ncv32u _pixMinVal<Ncv32u>() {return 0;}
++template<> inline __host__ __device__ Ncv8s  _pixMinVal<Ncv8s>()  {return SCHAR_MIN;}
++template<> inline __host__ __device__ Ncv16s _pixMinVal<Ncv16s>() {return SHRT_MIN;}
++template<> inline __host__ __device__ Ncv32s _pixMinVal<Ncv32s>() {return INT_MIN;}
++template<> inline __host__ __device__ Ncv32f _pixMinVal<Ncv32f>() {return FLT_MIN;}
++template<> inline __host__ __device__ Ncv64f _pixMinVal<Ncv64f>() {return DBL_MIN;}
+
+ template<typename Tvec> struct TConvVec2Base;
+ template<> struct TConvVec2Base<uchar1>  {typedef Ncv8u TBase;};
+@@ -116,21 +116,21 @@
+ template<typename Tin> static inline __host__ __device__ void _TDemoteClampNN(Tin &a, Ncv32f &out) {out = (Ncv32f)a;}
+
+ template<typename Tout> inline Tout _pixMakeZero();
+-template<> static inline __host__ __device__ uchar1 _pixMakeZero<uchar1>() {return make_uchar1(0);}
+-template<> static inline __host__ __device__ uchar3 _pixMakeZero<uchar3>() {return make_uchar3(0,0,0);}
+-template<> static inline __host__ __device__ uchar4 _pixMakeZero<uchar4>() {return make_uchar4(0,0,0,0);}
+-template<> static inline __host__ __device__ ushort1 _pixMakeZero<ushort1>() {return make_ushort1(0);}
+-template<> static inline __host__ __device__ ushort3 _pixMakeZero<ushort3>() {return make_ushort3(0,0,0);}
+-template<> static inline __host__ __device__ ushort4 _pixMakeZero<ushort4>() {return make_ushort4(0,0,0,0);}
+-template<> static inline __host__ __device__ uint1 _pixMakeZero<uint1>() {return make_uint1(0);}
+-template<> static inline __host__ __device__ uint3 _pixMakeZero<uint3>() {return make_uint3(0,0,0);}
+-template<> static inline __host__ __device__ uint4 _pixMakeZero<uint4>() {return make_uint4(0,0,0,0);}
+-template<> static inline __host__ __device__ float1 _pixMakeZero<float1>() {return make_float1(0.f);}
+-template<> static inline __host__ __device__ float3 _pixMakeZero<float3>() {return make_float3(0.f,0.f,0.f);}
+-template<> static inline __host__ __device__ float4 _pixMakeZero<float4>() {return make_float4(0.f,0.f,0.f,0.f);}
+-template<> static inline __host__ __device__ double1 _pixMakeZero<double1>() {return make_double1(0.);}
+-template<> static inline __host__ __device__ double3 _pixMakeZero<double3>() {return make_double3(0.,0.,0.);}
+-template<> static inline __host__ __device__ double4 _pixMakeZero<double4>() {return make_double4(0.,0.,0.,0.);}
++template<> inline __host__ __device__ uchar1 _pixMakeZero<uchar1>() {return make_uchar1(0);}
++template<> inline __host__ __device__ uchar3 _pixMakeZero<uchar3>() {return make_uchar3(0,0,0);}
++template<> inline __host__ __device__ uchar4 _pixMakeZero<uchar4>() {return make_uchar4(0,0,0,0);}
++template<> inline __host__ __device__ ushort1 _pixMakeZero<ushort1>() {return make_ushort1(0);}
++template<> inline __host__ __device__ ushort3 _pixMakeZero<ushort3>() {return make_ushort3(0,0,0);}
++template<> inline __host__ __device__ ushort4 _pixMakeZero<ushort4>() {return make_ushort4(0,0,0,0);}
++template<> inline __host__ __device__ uint1 _pixMakeZero<uint1>() {return make_uint1(0);}
++template<> inline __host__ __device__ uint3 _pixMakeZero<uint3>() {return make_uint3(0,0,0);}
++template<> inline __host__ __device__ uint4 _pixMakeZero<uint4>() {return make_uint4(0,0,0,0);}
++template<> inline __host__ __device__ float1 _pixMakeZero<float1>() {return make_float1(0.f);}
++template<> inline __host__ __device__ float3 _pixMakeZero<float3>() {return make_float3(0.f,0.f,0.f);}
++template<> inline __host__ __device__ float4 _pixMakeZero<float4>() {return make_float4(0.f,0.f,0.f,0.f);}
++template<> inline __host__ __device__ double1 _pixMakeZero<double1>() {return make_double1(0.);}
++template<> inline __host__ __device__ double3 _pixMakeZero<double3>() {return make_double3(0.,0.,0.);}
++template<> inline __host__ __device__ double4 _pixMakeZero<double4>() {return make_double4(0.,0.,0.,0.);}
+
+ static inline __host__ __device__ uchar1 _pixMake(Ncv8u x) {return make_uchar1(x);}
+ static inline __host__ __device__ uchar3 _pixMake(Ncv8u x, Ncv8u y, Ncv8u z) {return make_uchar3(x,y,z);}
+--- ./modules/gpu/src/graphcuts.cpp.org	2020-05-13 02:51:02.491287219 +0000
++++ ./modules/gpu/src/graphcuts.cpp	2020-05-13 02:51:14.870286311 +0000
+@@ -42,7 +42,7 @@
+
+ #include "precomp.hpp"
+
+-#if !defined (HAVE_CUDA) || defined (CUDA_DISABLER)
++#if !defined (HAVE_CUDA) || defined (CUDA_DISABLER) || (CUDART_VERSION >= 8000)
+
+ void cv::gpu::graphcut(GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, Stream&) { throw_nogpu(); }
+ void cv::gpu::graphcut(GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, GpuMat&, Stream&) { throw_nogpu(); }
+--- ./modules/gpu/include/opencv2/gpu/device/common.hpp.org	2020-05-12 23:50:47.351161644 +0000
++++ ./modules/gpu/include/opencv2/gpu/device/common.hpp	2020-05-12 23:51:12.771155213 +0000
+@@ -45,6 +45,7 @@
+
+ #include <cuda_runtime.h>
+ #include "opencv2/core/cuda_devptrs.hpp"
++#include <cuda_fp16.h>
+
+ #ifndef CV_PI
+     #define CV_PI   3.1415926535897932384626433832795
+--- ./cmake/OpenCVDetectCUDA.cmake.org	2020-05-12 21:16:49.009191775 +0000
++++ ./cmake/OpenCVDetectCUDA.cmake	2020-05-12 21:55:45.798052658 +0000
+@@ -76,6 +76,8 @@
+     else()
+       set(__cuda_arch_bin "3.0 3.5")
+     endif()
++   elseif(CUDA_GENERATION STREQUAL "Maxwell")
++    set(__cuda_arch_bin "5.0 5.2")
+   elseif(CUDA_GENERATION STREQUAL "Auto")
+     execute_process( COMMAND "${CUDA_NVCC_EXECUTABLE}" "${OpenCV_SOURCE_DIR}/cmake/checks/OpenCVDetectCudaArch.cu" "--run"
+                      WORKING_DIRECTORY "${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeTmp/"
+@@ -97,7 +99,7 @@
+       if(${CUDA_VERSION} VERSION_LESS "5.0")
+         set(__cuda_arch_bin "1.1 1.2 1.3 2.0 2.1(2.0) 3.0")
+       else()
+-        set(__cuda_arch_bin "1.1 1.2 1.3 2.0 2.1(2.0) 3.0 3.5")
++        set(__cuda_arch_bin "3.0 3.5 3.7 5.0 5.2 6.0 6.1")
+       endif()
+       set(__cuda_arch_ptx "3.0")
+     endif()
+@@ -257,4 +259,4 @@
+     set(CUDA_cufft_LIBRARY_ABS ${CUDA_cufft_LIBRARY})
+     ocv_convert_to_lib_name(CUDA_cufft_LIBRARY ${CUDA_cufft_LIBRARY})
+   endif()
+-endif()
+\ No newline at end of file
++endif()
+--- ./cmake/FindCUDA.cmake.org	2020-05-12 21:15:13.198242683 +0000
++++ ./cmake/FindCUDA.cmake	2020-05-12 21:16:17.581208474 +0000
+@@ -667,7 +667,16 @@
+   unset(CUDA_cusparse_LIBRARY CACHE)
+   unset(CUDA_npp_LIBRARY CACHE)
+   unset(CUDA_nppc_LIBRARY CACHE)
+-  unset(CUDA_nppi_LIBRARY CACHE)
++ unset(CUDA_nppial_LIBRARY CACHE)
++ unset(CUDA_nppicc_LIBRARY CACHE)
++ unset(CUDA_nppicom_LIBRARY CACHE)
++ unset(CUDA_nppidei_LIBRARY CACHE)
++ unset(CUDA_nppif_LIBRARY CACHE)
++ unset(CUDA_nppig_LIBRARY CACHE)
++ unset(CUDA_nppim_LIBRARY CACHE)
++ unset(CUDA_nppist_LIBRARY CACHE)
++ unset(CUDA_nppisu_LIBRARY CACHE)
++ unset(CUDA_nppitc_LIBRARY CACHE)
+   unset(CUDA_npps_LIBRARY CACHE)
+   unset(CUDA_nvcuvenc_LIBRARY CACHE)
+   unset(CUDA_nvcuvid_LIBRARY CACHE)
+@@ -910,9 +919,19 @@
+ if(CUDA_VERSION VERSION_GREATER "5.0")
+   # In CUDA 5.5 NPP was splitted onto 3 separate libraries.
+   find_cuda_helper_libs(nppc)
+-  find_cuda_helper_libs(nppi)
++  find_cuda_helper_libs(nppial)
++  find_cuda_helper_libs(nppicc)
++  find_cuda_helper_libs(nppicom)
++  find_cuda_helper_libs(nppidei)
++  find_cuda_helper_libs(nppif)
++  find_cuda_helper_libs(nppig)
++  find_cuda_helper_libs(nppim)
++  find_cuda_helper_libs(nppist)
++  find_cuda_helper_libs(nppisu)
++  find_cuda_helper_libs(nppitc)
+   find_cuda_helper_libs(npps)
+-  set(CUDA_npp_LIBRARY "${CUDA_nppc_LIBRARY};${CUDA_nppi_LIBRARY};${CUDA_npps_LIBRARY}")
++  set(CUDA_npp_LIBRARY "${CUDA_nppc_LIBRARY};${CUDA_nppial_LIBRARY};${CUDA_nppicc_LIBRARY};${CUDA_nppicom_LIBRARY};${CUDA_nppidei_LIBRARY};${CUDA_nppif_LIBRARY};${CUDA_nppig_LIBRARY};${CUDA_nppim_LIBRARY};${CUDA_nppist_LIBRARY};${CUDA_nppisu_LIBRARY};${CUDA_nppitc_LIBRARY};${CUDA_npps_LIBRARY}")
++
+ elseif(NOT CUDA_VERSION VERSION_LESS "4.0")
+   find_cuda_helper_libs(npp)
+ endif()

@@ -1,0 +1,43 @@
+--- matlab/CMakeLists.txt.org	2020-05-13 05:59:12.904546980 +0000
++++ matlab/CMakeLists.txt	2020-05-13 06:30:24.854847008 +0000
+@@ -34,8 +34,9 @@
+ file(GLOB Matlab_srcs +caffe/private/caffe_.cpp)
+ set(Matlab_caffe_mex ${PROJECT_SOURCE_DIR}/matlab/+caffe/private/caffe_.mex)
+
+-caffe_get_current_cflags(cflags)
++add_definitions(${Caffe_DEFINITIONS})
+ caffe_parse_linker_libs(Caffe_LINKER_LIBS folders libflags macos_frameworks)
++caffe_get_current_cflags(cflags)
+ set(folders $<TARGET_LINKER_FILE_DIR:caffe> ${folders})
+
+ # prepare linker flag lists
+@@ -50,7 +51,6 @@
+       ARGS -output ${Matlab_caffe_mex} ${Matlab_srcs} ${cflags} ${link_folders} ${libflags}
+       DEPENDS caffe COMMENT "Building Matlab interface: ${Matlab_caffe_mex}" VERBATIM)
+   add_custom_target(matlab ALL DEPENDS ${Matlab_caffe_mex} SOURCES ${Matlab_srcs})
+-
+ elseif(build_using MATCHES "Octave")
+
+   if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+--- cmake/Modules/FindMatlabMex.cmake.org	2020-05-12 04:19:45.950588105 +0000
++++ cmake/Modules/FindMatlabMex.cmake	2020-05-12 04:19:57.677583817 +0000
+@@ -27,7 +27,7 @@
+                    OUTPUT_VARIABLE __out RESULT_VARIABLE __res)
+
+    if(__res MATCHES 0) # Suppress `readlink` warning if `which` returned nothing
+-     execute_process(COMMAND which matlab  COMMAND xargs readlink
++     execute_process(COMMAND which matlab  COMMAND xargs realpath
+                      COMMAND xargs dirname COMMAND xargs dirname COMMAND xargs echo -n
+                      OUTPUT_VARIABLE __matlab_root OUTPUT_STRIP_TRAILING_WHITESPACE)
+    endif()
+--- cmake/Utils.cmake.org	2020-05-13 06:43:58.484568903 +0000
++++ cmake/Utils.cmake	2020-05-13 06:44:29.304558368 +0000
+@@ -354,7 +354,7 @@
+       list(APPEND libflags -l${CMAKE_MATCH_1})
+       list(APPEND folders    ${folder})
+     else()
+-      message(FATAL_ERROR "Logic error. Need to update cmake script")
++      message(WARNING "Logic error. Need to update cmake script")
+     endif()
+   endforeach()
+

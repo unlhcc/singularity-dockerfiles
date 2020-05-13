@@ -17,7 +17,7 @@
 | NIPYPE (Python2)   | 1.0.0   | `singularity exec docker://unlhcc/nipype-py27 <NIPYPE program>` | Replace `<NIPYPE program>` with the desired NIPYPE program |
 | NIPYPE (Python3)   | 1.0.0   | `singularity exec docker://unlhcc/nipype-py36 <NIPYPE program>` | Replace `<NIPYPE program>` with the desired NIPYPE program |
 | DPARSF         | 4.3.12    | `singularity exec docker://unlhcc/dparsf <DPARSF program>` | Replace `<DPARSF program>` with the desired DPARSF program |
-| Caffe GPU      | 1.0       | `singularity exec docker://unlhcc/caffe-gpu caffe` | Use `python3` for Python interface |
+| Caffe GPU      | 1.0, 1.0-136-g9b89154  | `singularity exec docker://unlhcc/caffe-gpu caffe` | Image provides Python 3.7. Matcaffe is included; load `matlab/r2016b` module and add `-B $MATLAB_ROOT:/opt/matlab` to the singularity options to use. |
 | ENet Caffe GPU | 427a014, 22d356c   | `singularity exec docker://unlhcc/enet-caffe-gpu <ENET program>` | Replace `<ENET program>` with the desired ENET program |
 | ROS Kinetic | 1.3.1, 1.3.2   | `singularity exec docker://unlhcc/ros-kinetic <ROS program>` | Replace `<ROS program>` with the desired ROS program |
 | Mitsuba        | 1.5.0     | `singularity exec docker://unlhcc/mitsuba mitsuba` | |
