@@ -19,7 +19,7 @@ build:
   stage: build
   except:
     - master
-  image: docker:latest
+  image: docker:18.06
   tags:
     - docker
   variables:
@@ -55,7 +55,7 @@ deploy:
   environment:
     name: dockerhub_production
     url: https://hub.docker.com/r/unlhcc
-  image: docker:latest
+  image: docker:18.06
   only:
     - master
   tags:
@@ -95,7 +95,7 @@ sync-registry:
   stage: sync-registry
   only:
     - master
-  image: docker:latest
+  image: docker:18.06
   tags:
     - docker
   variables:
