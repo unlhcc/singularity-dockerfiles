@@ -38,13 +38,14 @@ test:
   except:
     - master
   image: $HCC_REPO_NAMESPACE/singularity:$SINGULARITY_TAG
-  variables:
-    SINGULARITY_CACHEDIR: ${CI_PROJECT_DIR}/.cache/singularity
   tags:
     - docker
+  variables:
+    SINGULARITY_NOHTTPS: "true"
+    SINGULARITY_CACHEDIR: ${CI_PROJECT_DIR}/.cache/singularity
   script:
     - echo "$REGISTRY_IP $REGISTRY_HOSTNAME" >> /etc/hosts
-    - su -p singularity -c "cd $CI_PROJECT_DIR ; ./test_changed_images.sh"
+    - ./test_changed_images.sh
   cache:
     key: $CI_JOB_NAME
     paths:

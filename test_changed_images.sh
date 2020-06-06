@@ -9,7 +9,7 @@ printf '%s\n' "Finding changed images according to git..."
 # Get a unique list of top-level directories for any changed files
 # Get the directory of any changed file
 declare -a dirListA
-for entry in `git diff  --name-only master HEAD`;
+for entry in `git diff --name-only origin/master HEAD`;
 do
   i=`dirname $entry`
   dirListA+=("$i")
