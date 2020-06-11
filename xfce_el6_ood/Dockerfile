@@ -82,12 +82,14 @@ COPY --from=builder /usr/local /usr/local
 
 ENV PYTHONWARNINGS=ignore PATH=${PATH}:/opt/TurboVNC/bin/
 
-RUN yum install -y -q epel-release && \
+RUN curl -sSL https://virtualgl.org/pmwiki/uploads/Downloads/VirtualGL.repo > /etc/yum.repos.d/VirtualGL.repo && \
+  curl -sSL https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo > /etc/yum.repos.d/TurboVNC.repo && \
+  yum install -y -q epel-release && \
   yum install -y -q yum-utils firefox glib2 gtk2 dbus-glib xdg-user-dirs xkeyboard-config openssh-clients rsync \
   libX11 libICE libSM libgudev1 libXcursor libnotify libXrandr libnotify libjpeg-turbo xfce4-icon-theme xorg-x11-xkb-utils \
   xorg-x11-server-utils xorg-x11-xauth gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts dbus-x11 \
   https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm xterm dejavu-fonts-common dejavu-sans-mono-fonts vte gnome-icon-theme \
-  python-pip gcc python-devel https://downloads.sourceforge.net/project/turbovnc/2.2.3/turbovnc-2.2.3.x86_64.rpm \
+  python-pip gcc python-devel turbovnc VirtualGL glx-utils more \
   lua lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl vim nano libcgroup geany quota gtksourceview2 && \
   echo '$vncUserDir = "$ENV{WORK}/.vnc";' >>  /etc/turbovncserver.conf && \
   pip install -q --no-cache-dir ts nose numpy==1.11 && \
