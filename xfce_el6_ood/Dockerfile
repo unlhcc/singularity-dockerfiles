@@ -1,3 +1,29 @@
+FROM openswr/openswr:centos6 as swr
+
+USER root
+
+ADD CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
+ADD epel.repo /etc/yum.repos.d/epel.repo
+ADD RPM-GPG-KEY-EPEL-6 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+
+ENV PATH=/opt/llvm/7.0.0/bin:${PATH}
+
+RUN mkdir -p /build && \
+    curl -sSL https://github.com/mesa3d/mesa/archive/mesa-19.2.8.tar.gz | tar -zx -C /build && \
+    pushd /build/mesa-mesa-19.2.8 && mkdir build && \
+    meson --buildtype=release \
+        -Dglx=gallium-xlib \
+        -Dvulkan-drivers= \
+        -Ddri-drivers= \
+        -Dgallium-drivers=swrast,swr \
+        -Dplatforms=x11 \
+        -Dgallium-omx=disabled \
+        -Dprefix=$MESA_INSTALL_DIR \
+        -Dosmesa=gallium \
+        build > /dev/null && \
+    ninja -C build > /dev/null && \
+    meson install -C build
+
 FROM centos:6 as builder
 
 RUN yum install -q -y epel-release && \
@@ -78,9 +104,15 @@ RUN pushd /build/mousepad-0.3.0 && \
 
 FROM centos:6
 
+COPY --from=swr /opt/mesa /opt/mesa
+COPY --from=swr /opt/llvm /opt/llvm
 COPY --from=builder /usr/local /usr/local
 
-ENV PYTHONWARNINGS=ignore PATH=${PATH}:/opt/TurboVNC/bin/
+ADD CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
+ADD epel.repo /etc/yum.repos.d/epel.repo
+ADD RPM-GPG-KEY-EPEL-6 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+
+ENV PYTHONWARNINGS=ignore PATH=${PATH}:/opt/TurboVNC/bin/ LD_LIBRARY_PATH=/opt/mesa/lib64:/opt/llvm/7.0.0/lib:${LD_LIBRARY_PATH} GALLIUM_DRIVER=swr
 
 RUN curl -sSL https://virtualgl.org/pmwiki/uploads/Downloads/VirtualGL.repo > /etc/yum.repos.d/VirtualGL.repo && \
   curl -sSL https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo > /etc/yum.repos.d/TurboVNC.repo && \
