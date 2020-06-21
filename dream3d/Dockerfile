@@ -1,7 +1,7 @@
 # Start with Ubuntu base image
 FROM ubuntu:16.04
 ARG DEBIAN_FRONTEND=noninteractive
-ENV DREAM3D_VERSION="6.5.137"
+ENV DREAM3D_VERSION="6.5.138"
 
 # Install wget, build-essential, apt-add-repository
 RUN apt-get update && apt-get install -y -q \
@@ -17,7 +17,7 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
   update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
 
 # Download DREAM3D binary tarball
-RUN  curl -sSL http://dream3d.bluequartz.net/binaries/previous/DREAM3D-${DREAM3D_VERSION}-Linux-x86_64.tar.gz | tar -zx -C /opt && \
+RUN  curl -sSL http://dream3d.bluequartz.net/binaries/DREAM3D-${DREAM3D_VERSION}-Linux-x86_64.tar.gz | tar -zx -C /opt && \
   ln -s /opt/DREAM3D-${DREAM3D_VERSION}-Linux-x86_64 /opt/DREAM3D && \
   ln -s /opt/DREAM3D/lib/*.plugin /opt/DREAM3D/Plugins/ && \
   ln -s /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1 /opt/DREAM3D/lib
