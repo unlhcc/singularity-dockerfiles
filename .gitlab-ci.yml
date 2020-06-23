@@ -47,7 +47,7 @@ test:
     - echo "$REGISTRY_IP $REGISTRY_HOSTNAME" >> /etc/hosts
     - ./test_changed_images.sh
   cache:
-    key: $CI_JOB_NAME
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
       - .cache/singularity
 
