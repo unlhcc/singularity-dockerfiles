@@ -4,7 +4,7 @@
 | Spades         | 3.11.0    | `singularity exec docker://unlhcc/spades spades.py` | |
 | Macaulay2      | 1.15, 1.9.2     | `singularity exec docker://unlhcc/macaulay2 M2 <options>` | Replace `<options>` with the desired options for Macaulay2. |
 | CUDA (Ubuntu)  | 10.2       | `singularity exec docker://unlhcc/cuda-ubuntu <my CUDA program>` | Ubuntu 16.04.1 LTS w/CUDA Toolkit |
-| TensorFlow GPU | 1.4, 1.12, 1.14, 2.0.0, 2.1.0 | `singularity exec docker://unlhcc/tensorflow-gpu python /path/to/my_tf_code.py` | Use `python3` for Python3 code |
+| TensorFlow GPU | 1.4, 1.12, 1.14, 2.0.0, 2.1.0, 2.2.0 | `singularity exec docker://unlhcc/tensorflow-gpu python3 /path/to/my_tf_code.py` | Provides Python 3.7 |
 | Keras w/Tensorflow GPU backend| 2.0.4, 2.1.5, 2.2.4, 2.3.1 | `singularity exec docker://unlhcc/keras-tensorflow-gpu python /path/to/my_keras_code.py` | Use `python3` for Python3 code |
 | Octave         | 4.2.1     | `singularity exec docker://unlhcc/octave octave` | |
 | Sonnet GPU     | 1.13, 1.27, 1.34, 2.0.0  | `singularity exec docker://unlhcc/sonnet-gpu python /path/to/my_sonnet_code.py` | Provides Python 3.7 |
