@@ -30,5 +30,5 @@ RUN add-apt-repository ppa:deadsnakes/ppa && \
 
 # Install TensorFlow (and friends) for both Python 3.7
 # TensorFlow 2.x requires pip > 19.0
-RUN  python3 -m pip install --upgrade pip && \
-  pip3 --no-cache-dir install 'tensorflow-gpu==2.2.0' 'numpy<2.0,>=1.16.0' 'six>=1.10.0' pandas scipy matplotlib scikit-learn scikit-image 'setuptools>=41.0.0' tensorflow-probability 'tensorboard==2.2.2'
+RUN python -m pip install --upgrade pip && \
+  pip --no-cache-dir install 'tensorflow-gpu==2.2.0' 'numpy<2.0,>=1.16.0' 'six>=1.10.0' pandas matplotlib scikit-learn scikit-image 'setuptools>=41.0.0' tensorflow-probability 'tensorboard==2.2.2'

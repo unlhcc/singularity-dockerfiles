@@ -1,1 +1,1 @@
-imageCommand="python3 -c 'import tensorflow'"
+imageCommand="python -c 'import tensorflow'"
