@@ -5,7 +5,7 @@ RUN yum install -q -y wget zip unzip bzip2 which epel-release
 
 # Download Cell Ranger
 RUN mkdir -p /cellranger && cd /cellranger && \
-    wget https://unl.box.com/shared/static/x5761d5c70847qme3646qvxmdn4h5dpy.tar -o /dev/null && \
+    wget https://unl.box.com/shared/static/20wblwk9b2b699wyefc1avcm56j9jedd.tar -o /dev/null && \
 	tar -x --strip-components=1 -f *.tar && rm *.tar
 
 # Add token for private channel
@@ -22,12 +22,10 @@ RUN cd /tmp && curl -O -L https://repo.anaconda.com/miniconda/Miniconda3-latest-
 
 # Set environment from source.bash
 ENV PATH /opt/anaconda/envs/cellranger/bin:$PATH
-ENV PATH /cellranger/cellranger-cs/3.1.0/bin:/cellranger/cellranger-cs/3.1.0/tenkit/bin:$PATH
-ENV PATH /cellranger/cellranger-cs/3.1.0/tenkit/lib/bin:/cellranger/cellranger-cs/3.1.0/lib/bin:$PATH
-ENV PATH /cellranger/miniconda-cr-cs/4.3.21-miniconda-cr-cs-c10/bin:$PATH
-ENV MROPATH /cellranger/cellranger-cs/3.1.0/mro:/cellranger/cellranger-cs/3.1.0/tenkit/mro:$MROPATH
-ENV PYTHONPATH /cellranger/cellranger-cs/3.1.0/lib/python:/cellranger/cellranger-cs/3.1.0/tenkit/lib/python:/cellranger/martian-cs/v3.2.3/adapters/python:$PYTHONPATH
-ENV PYTHONUSERBASE /cellranger/cellranger-cs/3.1.0/lib
+ENV PATH /cellranger/bin:/cellranger/bin/tenkit:$PATH
+ENV PATH /cellranger/external/anaconda/bin:/cellranger/external/martian/bin:/cellranger/lib/bin:$PATH
+ENV PYTHONPATH /cellranger/lib/python:/cellranger/external/martian/adapters/python:$PYTHONPATH
+ENV MROPATH /cellranger/mro:$MROPATH
 
-# Mount work
-RUN mkdir -p /work
+# Mount work/common
+RUN mkdir -p /work /common
