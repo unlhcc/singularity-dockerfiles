@@ -108,6 +108,7 @@ COPY --from=swr /opt/mesa /opt/mesa
 COPY --from=swr /opt/llvm /opt/llvm
 COPY --from=builder /usr/local /usr/local
 
+ADD crane-6-ofed.repo /etc/yum.repos.d/crane-6-ofed.repo
 ADD CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
 ADD epel.repo /etc/yum.repos.d/epel.repo
 ADD RPM-GPG-KEY-EPEL-6 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
@@ -118,11 +119,11 @@ RUN curl -sSL https://virtualgl.org/pmwiki/uploads/Downloads/VirtualGL.repo > /e
   curl -sSL https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo > /etc/yum.repos.d/TurboVNC.repo && \
   yum install -y -q epel-release && \
   yum install -y -q yum-utils firefox glib2 gtk2 dbus-glib xdg-user-dirs xkeyboard-config openssh-clients rsync \
-  libX11 libICE libSM libgudev1 libXcursor libnotify libXrandr libnotify libjpeg-turbo xfce4-icon-theme xorg-x11-xkb-utils \
+  libX11 libXp libICE libSM libgudev1 libXcursor libnotify libXrandr libnotify libjpeg-turbo xfce4-icon-theme xorg-x11-xkb-utils \
   xorg-x11-server-utils xorg-x11-xauth gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts dbus-x11 \
   https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm xterm dejavu-fonts-common dejavu-sans-mono-fonts vte gnome-icon-theme \
   python-pip gcc python-devel turbovnc VirtualGL glx-utils more numactl \
-  lua lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl vim nano libcgroup geany quota gtksourceview2 && \
+  lua lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl vim nano libcgroup geany quota gtksourceview2 lustre-client && \
   echo '$vncUserDir = "$ENV{WORK}/.vnc";' >>  /etc/turbovncserver.conf && \
   pip install -q --no-cache-dir ts nose numpy==1.11 && \
   pip install -q  --no-cache-dir websockify && \

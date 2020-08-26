@@ -1,0 +1,6 @@
+[crane-6-ofed-x86_64]
+name=crane-6-ofed-x86_64
+baseurl=http://head.tusker.hcc.unl.edu/repo/crane/6/ofed/x86_64/
+enabled=1
+priority=40
+gpgcheck=0
