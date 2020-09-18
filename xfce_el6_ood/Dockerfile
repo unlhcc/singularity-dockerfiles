@@ -122,7 +122,7 @@ RUN curl -sSL https://virtualgl.org/pmwiki/uploads/Downloads/VirtualGL.repo > /e
   libX11 libXp libICE libSM libgudev1 libXcursor libnotify libXrandr libnotify libjpeg-turbo xfce4-icon-theme xorg-x11-xkb-utils \
   xorg-x11-server-utils xorg-x11-xauth gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts dbus-x11 \
   https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm xterm dejavu-fonts-common dejavu-sans-mono-fonts vte gnome-icon-theme \
-  python-pip gcc python-devel turbovnc VirtualGL glx-utils more numactl \
+  python-pip gcc python-devel turbovnc VirtualGL glx-utils more numactl tcsh \
   lua lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl vim nano libcgroup geany quota gtksourceview2 lustre-client && \
   echo '$vncUserDir = "$ENV{WORK}/.vnc";' >>  /etc/turbovncserver.conf && \
   pip install -q --no-cache-dir ts nose numpy==1.11 && \
