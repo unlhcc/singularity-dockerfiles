@@ -44,3 +44,4 @@
 | COMSOL | 5.5 | `singularity run -B $COMSOL_ROOT:/opt/comsol docker://unlhcc/comsol comsol batch <comsol args>` | This image does NOT include COMSOL itself. It is a thin wrapper to allow newer (>=5.5) versions of COMSOL to run in batch mode on Crane. You must also load the `comsol/5.5` module. On Rhino, using this image is not necessary - load and run comsol directly. |
 | r-inla | 20.03.17 | `singularity exec docker://unlhcc/r-inla Rscript /path/to/my/script.R` | Provides R 3.6 with the INLA package and tidyverse suite. |
 | Blender | 2.83.1 | `singularity exec docker://unlhcc/blender blender <options>` | Replace `<options>` with any of the Blender CLI arguments. |
+| ASAP         | 1.9 | `singularity exec docker://unlhcc/asap ASAP` | |
