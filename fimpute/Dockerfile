@@ -14,4 +14,4 @@ RUN wget http://www.aps.uoguelph.ca/~msargol/fimpute/FImpute_Linux.zip  && \
     yum clean all
 
 # Mount work
-RUN mkdir -p /work
+RUN mkdir -p /work /common
