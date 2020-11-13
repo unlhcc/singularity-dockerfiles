@@ -30,7 +30,7 @@ RUN yum install -q -y epel-release && \
   yum install -q -y yum-utils sudo gcc gcc-c++ gcc-gfortran intltool libtool \
   glib2-devel gtk2-devel pkgconfig  dbus-glib-devel  libX11-devel libICE-devel \
   libSM-devel libgudev1-devel  libXcursor-devel libnotify-devel libXrandr-devel \
-  libnotify-devel libjpeg-turbo-devel xorg-x11-server-utils  xorg-x11-xauth \
+  libnotify-devel libjpeg-turbo-devel libexif-devel xorg-x11-server-utils xorg-x11-xauth \
   gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts dbus-x11 https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm \
   dejavu-fonts-common dejavu-sans-mono-fonts vte-devel gnome-icon-theme xfce4-icon-theme gtksourceview2-devel && \
   echo '/usr/local/lib' >> /etc/ld.so.conf.d/local.conf && ldconfig
@@ -42,41 +42,42 @@ RUN mkdir -p /build && \
   curl -sSL https://download.gnome.org/sources/libwnck/2.30/libwnck-2.30.7.tar.bz2 | tar -jx -C /build && \
   curl -sSL https://archive.xfce.org/xfce/4.10/fat_tarballs/xfce-4.10.tar.bz2 | tar -jx -C /build --to-command="tar -jx -C /build" --ignore-command-error > /dev/null 2>&1 && \
   curl -sSL https://git.xfce.org/apps/xfce4-terminal/snapshot/xfce4-terminal-terminal-0.4.8.tar.gz | tar -zx -C /build && \
-  curl -sSL https://git.xfce.org/apps/mousepad/snapshot/mousepad-0.3.0.tar.gz | tar -zx -C /build
+  curl -sSL https://git.xfce.org/apps/mousepad/snapshot/mousepad-0.3.0.tar.gz | tar -zx -C /build && \
+  curl -sSL https://archive.xfce.org/src/apps/ristretto/0.8/ristretto-0.8.2.tar.bz2 | tar -jx -C /build
 
 # Build XFCE4
 RUN pushd /build/libwnck-2.30.7 && \
-  ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/xfce4-dev-tools-4.10.0 && \
-  ./configure --prefix=$PREFIX >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/gtk-xfce-engine-3.0.0 && \
-  ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/libxfce4util-4.10.0 && \
-  ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/xfconf-4.10.0 && \
-  ./configure --prefix=$PREFIX --disable-nls --disable-perl-bindings >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --disable-nls --disable-perl-bindings >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/libxfce4ui-4.10.0 && \
-  ./configure --prefix=$PREFIX --disable-nls --with-x >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --disable-nls --with-x >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/garcon-0.2.0 && \
-  ./configure --prefix=$PREFIX >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/exo-0.8.0 && \
-  ./configure --prefix=$PREFIX --disable-nls --with-x >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --disable-nls --with-x >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/Thunar-1.4.0 && \
-  ./configure --prefix=$PREFIX --enable-exif >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --enable-exif >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/xfce4-panel-4.10.0 && \
-  ./configure --prefix=$PREFIX --with-x >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --with-x >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/xfce4-settings-4.10.0 && \
-  ./configure --prefix=$PREFIX --disable-nls --with-x >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --disable-nls --with-x >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/xfce4-session-4.10.0 && \
     ./configure --prefix=$PREFIX --disable-nls --with-x >> build.log && make >> build.log && make install >> build.log
@@ -91,16 +92,19 @@ RUN pushd /build/xfce4-appfinder-4.10.0 && \
     ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/tumbler-0.1.25 && \
-  ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/thunar-volman-0.8.0 && \
-  ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
+    ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/xfce4-terminal-terminal-0.4.8 && \
-  ./autogen.sh >> build.log && make >> build.log && make install >> build.log
+    ./autogen.sh >> build.log && make >> build.log && make install >> build.log
 
 RUN pushd /build/mousepad-0.3.0 && \
-  ./autogen.sh >> build.log && ./configure --prefix=$PREFIX --disable-nls --enable-maintainer-mode >> build.log && make >> build.log && make install >> build.log
+    ./autogen.sh >> build.log && ./configure --prefix=$PREFIX --disable-nls --enable-maintainer-mode >> build.log && make >> build.log && make install >> build.log
+
+RUN pushd /build/ristretto-0.8.2 && \
+    ./configure --prefix=$PREFIX --disable-nls >> build.log && make >> build.log && make install >> build.log
 
 FROM centos:6
 
@@ -119,7 +123,7 @@ RUN curl -sSL https://virtualgl.org/pmwiki/uploads/Downloads/VirtualGL.repo > /e
   curl -sSL https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo > /etc/yum.repos.d/TurboVNC.repo && \
   yum install -y -q epel-release && \
   yum install -y -q yum-utils firefox glib2 gtk2 dbus-glib xdg-user-dirs xkeyboard-config openssh-clients rsync \
-  libX11 libXp libICE libSM libgudev1 libXcursor libnotify libXrandr libnotify libjpeg-turbo xfce4-icon-theme xorg-x11-xkb-utils \
+  libX11 libXp libICE libSM libgudev1 libXcursor libnotify libXrandr libnotify libjpeg-turbo libexif xfce4-icon-theme xorg-x11-xkb-utils \
   xorg-x11-server-utils xorg-x11-xauth gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts dbus-x11 \
   https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm xterm dejavu-fonts-common dejavu-sans-mono-fonts vte gnome-icon-theme \
   python-pip gcc python-devel turbovnc VirtualGL glx-utils more numactl tcsh xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-cyrillic \
