@@ -8,7 +8,7 @@ via the `docker://` URL prefix.
 
 When a Dockerfile is added to the repository, it will automatically
 be built, tested, and uploaded to the HCC namespace on Docker Hub at
-[https://hub.docker.com/u/unlhcc] (https://hub.docker.com/u/unlhcc).
+[https://hub.docker.com/u/unlhcc](https://hub.docker.com/u/unlhcc).
 It can then be run as `singularity exec docker://unlhcc/<image name> <command>`
 on the clusters.
 
@@ -24,9 +24,6 @@ request to merge your changes into master. Upon merge, the new image will
 be pushed to Docker Hub and available for use.
 
 ### Build your Docker image
-**Note:  In order for /work to be available in the final image, 
-you'll need to create the mount point in the Docker container when building.** 
-This can be done via adding `RUN mkdir /work` to the Dockerfile.
 
 Clone the repo and do a pull in the master branch to ensure you're up-to-date.
 Then create a new branch to add your new image to:  

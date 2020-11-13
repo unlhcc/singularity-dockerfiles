@@ -32,7 +32,7 @@ ADD RPM-GPG-KEY-EPEL-7 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 RUN yum -y -q --disableplugin=fastestmirror update && \
     yum -y -q --disableplugin=fastestmirror groupinstall Xfce && \
     yum -y -q --disableplugin=fastestmirror install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 dbus-glib python2-pip turbovnc \
-    vim nano geany more less https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm wget mousepad \
+    vim nano geany more less https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm wget mousepad ristretto \
     yum-utils firefox glib2 gtk2 dbus-glib xdg-user-dirs xkeyboard-config openssh-clients rsync \
     libX11 libXp libICE libSM libgudev1 libXcursor libnotify libXrandr libnotify libjpeg-turbo xfce4-icon-theme xorg-x11-xkb-utils \
     xorg-x11-server-utils xorg-x11-xauth gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts dbus-x11 \
