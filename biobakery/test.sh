@@ -1,1 +1,1 @@
-imageCommand="metaphlan2.py -h"
+imageCommand="metaphlan --help"

@@ -1,8 +1,8 @@
 # use the publicly available biobakery image
-FROM biobakery/biobakery
+FROM biobakery/workflows
 
-USER root
-WORKDIR root
+# USER root
+# WORKDIR root
 
-# mount work
-RUN mkdir -p /work
+# mount work/common
+RUN mkdir -p /work /common
