@@ -3,10 +3,10 @@ FROM ubuntu:16.04
 
 ARG DEBIAN_FRONTEND="noninteractive"
 RUN apt-get update && apt-get install -y wget build-essential sudo
-RUN cd /opt/ && wget https://github.com/dcouvin/CRISPRCasFinder/archive/release-4.2.19.tar.gz && \
-tar -xvf release-4.2.19.tar.gz && \
-rm release-4.2.19.tar.gz && \
-ln -s CRISPRCasFinder-release-4.2.19 CRISPRCasFinder && \
+RUN cd /opt/ && wget https://github.com/dcouvin/CRISPRCasFinder/archive/release-4.2.20.tar.gz && \
+tar -xvf release-4.2.20.tar.gz && \
+rm release-4.2.20.tar.gz && \
+ln -s CRISPRCasFinder-release-4.2.20 CRISPRCasFinder && \
 cd CRISPRCasFinder && \
 sed -i 's/sudo cpanm Bio::Tools::Run::Alignment::Muscle/sudo cpanm Bio::Tools::Run::Alignment::Muscle --force/g' installer_UBUNTU.sh && \
 bash installer_UBUNTU.sh && \
