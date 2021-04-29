@@ -28,6 +28,9 @@ RUN sed -i s/exo-web-browser/firefox/g /etc/xdg/xfce4/panel/default.xml
 # Remove autostart items that cause issues/errors
 RUN rm -f /etc/xdg/autostart/{xfce-polkit.desktop,xscreensaver.desktop}
 
+# Remove screensaver. If it locks there's no way to unlock.
+RUN yum -y -q erase --noautoremove xfce4-screensaver
+
 ENV PATH=${PATH}:/opt/TurboVNC/bin/ LD_LIBRARY_PATH=/opt/mesa/lib64:/opt/llvm/8.0.1/lib:${LD_LIBRARY_PATH}
 
 RUN mkdir -p /home /work /common /util
