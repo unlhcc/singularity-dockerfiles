@@ -5,3 +5,5 @@ RUN apt-get update && \
 
 RUN R CMD javareconf && \
     install2.r rJava > /dev/null 2>&1
+
+RUN ln -s /bin/bash /usr/bin/bash
