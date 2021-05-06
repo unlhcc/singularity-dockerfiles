@@ -14,7 +14,7 @@ RUN yum -y -q --disableplugin=fastestmirror update && \
     xorg-x11-server-utils xorg-x11-xauth gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts dbus-x11 \
     https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm xterm dejavu-fonts-common dejavu-sans-mono-fonts gnome-themes-standard \
     python2-pip gcc python2-devel turbovnc VirtualGL glx-utils numactl tcsh xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-cyrillic \
-    lua lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl libcgroup geany quota gtksourceview3 && \
+    lua lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl libcgroup geany quota gtksourceview3 glibc-langpack-en && \
     pip2 install -q --no-cache-dir ts nose numpy==1.11 && \
     pip2 install -q --no-cache-dir websockify && \
     yum -y -q --disableplugin=fastestmirror erase xfce4-power-manager && \
