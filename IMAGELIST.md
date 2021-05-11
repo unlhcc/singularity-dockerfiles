@@ -11,7 +11,7 @@
 | Neurodocker w/ANTs | 2.2.0, 2.3.4 | `singularity exec docker://unlhcc/neurodocker-ants <ants script>` | Replace `<ants script>` with the desired ANTs program |
 | GNU Radio      | 3.7.11, 3.7.13.5  | `singularity exec docker://unlhcc/gnuradio python /path/to/my_gnuradio_code.py` | Replace `python /path/to/my_gnuradio_code.py` with other GNU Radio commands to run |
 | Neurodocker w/AFNI | 17.3.00, 19.2.20, 19.2.21, 20.3.01 | `singularity exec docker://unlhcc/neurodocker-afni <AFNI program>` | Replace `<AFNI program>` with the desired AFNI program |
-| Neurodocker w/FreeSurfer | 6.0.0 | `singularity run -B <path to your FS license>:/opt/freesurfer/license.txt docker://unlhcc/neurodocker-freesurfer recon-all` | Substitute `<path to your FS license>` with the full path to your particular FS license file.  Replace `recon-all` with other FreeSurfer commands to run. On *Crane only*, create a matlab directory that is writeable by running `mkdir -p $WORK/matlab && ln -s $WORK/matlab $HOME/matlab`. |
+| Neurodocker w/FreeSurfer | 6.0.0 | `singularity run -B <path to your FS license>:/opt/freesurfer/license.txt docker://unlhcc/neurodocker-freesurfer recon-all` | Substitute `<path to your FS license>` with the full path to your particular FS license file.  Replace `recon-all` with other FreeSurfer commands to run. |
 | fMRIprep       | 1.0.7     | `singularity exec docker://unlhcc/fmriprep fmriprep` | |
 | ndmg           | 0.0.50    | `singularity exec docker://unlhcc/ndmg ndmg_bids` | |
 | NIPYPE (Python2)   | 1.0.0   | `singularity exec docker://unlhcc/nipype-py27 <NIPYPE program>` | Replace `<NIPYPE program>` with the desired NIPYPE program |
@@ -45,3 +45,4 @@
 | r-inla | 20.03.17 | `singularity exec docker://unlhcc/r-inla Rscript /path/to/my/script.R` | Provides R 3.6 with the INLA package and tidyverse suite. |
 | Blender | 2.83.1 | `singularity exec docker://unlhcc/blender blender <options>` | Replace `<options>` with any of the Blender CLI arguments. |
 | ASAP         | 1.9 | `singularity exec docker://unlhcc/asap ASAP` | |
+| freesurfer | 5.3 | `singularity run -B /util:/util -B $MATLAB_ROOT:/opt/matlab docker://unlhcc/freesurfer:5.3 recon-all <options> | Provides FreeSurfer 5.3. Load a matlab module additionally to make it available in the container. |
