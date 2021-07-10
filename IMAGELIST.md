@@ -46,3 +46,4 @@
 | Blender | 2.83.1 | `singularity exec docker://unlhcc/blender blender <options>` | Replace `<options>` with any of the Blender CLI arguments. |
 | ASAP         | 1.9 | `singularity exec docker://unlhcc/asap ASAP` | |
 | freesurfer | 5.3 | `singularity run -B /util:/util -B $MATLAB_ROOT:/opt/matlab docker://unlhcc/freesurfer:5.3 recon-all <options> | Provides FreeSurfer 5.3. Load a matlab module additionally to make it available in the container. |
+| PATRIC | 1.035 | `singularity exec docker://unlhcc/patric <p3-command>` | Provides the [PATRIC command line interface](https://docs.patricbrc.org/cli_tutorial/index.html). Replace `<p3-command>` with the specific PATRIC command to run. |
