@@ -19,7 +19,7 @@ RUN yum -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm xterm dejavu-fonts-common dejavu-sans-mono-fonts gnome-themes-standard \
     python2-pip gcc python2-devel turbovnc VirtualGL glx-utils numactl tcsh xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-cyrillic \
     lua lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl libcgroup geany quota gtksourceview3 glibc-langpack-en \
-    gvfs gvfs-smb gvfs-fuse wmctrl Lmod file
+    gvfs gvfs-smb gvfs-fuse wmctrl Lmod file openssl
 
 RUN yum -y -q --enablerepo=epel-playground install gigolo && \
     pip2 install -q --no-cache-dir ts nose numpy==1.11 && \
