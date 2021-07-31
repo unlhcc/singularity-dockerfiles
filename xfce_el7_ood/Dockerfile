@@ -23,7 +23,7 @@ RUN yum -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm xterm dejavu-fonts-common dejavu-sans-mono-fonts vte gnome-icon-theme \
     python-pip gcc python-devel turbovnc glx-utils numactl tcsh xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-cyrillic \
     lua lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl libcgroup geany quota gtksourceview2 libzstd devilspie2 \
-    wmctrl Lmod file mesa-libGLU
+    wmctrl Lmod file mesa-libGLU openssl
 
 # Install numpy/websockify for TurboVNC
 # Remove power manager to prevent sleep/suspend
