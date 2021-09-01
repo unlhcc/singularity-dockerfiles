@@ -1,11 +1,14 @@
-FROM ssthapa/freesurferosg:5.3
+FROM centos:6.10
 
 RUN rm -f /etc/yum.repos.d/*
 
 ADD vault.repo /etc/yum.repos.d/vault.repo
 
-RUN yum clean all && \
-    yum install -y -q perl perl-* bc
+# Needed packages
+RUN yum clean all && yum install -y -q epel-release
+RUN yum install -y -q perl bc libgomp tar tcsh libpng bzip2 zlib libXScrnSaver # qt qt-x11 vtk-qt
+RUN yum groupinstall -y -q "X Window System"
+RUN yum clean all
 
 # Matlab mount point/paths
 RUN mkdir -p /opt/matlab
@@ -13,8 +16,27 @@ ENV MATLAB_ROOT /opt/matlab
 ENV MATLAB_PREFDIR /tmp/matlab/prefs
 ENV PATH /opt/matlab/bin:$PATH
 
-# Fix typo in variable from source image
-ENV FREESURFER_HOME /usr/local/freesurfer
+# Download Freesurfer
+RUN curl -sSL https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.1/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.1.tar.gz | tar -zx -C /usr/local
+
+# Needed variables
+ENV FREESURFER_HOME=/usr/local/freesurfer \
+FIX_VERTEX_AREA="" FMRI_ANALYSIS_DIR=/usr/local/freesurfer/6.0/fsfast \
+FREESURFER=/usr/local/freesurfer/6.0 \
+FSFAST_HOME=/usr/local/freesurfer/6.0/fsfast \
+FSF_OUTPUT_FORMAT=nii.gz \
+FS_OVERRIDE=0 \
+FUNCTIONALS_DIR=/usr/local/freesurfer/6.0/sessions \
+LOCAL_DIR=/usr/local/freesurfer/6.0/local \
+MINC_BIN_DIR=/usr/local/freesurfer/6.0/mni/bin \
+MINC_LIB_DIR=/usr/local/freesurfer/6.0/mni/lib \
+MNI_DATAPATH=/usr/local/freesurfer/6.0/mni/data \
+MNI_DIR=/usr/local/freesurfer/6.0/mni \
+MNI_PERL5LIB=/usr/local/freesurfer/6.0/mni/share/perl5 \
+PERL5LIB=/usr/local/freesurfer/6.0/mni/share/perl5 \
+SUBJECTS_DIR=/usr/local/freesurfer/6.0/subjects
+
+ENV PATH=/usr/local/freesurfer/bin:/usr/local/freesurfer/mni/bin:/usr/local/freesurfer/tktools:/usr/local/freesurfer/fsfast/bin:$PATH
 
 # Use license from host
-RUN ln -s /util/opt/freesurfer/5.3/license.txt /usr/local/freesurfer/license.txt
+RUN ln -s /util/opt/freesurfer/6.0/license.txt /usr/local/freesurfer/license.txt
