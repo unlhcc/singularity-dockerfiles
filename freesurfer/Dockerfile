@@ -22,19 +22,19 @@ RUN curl -sSL https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.1/frees
 # Needed variables
 ENV FREESURFER_HOME=/usr/local/freesurfer \
 FIX_VERTEX_AREA="" FMRI_ANALYSIS_DIR=/usr/local/freesurfer/6.0/fsfast \
-FREESURFER=/usr/local/freesurfer/6.0 \
-FSFAST_HOME=/usr/local/freesurfer/6.0/fsfast \
+FREESURFER=/usr/local/freesurfer \
+FSFAST_HOME=/usr/local/freesurfer/fsfast \
 FSF_OUTPUT_FORMAT=nii.gz \
 FS_OVERRIDE=0 \
-FUNCTIONALS_DIR=/usr/local/freesurfer/6.0/sessions \
-LOCAL_DIR=/usr/local/freesurfer/6.0/local \
-MINC_BIN_DIR=/usr/local/freesurfer/6.0/mni/bin \
-MINC_LIB_DIR=/usr/local/freesurfer/6.0/mni/lib \
-MNI_DATAPATH=/usr/local/freesurfer/6.0/mni/data \
-MNI_DIR=/usr/local/freesurfer/6.0/mni \
-MNI_PERL5LIB=/usr/local/freesurfer/6.0/mni/share/perl5 \
-PERL5LIB=/usr/local/freesurfer/6.0/mni/share/perl5 \
-SUBJECTS_DIR=/usr/local/freesurfer/6.0/subjects
+FUNCTIONALS_DIR=/usr/local/freesurfer/sessions \
+LOCAL_DIR=/usr/local/freesurfer/local \
+MINC_BIN_DIR=/usr/local/freesurfer/mni/bin \
+MINC_LIB_DIR=/usr/local/freesurfer/mni/lib \
+MNI_DATAPATH=/usr/local/freesurfer/mni/data \
+MNI_DIR=/usr/local/freesurfer/mni \
+MNI_PERL5LIB=/usr/local/freesurfer/mni/share/perl5 \
+PERL5LIB=/usr/local/freesurfer/mni/share/perl5 \
+SUBJECTS_DIR=/usr/local/freesurfer/subjects
 
 ENV PATH=/usr/local/freesurfer/bin:/usr/local/freesurfer/mni/bin:/usr/local/freesurfer/tktools:/usr/local/freesurfer/fsfast/bin:$PATH
 
