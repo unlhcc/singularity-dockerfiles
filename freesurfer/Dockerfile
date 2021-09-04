@@ -26,15 +26,13 @@ FREESURFER=/usr/local/freesurfer \
 FSFAST_HOME=/usr/local/freesurfer/fsfast \
 FSF_OUTPUT_FORMAT=nii.gz \
 FS_OVERRIDE=0 \
-FUNCTIONALS_DIR=/usr/local/freesurfer/sessions \
 LOCAL_DIR=/usr/local/freesurfer/local \
 MINC_BIN_DIR=/usr/local/freesurfer/mni/bin \
 MINC_LIB_DIR=/usr/local/freesurfer/mni/lib \
 MNI_DATAPATH=/usr/local/freesurfer/mni/data \
 MNI_DIR=/usr/local/freesurfer/mni \
 MNI_PERL5LIB=/usr/local/freesurfer/mni/share/perl5 \
-PERL5LIB=/usr/local/freesurfer/mni/share/perl5 \
-SUBJECTS_DIR=/usr/local/freesurfer/subjects
+PERL5LIB=/usr/local/freesurfer/mni/share/perl5
 
 ENV PATH=/usr/local/freesurfer/bin:/usr/local/freesurfer/mni/bin:/usr/local/freesurfer/tktools:/usr/local/freesurfer/fsfast/bin:$PATH
 
