@@ -22,7 +22,7 @@ RUN yum -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     gvfs gvfs-smb gvfs-fuse wmctrl file openssl bc bind-utils bzip2 dstat make gcc gcc-c++ gcc-gfortran gdb htop iotop iperf3 \
     ipmitool libXp lsof ncdu net-tools nmap-ncat openldap-clients pbzip2 pciutils perf psmisc \
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
-    libcgroup-tools libpng12 libpng15 hostname tcl-devel
+    libcgroup-tools libpng12 libpng15 hostname tcl-devel libxcb* xcb-util*
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
