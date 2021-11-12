@@ -26,7 +26,7 @@ RUN yum -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     wmctrl file mesa-libGLU openssl bc bind-utils bzip2 dstat gcc gcc-c++ gcc-gfortran gdb htop iotop iperf3 \
     ipmitool libXp lsof ncdu net-tools nmap-ncat openldap-clients pbzip2 pciutils perf psmisc \
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
-    libcgroup-tools libpng12 hostname tcl-devel python3 libxcb* xcb-util* libncl
+    libcgroup-tools libpng12 hostname tcl-devel python3 libxcb* xcb-util* libncl glfw mesa-libOSMesa-devel mesa-libGL-devel
 
 # Install numpy/websockify for TurboVNC
 # Remove power manager to prevent sleep/suspend
