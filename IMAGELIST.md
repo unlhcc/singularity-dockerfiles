@@ -48,3 +48,4 @@
 | freesurfer | 5.3, 6.0 | `singularity run -B $MATLAB_ROOT:/opt/matlab docker://unlhcc/freesurfer recon-all <options> | Provides FreeSurfer 5.3, 6.0. Load a matlab module additionally to make it available in the container. |
 | PATRIC | 1.035 | `singularity exec docker://unlhcc/patric <p3-command>` | Provides the [PATRIC command line interface](https://docs.patricbrc.org/cli_tutorial/index.html). Replace `<p3-command>` with the specific PATRIC command to run. |
 | AlphaFold | 2.0.0 | `singularity run -B /work/HCC/BCRF/app_specific/alphafold/2.0.0/:/data -B .:/etc --pwd /app/alphafold --nv docker://unlhcc/alphafold <options>` | Replace `<options>` with any of the AlphaFold CLI arguments. |
+| S3V2_IDEAS_ESMP | d05d3e0 | `singularity exec docker://unlhcc/s3v2_ideas_esmp S3V2_IDEAS_pipeline.py <options>` | Replace `<options>` with any of the S3V2_IDEAS_ESMP arguments. |
