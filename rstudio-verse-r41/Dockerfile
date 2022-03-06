@@ -1,4 +1,4 @@
-FROM rocker/verse:4.1.2
+FROM rocker/verse:4.1.0
 
 RUN apt-get update && \
     apt-get -y -q install default-jdk tk8.6 > /dev/null
