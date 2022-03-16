@@ -57,18 +57,18 @@ RUN /opt/conda/bin/conda create -y -p /opt/alphafoldenv -c conda-forge \
 
 WORKDIR /app
 # RUN git clone https://github.com/deepmind/alphafold.git
-RUN wget -q -P ./alphafold https://github.com/deepmind/alphafold/archive/refs/tags/v2.0.0.tar.gz \
-    && tar xvf ./alphafold/v2.0.0.tar.gz -C ./alphafold --strip-components 1 \
-    && rm ./alphafold/v2.0.0.tar.gz
+RUN wget -q -P ./alphafold https://github.com/deepmind/alphafold/archive/refs/tags/v2.2.0.tar.gz \
+    && tar xvf ./alphafold/v2.2.0.tar.gz -C ./alphafold --strip-components 1 \
+    && rm ./alphafold/v2.2.0.tar.gz
 RUN wget -q -P /app/alphafold/alphafold/common/ \
   https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
 
 # Install pip packages.
 # downgrade TF to 2.4.1 https://github.com/deepmind/alphafold/pull/28
-RUN /opt/alphafoldenv/bin/pip install --upgrade --no-cache-dir pip \
+RUN /opt/alphafoldenv/bin/pip install -q --upgrade --no-cache-dir pip \
     && sed -i 's/^tensorflow.*$/tensorflow==2.4.1/' /app/alphafold/requirements.txt \
-    && /opt/alphafoldenv/bin/pip install --no-cache-dir -r /app/alphafold/requirements.txt \
-    && /opt/alphafoldenv/bin/pip install --upgrade --no-cache-dir jax jaxlib==0.1.69+cuda111 -f \
+    && /opt/alphafoldenv/bin/pip install -q --no-cache-dir -r /app/alphafold/requirements.txt \
+    && /opt/alphafoldenv/bin/pip install -q --upgrade --no-cache-dir jax==0.2.14 jaxlib==0.1.69+cuda111 -f \
        https://storage.googleapis.com/jax-releases/jax_releases.html
 
 # Apply OpenMM patch.
