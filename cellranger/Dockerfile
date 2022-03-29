@@ -4,9 +4,13 @@ FROM centos:7
 RUN yum install -q -y wget zip unzip bzip2 which epel-release
 
 # Download Cell Ranger
+
 RUN mkdir -p /cellranger && cd /cellranger && \
-    wget https://unl.box.com/shared/static/20wblwk9b2b699wyefc1avcm56j9jedd.tar -o /dev/null && \
-	tar -x --strip-components=1 -f *.tar && rm *.tar
+    curl -o cellranger.tar.gz \
+        'https://uofnelincoln.sharepoint.com/:u:/s/UNL-HollandComputingCenter/EX1PPFOvH0NCk7JXHJyu9sMBCqSZfbcSSNIWwsHziNC-fQ?e=5X5Fnt&download=1' \
+         --location --cookie-jar /tmp/tmp && \
+    tar -x --strip-components=1 -f *.tar.gz && rm *.tar.gz
+
 
 # Add token for private channel
 ARG token
