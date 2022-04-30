@@ -1,0 +1,50 @@
+diff --git a/Model/Build/BuildAll.xml b/Model/Build/BuildAll.xml
+index 847160572..ecefc7acb 100644
+--- a/Model/Build/BuildAll.xml
++++ b/Model/Build/BuildAll.xml
+@@ -536,15 +536,6 @@
+          <WorkingDirectory>%APSIM%/Model/TclLink</WorkingDirectory>
+          <CommandLine>make</CommandLine>
+       </Job>
+-      <Job name="Compile Tests">
+-         <DependsOn>Compile CSGeneral</DependsOn>
+-         <DependsOn>Compile ApsimFile</DependsOn>
+-         <DependsOn>Compile CSDotNetComponentInterface</DependsOn>
+-         <DependsOn>Compile CMPServices</DependsOn>
+-         <DependsOn>Compile DotNetProxies</DependsOn>
+-         <WorkingDirectory>%APSIM%/Model/Tests</WorkingDirectory>
+-         <CommandLine>make</CommandLine>
+-      </Job>
+       <Job name="Compile Textoutput">
+          <DependsOn>Compile CSDotNetComponentInterface</DependsOn>
+          <DependsOn>Compile CMPServices</DependsOn>
+diff --git a/Model/RLink/Makefile.linux b/Model/RLink/Makefile.linux
+index 13ab2115b..35d480d3b 100644
+--- a/Model/RLink/Makefile.linux
++++ b/Model/RLink/Makefile.linux
+@@ -40,7 +40,7 @@ RComponent.$(OBJEXT): RComponent.cpp RComponent.h RDataTypes.h
+ RDataTypes.$(OBJEXT): RDataTypes.cpp RDataTypes.h
+ 
+ RComponent.h RDataTypes.cpp RDataTypes.h REmbed.cpp REmbed.h RLink.def: ../DataTypes/Datatypes.xml RDataTypes.macro
+-	$(APSIM)/Model/ProcessDataTypesInterface.exe ../DataTypes/Datatypes.xml RDataTypes.macro
++	mono $(APSIM)/Model/ProcessDataTypesInterface.exe ../DataTypes/Datatypes.xml RDataTypes.macro
+ 
+ REmbed.o: REmbed.cpp REmbed.h RDataTypes.h 
+ 	$(RCXX) -fPIC -c $(RCXXFLAGS) REmbed.cpp 
+@@ -60,4 +60,4 @@ libRLink.a: RLink.def
+ 	dlltool -d RLink.def -l libRLink.a
+ 
+ clean:
+-	rm -f RComponent.h RDataTypes.cpp RDataTypes.h RDataTypesEmbedded.cpp RDataTypesEmbedded.h RLink.def ../REmbed.so *.o 
+\ No newline at end of file
++	rm -f RComponent.h RDataTypes.cpp RDataTypes.h RDataTypesEmbedded.cpp RDataTypesEmbedded.h RLink.def ../REmbed.so *.o 
+diff --git a/Model/TclLink/Makefile b/Model/TclLink/Makefile
+index e7e594144..52c16488e 100644
+--- a/Model/TclLink/Makefile
++++ b/Model/TclLink/Makefile
+@@ -52,4 +52,4 @@ ifeq ($(PLATFORM),WIN32VS)
+ endif
+ 
+ CIDataTypes.tcl: ../DataTypes/Datatypes.xml TclComponent.macro
+-	$(APSIM)/Model/ProcessDataTypesInterface.exe ../DataTypes/Datatypes.xml TclComponent.macro
++	mono $(APSIM)/Model/ProcessDataTypesInterface.exe ../DataTypes/Datatypes.xml TclComponent.macro
