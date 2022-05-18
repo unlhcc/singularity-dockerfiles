@@ -8,7 +8,7 @@
 # 
 #     https://github.com/ReproNim/neurodocker
 
-FROM centos:6
+FROM centos:7
 
 USER root
 
@@ -39,17 +39,17 @@ RUN export ND_ENTRYPOINT="/neurodocker/startup.sh" \
 
 ENTRYPOINT ["/neurodocker/startup.sh"]
 
-ENV FSLDIR="/opt/fsl-6.0.3" \
-    PATH="/opt/fsl-6.0.3/bin:$PATH" \
+ENV FSLDIR="/opt/fsl-6.0.5.1" \
+    PATH="/opt/fsl-6.0.5.1/bin:$PATH" \
     FSLOUTPUTTYPE="NIFTI_GZ" \
     FSLMULTIFILEQUIT="TRUE" \
-    FSLTCLSH="/opt/fsl-6.0.3/bin/fsltclsh" \
-    FSLWISH="/opt/fsl-6.0.3/bin/fslwish" \
+    FSLTCLSH="/opt/fsl-6.0.5.1/bin/fsltclsh" \
+    FSLWISH="/opt/fsl-6.0.5.1/bin/fslwish" \
     FSLLOCKDIR="" \
     FSLMACHINELIST="" \
     FSLREMOTECALL="" \
     FSLGECUDAQ="cuda.q" \
-    LD_LIBRARY_PATH="/opt/fsl-6.0.3/lib"
+    LD_LIBRARY_PATH="/opt/fsl-6.0.5.1/lib"
 RUN yum install -y -q \
            bc \
            file \
@@ -70,24 +70,29 @@ RUN yum install -y -q \
            libpng \
            sudo \
            wget \
-    && yum clean packages \
+           which \
+           libquadmath-devel \
+    && yum clean all \
     && rm -rf /var/cache/yum/* \
     && echo "Downloading FSL ..." \
-    && mkdir -p /opt/fsl-6.0.3 \
-    && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-6.0.3-centos6_64.tar.gz \
-    | tar -xz -C /opt/fsl-6.0.3 --strip-components 1 \
+    && mkdir -p /opt/fsl-6.0.5.1 \
+    && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-6.0.5.1-centos7_64.tar.gz \
+    | tar -xz -C /opt/fsl-6.0.5.1 --strip-components 1 \
     && sed -i '$iecho Some packages in this Docker container are non-free' $ND_ENTRYPOINT \
     && sed -i '$iecho If you are considering commercial use of this container, please consult the relevant license:' $ND_ENTRYPOINT \
     && sed -i '$iecho https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Licence' $ND_ENTRYPOINT \
     && sed -i '$isource $FSLDIR/etc/fslconf/fsl.sh' $ND_ENTRYPOINT \
     && echo "Installing FSL conda environment ..." \
-    && bash /opt/fsl-6.0.3/etc/fslconf/fslpython_install.sh -f /opt/fsl-6.0.3
+    && bash /opt/fsl-6.0.5.1/etc/fslconf/fslpython_install.sh -f /opt/fsl-6.0.5.1
 
-# Install CUDA 9.1 & symlink eddy_cuda to 9.1 version
-RUN yum install -y -q http://developer.download.nvidia.com/compute/cuda/repos/rhel6/x86_64/cuda-repo-rhel6-9.1.85-1.x86_64.rpm && \
-    yum install -y -q cuda-libraries-9-1 && \
+# Install CUDA 10.2 & symlink eddy_cuda to 10.2 version
+# https://www.server-world.info/en/note?os=CentOS_7&p=cuda&f=4
+RUN yum -y -q --enablerepo=extras install epel-release && \
+    yum -y -q install yum-utils && \
+    yum-config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo && \
+    yum --enablerepo=epel -y -q install cuda-10-2 && \
     yum clean all && \
-    ln -s /opt/fsl-6.0.3/bin/eddy_cuda9.1 /opt/fsl-6.0.3/bin/eddy_cuda
+    ln -s /opt/fsl-6.0.5.1/bin/eddy_cuda10.2 /opt/fsl-6.0.5.1/bin/eddy_cuda
 
 RUN echo '{ \
     \n  "pkg_manager": "yum", \
@@ -99,7 +104,7 @@ RUN echo '{ \
     \n    [ \
     \n      "fsl", \
     \n      { \
-    \n        "version": "6.0.3" \
+    \n        "version": "6.0.5.1" \
     \n      } \
     \n    ] \
     \n  ] \

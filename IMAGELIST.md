@@ -22,7 +22,7 @@
 | ROS Kinetic | 1.3.1, 1.3.2   | `singularity exec docker://unlhcc/ros-kinetic <ROS program>` | Replace `<ROS program>` with the desired ROS program |
 | Mitsuba        | 1.5.0     | `singularity exec docker://unlhcc/mitsuba mitsuba` | |
 | FImpute        | 2.2       | `singularity exec docker://unlhcc/fimpute FImpute <control file>` | Replace `<control file>` with the control file you have prepared |
-| Neurodocker w/FSL | 6.0.3, 5.0.11 | `singularity run docker://unlhcc/neurodocker-fsl <FSL program>` | Replace `<FSL program>` with the desired FSL program. This image includes GPU support; add `--nv` to the `singularity run` args to enable it. |
+| Neurodocker w/FSL | 6.0.5.1, 6.0.3, 5.0.11 | `singularity run docker://unlhcc/neurodocker-fsl <FSL program>` | Replace `<FSL program>` with the desired FSL program |
 | gdc-client     | 1.4.0     | `singularity exec docker://unlhcc/gdc-client gdc-client <sub-command>` | Replace `<sub-command>` with the desired gdc-client sub-command |
 | BLUPF90 | 1.0 | `singularity exec docker://unlhcc/blupf90 <command>` | Replace `<command>` with any command from the suite (`blupf90`, `renumf90`, etc.) |
 | RMark | 2.2.5 | `singularity exec docker://unlhcc/rmark Rscript my_r_script.r` | |
@@ -47,6 +47,6 @@
 | ASAP         | 1.9 | `singularity exec docker://unlhcc/asap ASAP` | |
 | freesurfer | 5.3, 6.0 | `singularity run -B $MATLAB_ROOT:/opt/matlab docker://unlhcc/freesurfer recon-all <options> | Provides FreeSurfer 5.3, 6.0. Load a matlab module additionally to make it available in the container. |
 | PATRIC | 1.035 | `singularity exec docker://unlhcc/patric <p3-command>` | Provides the [PATRIC command line interface](https://docs.patricbrc.org/cli_tutorial/index.html). Replace `<p3-command>` with the specific PATRIC command to run. |
-| AlphaFold | 2.0.0, 2.2.0 | `singularity run -B /work/HCC/BCRF/app_specific/alphafold/2.2.0/:/data -B .:/etc --pwd /app/alphafold --nv docker://unlhcc/alphafold <options>` | Replace `<options>` with any of the AlphaFold CLI arguments. |
+| AlphaFold | 2.0.0, 2.2.0 | `singularity run -B /work/HCC/BCRF/app_specific/alphafold/2.2.0/:/data -B .:/etc --pwd /app/alphafold docker://unlhcc/alphafold <options>` | Replace `<options>` with any of the AlphaFold CLI arguments. |
 | S3V2_IDEAS_ESMP | d05d3e0 | `singularity exec docker://unlhcc/s3v2_ideas_esmp S3V2_IDEAS_pipeline.py <options>` | Replace `<options>` with any of the S3V2_IDEAS_ESMP arguments. |
 | APSIM Classic | 7.9 | `singularity exec docker://unlhcc/apsim-classic Apsim.exe <input>` | Replace `<input>` with the APSim input filename. |
