@@ -1,4 +1,4 @@
-FROM centos:8.3.2011
+FROM almalinux:8.5
 
 ADD TurboVNC.repo /etc/yum.repos.d/TurboVNC.repo
 ADD VirtualGL.repo /etc/yum.repos.d/VirtualGL.repo
@@ -11,23 +11,23 @@ RUN dnf -y -q update
 
 RUN dnf -y -q groupinstall Xfce
 
-RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 dbus-glib python2-pip turbovnc \
+RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 dbus-glib python2-pip \
     vim nano geany less https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm wget mousepad ristretto \
     yum-utils firefox glib2 gtk2 dbus-glib xdg-user-dirs xkeyboard-config openssh-clients rsync \
     libX11 libXp libICE libSM libgudev1 libXcursor libnotify libXrandr libnotify libjpeg-turbo xorg-x11-xkb-utils \
     xorg-x11-server-utils xorg-x11-xauth gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts dbus-x11 \
     https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm xterm dejavu-fonts-common dejavu-sans-mono-fonts gnome-themes-standard \
-    python2-pip gcc python2-devel turbovnc VirtualGL glx-utils numactl tcsh xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-cyrillic \
+    python2-pip gcc python2-devel turbovnc-2.2.7 VirtualGL glx-utils numactl tcsh xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-cyrillic \
     lua lua-devel lua-filesystem lua-json lua-lpeg lua-posix lua-term tcl libcgroup geany quota gtksourceview3 glibc-langpack-en \
     gvfs gvfs-smb gvfs-fuse wmctrl file openssl bc bind-utils bzip2 dstat make gcc gcc-c++ gcc-gfortran gdb htop iotop iperf3 \
     ipmitool libXp lsof ncdu net-tools nmap-ncat openldap-clients pbzip2 pciutils perf psmisc \
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
-    libcgroup-tools libpng12 libpng15 hostname tcl-devel libxcb* xcb-util* libnsl mesa-libOSMesa-devel mesa-libGL-devel
+    libcgroup-tools libpng12 libpng15 hostname tcl-devel libxcb* xcb-util* libnsl mesa-libOSMesa-devel mesa-libGL-devel freeglut autofs \
+    ncurses-compat-libs singularity
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
-RUN dnf -y -q --enablerepo=epel-playground install gigolo && \
-    pip2 install -q --no-cache-dir ts nose numpy==1.11 && \
+RUN pip2 install -q --no-cache-dir ts nose numpy==1.11 && \
     pip2 install -q --no-cache-dir websockify==0.9.0 && \
     dnf -y -q erase xfce4-power-manager && \
     # Clean
