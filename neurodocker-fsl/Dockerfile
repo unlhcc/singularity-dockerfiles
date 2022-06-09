@@ -90,7 +90,7 @@ RUN yum install -y -q \
 RUN yum -y -q --enablerepo=extras install epel-release && \
     yum -y -q install yum-utils && \
     yum-config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo && \
-    yum --enablerepo=epel -y -q install cuda-10-2 && \
+    yum --enablerepo=epel -y -q install cuda-cudart-9-1 cuda-cudart-10-2 libcublas-10-2 cuda-nvtx-10-2 cuda-curand-9-1 cuda-cublas-9-1 libpng12 && \
     yum clean all && \
     ln -s /opt/fsl-6.0.5.1/bin/eddy_cuda10.2 /opt/fsl-6.0.5.1/bin/eddy_cuda
 
