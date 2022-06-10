@@ -5,6 +5,8 @@ ADD VirtualGL.repo /etc/yum.repos.d/VirtualGL.repo
 
 RUN dnf install -y -q epel-release dnf-plugins-core
 
+RUN dnf install -y 'dnf-command(versionlock)'
+
 RUN dnf config-manager --set-enabled powertools
 
 RUN dnf -y -q update
@@ -24,6 +26,8 @@ RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
     libcgroup-tools libpng12 libpng15 hostname tcl-devel libxcb* xcb-util* libnsl mesa-libOSMesa-devel mesa-libGL-devel freeglut autofs \
     ncurses-compat-libs singularity
+
+RUN dnf versionlock add turbovnc
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
