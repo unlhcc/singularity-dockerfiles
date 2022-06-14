@@ -1,0 +1,17 @@
+--- configure.bak	2022-06-09 03:13:26.370380439 +0000
++++ configure	2022-06-09 03:13:33.541370624 +0000
+@@ -15289,14 +15289,6 @@
+
+ # Check whether Intel's MKL is available. If not, link against FFTW.
+
+-ac_fn_cxx_check_header_mongrel "$LINENO" "fftw3.h" "ac_cv_header_fftw3_h" "$ac_includes_default"
+-if test "x$ac_cv_header_fftw3_h" = xyes; then :
+-
+-else
+-  as_fn_error $? "\"Can't find fftw3.h\"" "$LINENO" 5
+-fi
+-
+-
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for fftwf_malloc in -lmkl_intel_lp64" >&5
+ $as_echo_n "checking for fftwf_malloc in -lmkl_intel_lp64... " >&6; }
+ if ${ac_cv_lib_mkl_intel_lp64_fftwf_malloc+:} false; then :
