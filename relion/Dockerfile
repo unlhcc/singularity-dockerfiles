@@ -48,13 +48,21 @@ ADD oneAPI.repo /etc/yum.repos.d
 
 RUN dnf install -y -q dnf-plugins-core
 
-RUN dnf install -y -q intel-oneapi-runtime-libs libtiff libpng libjpeg ghostscript libXft libX11 wxBase3 # fltk
+RUN dnf install -y -q intel-oneapi-runtime-libs libtiff libpng libjpeg ghostscript libXft libX11 wxBase3 texlive-latex # fltk
 
 # RESMAP
 RUN curl -sSL --output /opt/relion/bin/resmap "https://downloads.sourceforge.net/project/resmap/ResMap-1.1.4-linux64" && \
     chmod +x /opt/relion/bin/resmap
 
-ENV PATH=/opt/relion/bin:${PATH} \
+# TikZiT
+RUN curl -sSL https://github.com/tikzit/tikzit/releases/download/v2.1.6/tikzit-linux.tar.gz | tar -zx -C /opt && \
+    cp /opt/tikzit/share/applications/tikzit.desktop /usr/share/applications && \
+    rsync -a /opt/tikzit/share/icons/hicolor/ /usr/share/icons/hicolor && \
+    rsync -a /opt/tikzit/share/icons/hicolor/ /usr/share/icons/Adwaita && \
+    gtk-update-icon-cache /usr/share/icons/hicolor && \
+    gtk-update-icon-cache /usr/share/icons/Adwaita
+
+ENV PATH=/opt/relion/bin:/opt/tikzit/bin:${PATH} \
     RELION_CTFFIND_EXECUTABLE=/opt/relion/bin/ctffind \
     RELION_RESMAP_EXECUTABLE=/opt/relion/bin/resmap \
     RELION_SCRATCH_DIR=/tmp \
