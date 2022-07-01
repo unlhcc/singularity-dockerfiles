@@ -1,0 +1,11 @@
+--- bin/xtract	2021-07-15 05:44:34.000000000 -0500
++++ bin/xtract.new	2022-06-29 23:22:01.148595857 -0500
+@@ -582,7 +582,7 @@
+ if [ $gpu -eq 0 ]; then
+   fsl_sub -T 2160 -n -l "$out/logs" -N xtract -t "$commands"
+ else
+-  fsl_sub -T 300 --coprocessor=cuda -l "$out/logs" -N xtract "$commands"
++  fsl_sub -T 300 --coprocessor=cuda -l "$out/logs" -N xtract -t "$commands"
+ fi
+ 
+ #EOF

@@ -24,6 +24,7 @@ RUN export ND_ENTRYPOINT="/neurodocker/startup.sh" \
            curl \
            localedef \
            unzip \
+           patch \
     && yum clean packages \
     && rm -rf /var/cache/yum/* \
     && localedef -i en_US -f UTF-8 en_US.UTF-8 \
@@ -93,6 +94,13 @@ RUN yum -y -q --enablerepo=extras install epel-release && \
     yum --enablerepo=epel -y -q install cuda-cudart-9-1 cuda-cudart-10-2 libcublas-10-2 cuda-nvtx-10-2 cuda-curand-9-1 cuda-cublas-9-1 libpng12 && \
     yum clean all && \
     ln -s /opt/fsl-6.0.5.1/bin/eddy_cuda10.2 /opt/fsl-6.0.5.1/bin/eddy_cuda
+
+ADD xtract.patch /opt/fsl-6.0.5.1/
+
+# Add patch for xtract 6.0.5 based on https://www.jiscmail.ac.uk/cgi-bin/wa-jisc.exe?A2=ind2107&L=FSL&D=0&P=196878
+RUN cd /opt/fsl-6.0.5.1/ && \
+    patch -p0 -i xtract.patch -s && \
+    rm xtract.patch
 
 RUN echo '{ \
     \n  "pkg_manager": "yum", \
