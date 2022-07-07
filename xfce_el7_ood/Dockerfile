@@ -1,6 +1,8 @@
 FROM centos:7.7.1908
 
 ADD TurboVNC.repo /etc/yum.repos.d/TurboVNC.repo
+ADD atom.repo /etc/yum.repos.d/atom.repo
+RUN rpm --import https://packagecloud.io/AtomEditor/atom/gpgkey
 
 # Update everything first
 RUN yum -y clean all && yum -y -q update
@@ -26,11 +28,12 @@ RUN yum -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     wmctrl file mesa-libGLU openssl bc bind-utils bzip2 dstat gcc gcc-c++ gcc-gfortran gdb htop iotop iperf3 \
     ipmitool libXp lsof ncdu net-tools nmap-ncat openldap-clients pbzip2 pciutils perf psmisc \
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
-    libcgroup-tools libpng12 hostname tcl-devel python3 libxcb* xcb-util* libncl glfw mesa-libOSMesa-devel mesa-libGL-devel
+    libcgroup-tools libpng12 hostname tcl-devel python3 libxcb* xcb-util* libncl glfw mesa-libOSMesa-devel mesa-libGL-devel singularity \
+    atom-1.57.0
 
 # Install numpy/websockify for TurboVNC
 # Remove power manager to prevent sleep/suspend
-RUN pip install -q --no-cache-dir ts nose numpy==1.11 && \
+RUN pip install -q --no-cache-dir ts nose numpy==1.11 "requests<2.28" certifi==2021.10.8 && \
     pip install -q --no-cache-dir websockify==0.9.0 && \
     yum -y -q erase xfce4-power-manager && \
     # Clean
