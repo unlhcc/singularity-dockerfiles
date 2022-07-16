@@ -5,7 +5,7 @@
    fsl_sub -T 2160 -n -l "$out/logs" -N xtract -t "$commands"
  else
 -  fsl_sub -T 300 --coprocessor=cuda -l "$out/logs" -N xtract "$commands"
-+  fsl_sub -T 300 --coprocessor=cuda -l "$out/logs" -N xtract -t "$commands"
++  fsl_sub -T 300 --coprocessor=cuda -l "$out/logs" -N xtract sh "$commands"
  fi
  
  #EOF
