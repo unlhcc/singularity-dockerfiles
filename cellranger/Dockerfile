@@ -22,7 +22,7 @@ RUN cd /tmp && curl -O -L https://repo.anaconda.com/miniconda/Miniconda3-latest-
     conda config --system --add channels defaults && conda config --system --add channels bioconda && \
     conda config --system --add channels conda-forge && conda config --system --add channels hcc && \
     conda config --system --add channels https://conda.anaconda.org/t/${token}/hcc && \
-    conda create -q -y -n cellranger bcl2fastq2=2.20.0.422 lz4 star
+    conda create -q -y -n cellranger bcl2fastq2=2.20.0.422 lz4 star boost=1.67.0 libboost=1.67.0
 
 # Set environment from source.bash
 ENV PATH /opt/anaconda/envs/cellranger/bin:$PATH
