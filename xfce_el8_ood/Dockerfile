@@ -25,7 +25,7 @@ RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     ipmitool libXp lsof ncdu net-tools nmap-ncat openldap-clients pbzip2 pciutils perf psmisc \
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
     libcgroup-tools libpng12 libpng15 hostname tcl-devel libxcb* xcb-util* libnsl mesa-libOSMesa-devel mesa-libGL-devel freeglut autofs \
-    ncurses-compat-libs singularity https://github.com/atom/atom/releases/download/v1.60.0/atom.x86_64.rpm okular evince
+    ncurses-compat-libs singularity https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince
 
 RUN dnf versionlock add turbovnc
 
@@ -61,6 +61,8 @@ RUN ln -s /usr/share/applications/thunar.desktop /usr/share/applications/Thunar.
 # Moichandising! Moichandising! Moichandising! Where the real money from the container is made!
 ADD icons /usr/share/icons/hicolor
 ADD images /usr/share/backgrounds
+ADD xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
+ADD xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
 
 # Profile scripts so we get the same default module behavior
 ADD profile.d /etc/profile.d
