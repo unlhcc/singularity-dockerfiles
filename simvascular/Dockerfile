@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y -q apt-utils && \
     apt-get install -y -q libgstreamer1.0-0 libgstreamer-plugins-base1.0-0 libxss-dev libgomp1 libegl1 libvtk7.1p \
-    libxmu-dev libxi-dev openmpi-bin wget libgl1-mesa-glx firefox libopenblas-base libnss3 wget > /dev/null && \
+    libxmu-dev libxi-dev openmpi-bin wget libgl1-mesa-glx firefox libopenblas-base libnss3 wget glogg > /dev/null && \
     apt-get clean
 
 RUN wget -q -O sv.deb "https://uofnelincoln.sharepoint.com/:u:/s/UNL-HollandComputingCenter/EQBcU96GOrJPha-P49RKWr8BE0-alTCwyiBUBNmvafMV5Q?e=gKq5NZ&download=1" && \
