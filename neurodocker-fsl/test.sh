@@ -1,1 +1,1 @@
-imageCommand="/neurodocker/startup.sh eddy_correct --help"
+imageCommand="eddy_correct --help"

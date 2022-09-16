@@ -1,0 +1,21 @@
+--- etc/fslconf/fslpython_install.sh.org	2022-09-15 18:34:44.121779210 -0500
++++ etc/fslconf/fslpython_install.sh	2022-09-15 19:49:25.458506324 -0500
+@@ -222,6 +222,9 @@
+ "${miniconda_bin_dir}/conda"  config --file "${miniconda_root_dir}"/.condarc --add    channels         conda-forge
+ "${miniconda_bin_dir}/conda"  config --file "${miniconda_root_dir}"/.condarc --append channels         https://fsl.fmrib.ox.ac.uk/fsldownloads/fslconda/channel
+ 
++# Install mamba
++"${miniconda_bin_dir}/conda" install -c conda-forge mamba 2>> "${miniconda_install_log}"  | \
++    ${script_dir}/progress.sh 150 ${quiet} >> "${miniconda_install_log}"
+ 
+ ##############################
+ # Create fslpython environment
+@@ -239,7 +242,7 @@
+ # different on linux. Also is likely to need
+ # updating whenever the fslpython environment
+ # specification is changed.
+-FSLDIR=$fsl_dir "${miniconda_bin_dir}/conda" env create \
++FSLDIR=$fsl_dir "${miniconda_bin_dir}/mamba" env create \
+     -f "${script_dir}/fslpython_environment.yml" \
+     2>> "${miniconda_install_log}" | \
+     ${script_dir}/progress.sh 400 ${quiet} 1>> "${miniconda_install_log}"
