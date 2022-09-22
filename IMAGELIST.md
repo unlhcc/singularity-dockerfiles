@@ -32,7 +32,7 @@
 | LIONS | 0.2 | `singularity exec -B <resource directory>:/LIONS-docker/resources/<genomeName> -B <data_directory>:/LIONS-data docker://unlhcc/lions lions.sh <path/to/parameter/ctrl>` | Replace `<path/to/parameter/ctrl>` with the path to your parameter file. |
 | lyve-SET | 1.1.4f | `singularity exec docker://unlhcc/lyve-set <lyve-SET program>` | Replace `<lyve-SET program>` with any command from the lyve-SET suite |
 | RASTtk | 1.3.0 | `singularity exec docker://unlhcc/rasttk <rasttk program>` | Replace `<rasttk program>` with any command from the RASTtk suite. |
-| CellRanger | 3.0.2, 3.1.0, 4.0.0, 6.1.2 | `singularity exec docker://unlhcc/cellranger cellranger <cellranger program>` | Replace `<cellranger program>` with any command from the CellRanger suite. |
+| CellRanger | 3.0.2, 3.1.0, 4.0.0, 6.1.2, 7.0.1 | `singularity exec docker://unlhcc/cellranger cellranger <cellranger program>` | Replace `<cellranger program>` with any command from the CellRanger suite. If needed, the reference database files can be found in `/work/HCC/BCRF/app_specific/cellranger/2020-A/`. |
 | SkylineRunner | 3.0.19158 | `singularity run -B $PWD:/data -B /tmp:/mywineprefix docker://unlhcc/skylinerunner mywine SkylineCmd <options>` | Replace `$PWD` with an absolute path if not running from the directory containing data. |
 | MXNet GPU (Python only) | 1.5.0, 1.6.0 | `singularity exec docker://unlhcc/mxnet-gpu python /path/to/my_mxnet_code.py` | Provides Python 3.7. |
 | ORFfinder | 0.4.3 | `singularity exec docker://unlhcc/orffinder ORFfinder <options>` | Replace `<options>` with the available options for ORFfinder. |
