@@ -1,0 +1,13 @@
+--- src/apps/CMakeLists.txt.org	2022-10-25 17:54:47.406484737 -0500
++++ src/apps/CMakeLists.txt	2022-10-25 17:54:57.272465204 -0500
+@@ -411,6 +411,10 @@
+ 	if(TIFF_FOUND)
+ 		target_link_libraries(${_target} ${TIFF_LIBRARIES})
+ 	endif()
++
++        if (ALTCPU)
++                target_link_libraries(${_target} ${TBB_LIBRARIES})
++        endif(ALTCPU)
+ 	
+ 	install (TARGETS ${_target} RUNTIME DESTINATION bin)
+ endforeach()

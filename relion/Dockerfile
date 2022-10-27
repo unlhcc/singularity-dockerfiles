@@ -1,19 +1,26 @@
-FROM almalinux:8.5 as builder
+FROM almalinux:8.6 as builder
 
 ADD oneAPI.repo /etc/yum.repos.d
 
 RUN dnf -y -q update
 
-RUN dnf install -y -q intel-oneapi-mkl-devel intel-oneapi-mpi-devel intel-oneapi-tbb-devel \
-    intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic intel-oneapi-compiler-fortran cmake git gcc gcc-c++ \
-    libtiff-devel libpng-devel ghostscript libXft-devel libX11-devel libjpeg-devel patch # fltk-devel
+RUN dnf install -y -q intel-oneapi-mkl-devel-2022.2.0 intel-oneapi-mpi-devel-2021.7.0 intel-oneapi-tbb-devel-2021.7.0 \
+    intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic-2022.1.0 intel-oneapi-compiler-fortran-2022.1.0 cmake git gcc gcc-c++ \
+    libtiff-devel libpng-devel ghostscript libXft-devel libX11-devel libjpeg-devel patch procps-ng # fltk-devel
+
+# Hush icc/icpc deprecation warnings
+RUN echo '-diag-disable=10441' >> /opt/intel/oneapi/compiler/latest/linux/bin/intel64/icc.cfg && \
+    echo '-diag-disable=10441' >> /opt/intel/oneapi/compiler/latest/linux/bin/intel64/icpc.cfg
 
 # RELION
-ENV RELION_VERSION=3.1.3
+ENV RELION_VERSION=4.0.0
 
 RUN mkdir /src && curl -sSL https://github.com/3dem/relion/archive/refs/tags/${RELION_VERSION}.tar.gz | tar -zx -C /src
 
-RUN pushd /src/relion-${RELION_VERSION} && mkdir build && pushd build && \
+ADD 001-tbb-altcpu.patch /src/relion-${RELION_VERSION}
+
+RUN pushd /src/relion-${RELION_VERSION} && patch -p0 -i 001-tbb-altcpu.patch && \
+    mkdir build && pushd build && \
     source /opt/intel/oneapi/setvars.sh && \
     cmake -DCMAKE_INSTALL_PREFIX=/opt/relion -DMKLFFT=ON -DCMAKE_C_COMPILER=icc \
     -DCMAKE_CXX_COMPILER=icpc -DMPI_C_COMPILER=mpiicc -DMPI_CXX_COMPILER=mpiicpc \
