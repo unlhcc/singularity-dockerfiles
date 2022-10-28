@@ -1,4 +1,4 @@
-FROM almalinux:8.5 as builder
+FROM almalinux:8.6 as builder
 
 ADD oneAPI.repo /etc/yum.repos.d
 
@@ -11,14 +11,18 @@ RUN dnf -y -q --enablerepo=extras install epel-release && \
 
 RUN dnf install -y -q intel-oneapi-mkl-devel  \
     cmake git gcc gcc-c++ openmpi-devel \
-    libtiff-devel libpng-devel ghostscript libXft-devel libX11-devel libjpeg-devel patch # fltk-devel
+    libtiff-devel libpng-devel ghostscript libXft-devel libX11-devel libjpeg-devel patch procps-ng  # fltk-devel
 
 # RELION
-ENV RELION_VERSION=3.1.3
+ENV RELION_VERSION=4.0.0
 
 RUN mkdir /src && curl -sSL https://github.com/3dem/relion/archive/refs/tags/${RELION_VERSION}.tar.gz | tar -zx -C /src
 
-RUN pushd /src/relion-${RELION_VERSION} && mkdir build && pushd build && \
+# https://github.com/3dem/relion/issues/826
+ADD 001-cuda-jaz.patch /src/relion-${RELION_VERSION}
+
+RUN pushd /src/relion-${RELION_VERSION} && patch -p1 -i 001-cuda-jaz.patch  && \
+    mkdir build && pushd build && \
     source /opt/intel/oneapi/mkl/latest/env/vars.sh && \
     source /etc/profile.d/modules.sh && \
     module load mpi/openmpi-x86_64 && \
@@ -37,9 +41,9 @@ RUN dnf -y -q install epel-release && \
 RUN curl -sSL "https://grigoriefflab.umassmed.edu/system/tdf?path=ctffind-${CTFFIND_VERSION}.tar.gz&file=1&type=node&id=26" | tar -zx -C /src
 
 # Hack so we don't have to install fftw headers since we're using MKL
-ADD ctffind_fftw.patch /src/ctffind-${CTFFIND_VERSION}
+ADD 002-ctffind_fftw.patch /src/ctffind-${CTFFIND_VERSION}
 
-RUN pushd /src/ctffind-${CTFFIND_VERSION} && patch -p0 < ctffind_fftw.patch && \
+RUN pushd /src/ctffind-${CTFFIND_VERSION} && patch -p0 < 002-ctffind_fftw.patch && \
     source /opt/intel/oneapi/mkl/latest/env/vars.sh && \
     export CPATH=$CPATH:/opt/intel/oneapi/mkl/latest/include/fftw/ && \
     ./configure --prefix=/opt/relion --disable-debugmode --enable-mkl --enable-openmp && \
@@ -61,7 +65,7 @@ RUN dnf config-manager --add-repo http://developer.download.nvidia.com/compute/c
 # MOTIONCOR2 (GPU)
 RUN curl -sSL --output /tmp/mc.zip "https://drive.google.com/uc?export=download&id=1-r_FTgLFqLe3i7h8oCz9d5Zhl7mMcni9" && \
     unzip -j -qq -c /tmp/mc.zip MotionCor2_1.5.0/MotionCor2_1.5.0_Cuda114_05-31-2022  > /opt/relion/bin/motioncor2 && \
-    chmod +x /opt/relion/bin/motioncor2
+    chmod +x /opt/relion/bin/motioncor2 && rm -f /tmp/mc.zip
 
 # RESMAP
 RUN curl -sSL --output /opt/relion/bin/resmap "https://downloads.sourceforge.net/project/resmap/ResMap-1.1.4-linux64" && \
