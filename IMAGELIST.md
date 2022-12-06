@@ -45,8 +45,9 @@
 | r-inla | 20.03.17 | `apptainer exec docker://unlhcc/r-inla Rscript /path/to/my/script.R` | Provides R 3.6 with the INLA package and tidyverse suite. |
 | Blender | 2.83.1 | `apptainer exec docker://unlhcc/blender blender <options>` | Replace `<options>` with any of the Blender CLI arguments. |
 | ASAP         | 1.9 | `apptainer exec docker://unlhcc/asap ASAP` | |
-| freesurfer | 5.3, 6.0 | `apptainer run -B $MATLAB_ROOT:/opt/matlab docker://unlhcc/freesurfer recon-all <options> | Provides FreeSurfer 5.3, 6.0. Load a matlab module additionally to make it available in the container. |
+| freesurfer | 5.3, 6.0 | `apptainer run -B $MATLAB_ROOT:/opt/matlab docker://unlhcc/freesurfer recon-all <options>` | Provides FreeSurfer 5.3, 6.0. Load a matlab module additionally to make it available in the container. |
 | PATRIC | 1.035 | `apptainer exec docker://unlhcc/patric <p3-command>` | Provides the [PATRIC command line interface](https://docs.patricbrc.org/cli_tutorial/index.html). Replace `<p3-command>` with the specific PATRIC command to run. |
 | AlphaFold | 2.0.0, 2.2.0 | `apptainer run -B /work/HCC/BCRF/app_specific/alphafold/2.2.0/:/data -B .:/etc --pwd /app/alphafold docker://unlhcc/alphafold <options>` | Replace `<options>` with any of the AlphaFold CLI arguments. |
 | S3V2_IDEAS_ESMP | d05d3e0 | `apptainer exec docker://unlhcc/s3v2_ideas_esmp S3V2_IDEAS_pipeline.py <options>` | Replace `<options>` with any of the S3V2_IDEAS_ESMP arguments. |
 | APSIM Classic | 7.9 | `apptainer exec docker://unlhcc/apsim-classic Apsim.exe <input>` | Replace `<input>` with the APSim input filename. |
+| Gate | 9.2 | `apptainer exec docker://unlhcc/gate /runGate.sh <arguments>` | Replace `<arguments>` with Gate program input arguments. |
