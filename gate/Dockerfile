@@ -20,6 +20,8 @@ RUN yum install -y  make \
                     python3-devel \
                     which nano
 
+RUN rm /etc/profile.d/lmod.sh && rm /etc/profile.d/lmod.csh
+
 #Prepare entrypoint
 RUN \
  echo "source /software/geant4/install/bin/geant4.sh" >> /etc/mybashrc && \
@@ -32,5 +34,5 @@ RUN \
  chmod a+x /runGate.sh
 
 WORKDIR /APP
-ENTRYPOINT ["/runGate.sh"]
+CMD ["/runGate.sh"]
 
