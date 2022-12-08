@@ -50,4 +50,4 @@
 | AlphaFold | 2.0.0, 2.2.0 | `apptainer run -B /work/HCC/BCRF/app_specific/alphafold/2.2.0/:/data -B .:/etc --pwd /app/alphafold docker://unlhcc/alphafold <options>` | Replace `<options>` with any of the AlphaFold CLI arguments. |
 | S3V2_IDEAS_ESMP | d05d3e0 | `apptainer exec docker://unlhcc/s3v2_ideas_esmp S3V2_IDEAS_pipeline.py <options>` | Replace `<options>` with any of the S3V2_IDEAS_ESMP arguments. |
 | APSIM Classic | 7.9 | `apptainer exec docker://unlhcc/apsim-classic Apsim.exe <input>` | Replace `<input>` with the APSim input filename. |
-| Gate | 9.2 | `apptainer exec docker://unlhcc/gate /runGate.sh <arguments>` | Replace `<arguments>` with Gate program input arguments. |
+| Gate | 9.2 | `apptainer exec -B ${PWD}:/APP docker://unlhcc/gate /runGate.sh <arguments>` | Replace `<arguments>` with Gate program input arguments. |
