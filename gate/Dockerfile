@@ -20,7 +20,6 @@ RUN yum install -y  make \
                     python3-devel \
                     which nano
 
-RUN rm /etc/profile.d/lmod.sh && rm /etc/profile.d/lmod.csh
 
 #Prepare entrypoint
 RUN \
