@@ -51,3 +51,4 @@
 | S3V2_IDEAS_ESMP | d05d3e0 | `apptainer exec docker://unlhcc/s3v2_ideas_esmp S3V2_IDEAS_pipeline.py <options>` | Replace `<options>` with any of the S3V2_IDEAS_ESMP arguments. |
 | APSIM Classic | 7.9 | `apptainer exec docker://unlhcc/apsim-classic Apsim.exe <input>` | Replace `<input>` with the APSim input filename. |
 | Gate | 9.2 | `apptainer exec -B ${PWD}:/APP docker://unlhcc/gate /runGate.sh <arguments>` | Replace `<arguments>` with Gate program input arguments. |
+| HippUnfold | 1.2.0 | `apptainer exec docker://unlhcc/hippunfold hippunfold <options>` | Replace `<options>` with any of the HippUnfold arguments. |
