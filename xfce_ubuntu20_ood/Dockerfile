@@ -24,7 +24,10 @@ RUN apt-get install -y -q python2 python2-dev x11vnc dbus-x11 vim nano geany mou
     pv screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind zip \
     ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer atom=1.46.0 curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt && \
     wget -q -O /tmp/turbovnc_2.2.7_amd64.deb https://downloads.sourceforge.net/project/turbovnc/2.2.7/turbovnc_2.2.7_amd64.deb && \
-    dpkg -i /tmp/turbovnc_2.2.7_amd64.deb
+    dpkg -i /tmp/turbovnc_2.2.7_amd64.deb && \
+    wget -q -O /tmp/multiarch-support_2.27-3ubuntu1.6_amd64.deb http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.27-3ubuntu1.6_amd64.deb && \
+    wget -q -O /tmp/libxp6_1.0.2-2_amd64.deb http://ftp.debian.org/debian/pool/main/libx/libxp/libxp6_1.0.2-2_amd64.deb && \
+    apt install -y -q /tmp/multiarch-support_2.27-3ubuntu1.6_amd64.deb /tmp/libxp6_1.0.2-2_amd64.deb
 
 RUN fc-cache -vr
 
