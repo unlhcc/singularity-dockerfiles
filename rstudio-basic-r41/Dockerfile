@@ -1,7 +1,7 @@
 FROM rocker/rstudio:4.1.3
 
 RUN apt-get -q update && \
-    apt-get -y -q install default-jdk tk8.6 lua5.3 lua-filesystem lua-posix lua-term lua-json > /dev/null
+    apt-get -y -q install default-jdk tk8.6 lua5.3 lua-filesystem lua-posix lua-term lua-json ssh > /dev/null
 
 RUN R CMD javareconf && \
     install2.r rJava > /dev/null 2>&1
