@@ -76,7 +76,7 @@ RUN echo "Downloading Miniconda installer ..." \
 #-------------------------
 # Create conda environment
 #-------------------------
-RUN conda create -y -q --name neuro --channel conda-forge python=3.6.2 \
+RUN conda create -y -q --name neuro -c conda-forge python=3.6.2 \
                                                           numpy \
                                                           pandas \
                                                           reprozip \
@@ -84,7 +84,13 @@ RUN conda create -y -q --name neuro --channel conda-forge python=3.6.2 \
     && /bin/bash -c "source activate neuro \
       && pip install -q --no-cache-dir nipype" \
     && sync
-ENV PATH=/opt/conda/envs/neuro/bin:$PATH
+RUN conda create -y -q --name afni -c hcc -c conda-forge \
+      afni=22.0.21 \
+      r-tidyverse \
+      r-base=4.1 \
+    && conda clean -ya
+
+ENV PATH=/opt/conda/envs/neuro/bin:/opt/conda/envs/afni/bin:/opt/freesurfer/bin:$PATH
 
 #--------------------------------------
 # Save container specifications to JSON
