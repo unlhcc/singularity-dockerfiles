@@ -73,22 +73,63 @@ RUN echo "Downloading Miniconda installer ..." \
     && conda update -y -q --all && sync \
     && conda clean -tipsy && sync
 
+#------------------
+# Install AFNI
+#------------------
+ENV PATH="/opt/afni-latest:/opt/anaconda/bin:$PATH" \
+    AFNI_PLUGINPATH="/opt/afni-latest"
+RUN apt-get update -qq \
+    && apt-get install -y -q --no-install-recommends \
+           ed \
+           gsl-bin \
+           libglib2.0-0 \
+           libglu1-mesa-dev \
+           libglw1-mesa \
+           libgomp1 \
+           libjpeg62 \
+           libxm4 \
+           netpbm \
+           tcsh \
+           xfonts-base \
+           xvfb \
+           wget \
+           software-properties-common \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    # download libxp, old links are broken
+    && add-apt-repository --yes ppa:zeehio/libxp && apt-get update -qq && apt-get install -y -q libxp6 \
+    # download libpng, old links are broken
+    && wget -O /tmp/toinstall.deb http://archive.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.50-1ubuntu2.14.04.3_amd64.deb \
+    && dpkg -i /tmp/toinstall.deb \
+    && rm /tmp/toinstall.deb \
+    && apt-get install -f \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && gsl2_path="$(find / -name 'libgsl.so.19' || printf '')" \
+    && if [ -n "$gsl2_path" ]; then \
+         ln -sfv "$gsl2_path" "$(dirname $gsl2_path)/libgsl.so.0"; \
+    fi \
+    && ldconfig \
+    && echo "Downloading AFNI ..." \
+    && mkdir -p /opt/afni-latest \
+    && curl -fsSL --retry 5 https://afni.nimh.nih.gov/pub/dist/tgz/linux_openmp_64.tgz \
+    | tar -xz -C /opt/afni-latest --strip-components 1
+
 #-------------------------
 # Create conda environment
 #-------------------------
-RUN conda create -y -q --name neuro -c conda-forge python=3.6.2 \
+RUN conda create -y -q --name neuro -c hcc -c conda-forge python=3.6.2 \
                                                           numpy \
                                                           pandas \
-                                                          reprozip \
+                                                          reprozip \ 
     && sync && conda clean -tipsy && sync \
     && /bin/bash -c "source activate neuro \
       && pip install -q --no-cache-dir nipype" \
     && sync
-RUN conda create -y -q --name afni -c hcc -c conda-forge \
-      afni=22.0.21 \
-      r-tidyverse \
-      r-base=4.1 \
-    && conda clean -ya
+
+RUN conda create -y -q --name afni -c hcc -c conda-forge matplotlib \
+    r=4.0 r-corrplot scikit-learn scikit-plot r-metafor r-rmpi \
+    r-afex r-phia r-snow r-nlme r-lme4 r-paran r-psych r-brms r-tidyverse scipy numpy pandas
 
 ENV PATH=/opt/conda/envs/neuro/bin:/opt/conda/envs/afni/bin:/opt/freesurfer/bin:$PATH
 
