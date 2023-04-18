@@ -6,7 +6,7 @@ RUN apt-get update && \
 RUN R CMD javareconf && \
     install2.r rJava > /dev/null 2>&1 && \
     # install workshop libraries
-    install2.r tidyverse gridExtra stringr pheatmap grDevices vegan knitr readr tidyr dplyr rstatix BiocManager > /dev/null 2>&1
+    install2.r tidyverse gridExtra stringr pheatmap grDevices vegan knitr readr tidyr dplyr rstatix picante BiocManager > /dev/null 2>&1
 
 # Install Bioconductor packages
 RUN R -q -s -e 'BiocManager::install("rhdf5")' && \
