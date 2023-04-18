@@ -1,4 +1,4 @@
-FROM rocker/geospatial:4.2.2
+FROM rocker/geospatial:4.2.3
 
 RUN apt-get update && \
     apt-get -y install lua5.3 lua-filesystem lua-posix lua-term lua-json ssh > /dev/null
