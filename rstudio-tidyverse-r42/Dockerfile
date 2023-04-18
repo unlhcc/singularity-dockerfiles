@@ -1,4 +1,4 @@
-FROM rocker/tidyverse:4.2.1
+FROM rocker/tidyverse:4.2.2
 
 RUN apt-get update && \
     apt-get -y -q install default-jdk tk8.6 lua5.3 lua-filesystem lua-posix lua-term lua-json ssh > /dev/null
