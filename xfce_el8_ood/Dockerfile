@@ -17,7 +17,7 @@ RUN dnf -y -q --disablerepo=* --enablerepo=appstream,baseos --releasever=8.6 ins
     qt5-qtdeclarative qt5-qtx11extras qt5-qtquickcontrols qt5-qtquickcontrols2 qt5-qtsvg qt5-qtwayland \
     qt5-qttools-libs-designer qt5-qtxmlpatterns
 
-RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 dbus-glib python2-pip \
+RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 dbus-glib python2-pip libssh libssh-devel \
     vim nano geany less https://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm wget mousepad ristretto \
     yum-utils firefox glib2 gtk2 dbus-glib xdg-user-dirs xkeyboard-config openssh-clients rsync \
     libX11 libXp libICE libSM libgudev1 libXcursor libnotify libXrandr libnotify libjpeg-turbo xorg-x11-xkb-utils \
@@ -48,8 +48,9 @@ RUN pip2 install -q --no-cache-dir ts nose numpy==1.11 && \
     rm -rf /var/cache/dnf/*
 
 # Lmod
-RUN curl -sSL https://github.com/TACC/Lmod/archive/refs/tags/8.5.12.tar.gz | tar -zx -C /tmp && \
-    pushd /tmp/Lmod-8.5.12 && ./configure --with-module-root-path=/util/opt/modulefiles --with-caseIndependentSorting=yes --with-settarg=no && \
+RUN mkdir /tmp/Lmod-8.5.12 && \
+    curl -sSL https://github.com/TACC/Lmod/archive/refs/tags/8.5.12.tar.gz | tar -zx -C /tmp/Lmod-8.5.12 --strip-components=1 && \
+    pushd /tmp/Lmod-8.5.12 && ls && ./configure --with-module-root-path=/util/opt/modulefiles --with-caseIndependentSorting=yes --with-settarg=no && \
     make && make install
 
 # Change the "web browser" launcher to firefox directly
