@@ -60,7 +60,7 @@ RUN apt-get update -qq \
            xvfb \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && curl -sSL --retry 5 -o /tmp/toinstall.deb http://mirrors.kernel.org/debian/pool/main/libx/libxp/libxp6_1.0.2-2_amd64.deb \
+    && curl -sSL --retry 5 -o /tmp/toinstall.deb https://apt.ligo-wa.caltech.edu:8443/debian/pool/stretch/libxp6/libxp6_1.0.2-2_amd64.deb \
     && dpkg -i /tmp/toinstall.deb \
     && rm /tmp/toinstall.deb \
     && curl -sSL --retry 5 -o /tmp/toinstall.deb http://snapshot.debian.org/archive/debian-security/20160113T213056Z/pool/updates/main/libp/libpng/libpng12-0_1.2.49-1%2Bdeb7u2_amd64.deb \
@@ -78,10 +78,13 @@ RUN apt-get update -qq \
     && mkdir -p /opt/afni-latest \
     && curl -fsSL --retry 5 https://afni.nimh.nih.gov/pub/dist/tgz/linux_openmp_64.tgz \
     | tar -xz -C /opt/afni-latest --strip-components 1
+
 RUN curl -ssL -o /tmp/Miniconda3-latest-Linux-x86_64.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
     && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/anaconda > /dev/null 2>&1 \
-    && PATH=$PATH:/opt/anaconda/bin conda install -q -y -c hcc -c conda-forge matplotlib r=4.0 r-corrplot scikit-learn scikit-plot \
-       r-metafor r-rmpi r-afex r-phia r-snow r-nlme r-lme4 r-paran r-psych r-brms r-tidyverse scipy numpy pandas \
+    && PATH=$PATH:/opt/anaconda/bin conda install -q -y -c hcc -c conda-forge python=3.9 'numpy >=1.14.5' matplotlib-base \
+        scikit-learn scikit-plot scipy pandas r-base=4.2 r-afex r-phia r-snow r-nlme r-lme4 r-paran r-brms r-shiny \
+        r-shinydashboard r-plotly r-colourpicker r-data.table r-gplots r-rcolorbrewer r-psych r-ggplot2 r-ggridges r-dplyr \
+        r-tidyr r-scales r-corrplot r-metafor r-rmpi r-tidyverse \
     && rm -f /tmp/Miniconda3-latest-Linux-x86_64.sh
 
 
@@ -95,7 +98,7 @@ RUN echo '{ \
     \n    [ \
     \n      "afni", \
     \n      { \
-    \n        "version": "20.3.01", \
+    \n        "version": "23.2.02", \
     \n        "method": "binaries" \
     \n      } \
     \n    ] \
