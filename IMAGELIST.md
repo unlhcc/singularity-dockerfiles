@@ -54,3 +54,4 @@
 | HippUnfold | 1.2.0 | `apptainer exec docker://unlhcc/hippunfold hippunfold <options>` | Replace `<options>` with any of the HippUnfold arguments. |
 | mfold | 3.6 | `apptainer exec docker://unlhcc/mfold mfold <options>` | Replace `<options>` with any of the mfold arguments. |
 | CellRanger ARC | 2.0.2 | `apptainer exec docker://unlhcc/cellranger-arc cellranger-arc <cellranger-arc program>` | Replace `<cellranger-arc program>` with any command from the CellRanger ARC suite. If needed, the reference database files can be found in `/work/HCC/BCRF/app_specific/cellranger-arc/2020-A-2.0.0/`. |
+| LROSE | 20230814 | `apptainer exec docker://unlhcc/lrose <lrose program>` | Replace `<lrose program>` with any command from the LROSE suite. |
