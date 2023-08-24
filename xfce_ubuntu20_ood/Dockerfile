@@ -17,16 +17,17 @@ RUN apt-get install -y -q xfce4 xfce4-terminal
 RUN wget -q https://packagecloud.io/AtomEditor/atom/gpgkey -O- | apt-key add - && \
     add-apt-repository "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main"
 
-RUN apt-get install -y -q python2 python2-dev x11vnc dbus-x11 vim nano geany mousepad ristretto less \
+RUN apt-get install -y  python2 python2-dev x11vnc dbus-x11 vim nano geany mousepad ristretto less \
     firefox xdg-user-dirs rsync lua5.3 liblua5.3-dev lua-filesystem lua-json lua-lpeg lua-posix lua-term \
     gvfs-fuse wmctrl file openssl bc bind9-utils bzip2 dstat make gdb htop iotop iperf3 \
     gcc gfortran g++ ipmitool lsof ncdu net-tools pbzip2 pciutils psmisc libpng16-16 default-jdk \
     pv screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind zip \
-    ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer atom=1.46.0 curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt && \
-    wget -q -O /tmp/turbovnc_2.2.7_amd64.deb https://downloads.sourceforge.net/project/turbovnc/2.2.7/turbovnc_2.2.7_amd64.deb && \
+    ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer atom=1.46.0 curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt
+
+RUN wget -q -O /tmp/turbovnc_2.2.7_amd64.deb https://downloads.sourceforge.net/project/turbovnc/2.2.7/turbovnc_2.2.7_amd64.deb && \
     dpkg -i /tmp/turbovnc_2.2.7_amd64.deb && \
     wget -q -O /tmp/multiarch-support_2.27-3ubuntu1.6_amd64.deb http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.27-3ubuntu1.6_amd64.deb && \
-    wget -q -O /tmp/libxp6_1.0.2-2_amd64.deb http://ftp.debian.org/debian/pool/main/libx/libxp/libxp6_1.0.2-2_amd64.deb && \
+    wget -q -O /tmp/libxp6_1.0.2-2_amd64.deb https://archive.debian.org/debian/pool/main/libx/libxp/libxp6_1.0.2-2_amd64.deb && \
     apt install -y -q /tmp/multiarch-support_2.27-3ubuntu1.6_amd64.deb /tmp/libxp6_1.0.2-2_amd64.deb
 
 RUN fc-cache -vr
@@ -69,3 +70,7 @@ ADD xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml /etc/xdg/xfce4/xfconf/xfce-
 # Profile scripts so we get the same default module behavior
 ADD profile.d /etc/profile.d
 RUN mkdir -p /home /work /common /util
+
+# Make bash the default shell as nature intended
+RUN echo "dash dash/sh boolean false" | debconf-set-selections
+RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
