@@ -74,3 +74,6 @@ RUN mkdir -p /home /work /common /util
 # Make bash the default shell as nature intended
 RUN echo "dash dash/sh boolean false" | debconf-set-selections
 RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
+
+# Remove vte prompt madness
+RUN rm -f /etc/profile.d/vte*
