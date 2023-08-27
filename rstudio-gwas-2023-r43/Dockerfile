@@ -25,3 +25,7 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/lua /usr/lib64/lua
 
 # Restore PATH so OOD can find rsession
 ENV PATH=/usr/lib/rstudio-server/bin:$PATH
+
+# Add rTASSEL
+RUN install2.r devtools > /dev/null 2>&1 && \
+    R -q -s -e 'devtools::install_github("maize-genetics/rTASSEL")'
