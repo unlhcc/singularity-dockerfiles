@@ -32,9 +32,14 @@ RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     ncurses-compat-libs apptainer https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince
 
 RUN mkdir /tmp/LO && \
-    curl -sSL https://download.documentfoundation.org/libreoffice/stable/7.4.6/rpm/x86_64/LibreOffice_7.4.6_Linux_x86-64_rpm.tar.gz | tar -zx -C /tmp/LO --strip-components=1 && \
+    curl -sSL https://download.documentfoundation.org/libreoffice/stable/7.5.5/rpm/x86_64/LibreOffice_7.5.5_Linux_x86-64_rpm.tar.gz | tar -zx -C /tmp/LO --strip-components=1 && \
     dnf -y -q localinstall /tmp/LO/RPMS/*.rpm && \
     rm -rf /tmp/LO
+
+# VLC
+RUN dnf install -y -q https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm && \
+    dnf install -y -q vlc && \
+    dnf config-manager --set-disabled rpmfusion-free-updates
 
 RUN dnf versionlock add turbovnc
 
