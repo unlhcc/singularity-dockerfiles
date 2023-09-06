@@ -29,7 +29,7 @@ RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     ipmitool libXp lsof ncdu net-tools nmap-ncat openldap-clients pbzip2 pciutils perf psmisc \
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
     libcgroup-tools libpng12 libpng15 hostname tcl-devel libxcb* xcb-util* libnsl mesa-libOSMesa-devel mesa-libGL-devel freeglut autofs \
-    ncurses-compat-libs apptainer https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince
+    ncurses-compat-libs apptainer https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince totem
 
 RUN mkdir /tmp/LO && \
     curl -sSL https://download.documentfoundation.org/libreoffice/stable/7.5.5/rpm/x86_64/LibreOffice_7.5.5_Linux_x86-64_rpm.tar.gz | tar -zx -C /tmp/LO --strip-components=1 && \

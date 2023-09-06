@@ -22,7 +22,13 @@ RUN apt-get install -y  python2 python2-dev x11vnc dbus-x11 vim nano geany mouse
     gvfs-fuse wmctrl file openssl bc bind9-utils bzip2 dstat make gdb htop iotop iperf3 \
     gcc gfortran g++ ipmitool lsof ncdu net-tools pbzip2 pciutils psmisc libpng16-16 default-jdk \
     pv screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind zip \
-    ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer atom=1.46.0 curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt
+    ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer atom=1.46.0 curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt \
+    vlc totem
+
+# More recent libreoffice
+RUN apt-add-repository -y  ppa:libreoffice && \
+    apt-get update && \
+    apt-get install -y libreoffice
 
 RUN wget -q -O /tmp/turbovnc_2.2.7_amd64.deb https://downloads.sourceforge.net/project/turbovnc/2.2.7/turbovnc_2.2.7_amd64.deb && \
     dpkg -i /tmp/turbovnc_2.2.7_amd64.deb && \
