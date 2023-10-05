@@ -1,0 +1,1 @@
+imageCommand="code-server --help"
