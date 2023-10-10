@@ -15,7 +15,7 @@
 # This image is modification of https://raw.githubusercontent.com/uvarc/rivanna-docker/master/alphafold/2.0.0/Dockerfile
 
 ARG CUDA=11.2
-FROM nvidia/cuda:${CUDA}.0-base-ubuntu18.04 AS build
+FROM nvidia/cuda:${CUDA}.2-base-ubuntu18.04 AS build
 ARG CUDA
 
 # Use bash to support string substitution.
@@ -48,8 +48,8 @@ RUN wget -q -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-
 # Install conda packages.
 ENV PATH="/opt/conda/bin:$PATH"
 RUN /opt/conda/bin/conda create -y -p /opt/alphafoldenv -c conda-forge \
-      python=3.8 \
-      openmm=7.5.1 \
+      python=3.9 \
+      openmm=7.7.0 \
       cudatoolkit==${CUDA}.0 \
       pdbfixer \
       pip \
@@ -57,25 +57,26 @@ RUN /opt/conda/bin/conda create -y -p /opt/alphafoldenv -c conda-forge \
 
 WORKDIR /app
 # RUN git clone https://github.com/deepmind/alphafold.git
-RUN wget -q -P ./alphafold https://github.com/deepmind/alphafold/archive/refs/tags/v2.2.0.tar.gz \
-    && tar xvf ./alphafold/v2.2.0.tar.gz -C ./alphafold --strip-components 1 \
-    && rm ./alphafold/v2.2.0.tar.gz
+RUN wget -q -P ./alphafold https://github.com/deepmind/alphafold/archive/refs/tags/v2.3.2.tar.gz \
+    && tar xvf ./alphafold/v2.3.2.tar.gz -C ./alphafold --strip-components 1 \
+    && rm ./alphafold/v2.3.2.tar.gz
 RUN wget -q -P /app/alphafold/alphafold/common/ \
   https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
 
 # Install pip packages.
 # downgrade TF to 2.4.1 https://github.com/deepmind/alphafold/pull/28
 RUN /opt/alphafoldenv/bin/pip install -q --upgrade --no-cache-dir pip \
-    && sed -i 's/^tensorflow.*$/tensorflow==2.4.1/' /app/alphafold/requirements.txt \
+    # && sed -i 's/^tensorflow.*$/tensorflow==2.4.1/' /app/alphafold/requirements.txt \
     && /opt/alphafoldenv/bin/pip install -q --no-cache-dir -r /app/alphafold/requirements.txt \
-    && /opt/alphafoldenv/bin/pip install -q --upgrade --no-cache-dir jax==0.2.14 jaxlib==0.1.69+cuda111 -f \
-       https://storage.googleapis.com/jax-releases/jax_releases.html
+    && /opt/alphafoldenv/bin/pip install -q --upgrade --no-cache-dir jax==0.3.25 jaxlib==0.3.25+cuda11.cudnn805 -f \
+       https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
 # Apply OpenMM patch.
-WORKDIR /opt/alphafoldenv/lib/python3.8/site-packages
-RUN patch -p0 < /app/alphafold/docker/openmm.patch
+# Per https://github.com/google-deepmind/alphafold/issues/404 patch is not needed anymore
+# WORKDIR /opt/alphafoldenv/lib/python3.9/site-packages
+# RUN patch -p0 < /app/alphafold/docker/openmm.patch
 
-FROM nvidia/cuda:${CUDA}.0-base
+FROM nvidia/cuda:${CUDA}.2-base-ubuntu18.04
 ARG CUDA
 
 SHELL ["/bin/bash", "-c"]
