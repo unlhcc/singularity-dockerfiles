@@ -49,7 +49,7 @@ RUN wget -q -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-
 ENV PATH="/opt/conda/bin:$PATH"
 RUN /opt/conda/bin/conda create -y -p /opt/alphafoldenv -c conda-forge \
       python=3.9 \
-      openmm=7.7.0 \
+      openmm=7.5.1 \
       cudatoolkit==${CUDA}.0 \
       pdbfixer \
       pip \
@@ -73,8 +73,9 @@ RUN /opt/alphafoldenv/bin/pip install -q --upgrade --no-cache-dir pip \
 
 # Apply OpenMM patch.
 # Per https://github.com/google-deepmind/alphafold/issues/404 patch is not needed anymore
-# WORKDIR /opt/alphafoldenv/lib/python3.9/site-packages
-# RUN patch -p0 < /app/alphafold/docker/openmm.patch
+# for next releases and higher openmm version
+WORKDIR /opt/alphafoldenv/lib/python3.9/site-packages
+RUN patch -p0 < /app/alphafold/docker/openmm.patch
 
 FROM nvidia/cuda:${CUDA}.2-base-ubuntu18.04
 ARG CUDA
