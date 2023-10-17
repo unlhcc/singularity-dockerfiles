@@ -38,7 +38,9 @@ ENV CTFFIND_VERSION=4.1.14
 RUN dnf -y -q install epel-release && \
     dnf -y -q install wxBase3-devel wxGTK3-devel
 
-RUN curl -sSL "https://grigoriefflab.umassmed.edu/system/tdf?path=ctffind-${CTFFIND_VERSION}.tar.gz&file=1&type=node&id=26" | tar -zx -C /src
+# This is not stable link, use the SharePoint download we have instead
+# RUN curl -sSL "https://grigoriefflab.umassmed.edu/system/tdf?path=ctffind-${CTFFIND_VERSION}.tar.gz&file=1&type=node&id=26" | tar -zx -C /src
+RUN curl -sSL --cookie-jar /tmp  "https://uofnelincoln.sharepoint.com/:u:/s/UNL-HollandComputingCenter/Ee0eoKkI-JZHh9x2i2hx4hUBRK_vedGu42OeuEK6IlAR9A?download=1"  | tar -zx -C /src 
 
 # Hack so we don't have to install fftw headers since we're using MKL
 ADD 002-ctffind_fftw.patch /src/ctffind-${CTFFIND_VERSION}
@@ -60,7 +62,7 @@ RUN dnf install -y -q dnf-plugins-core
 RUN dnf install -y -q intel-oneapi-runtime-libs libtiff libpng libjpeg ghostscript libXft libX11 wxBase3 openmpi texlive-latex # fltk
 
 RUN dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-rhel8.repo && \
-    dnf --enablerepo=epel -y -q install cuda-libraries-11-4
+    dnf --enablerepo=epel -y -q install cuda-libraries-11-4 cuda-nvtx-11-4-11.4.120-1
 
 # MOTIONCOR2 (GPU)
 RUN curl -sSL --output /tmp/mc.zip "https://drive.google.com/uc?export=download&id=1-r_FTgLFqLe3i7h8oCz9d5Zhl7mMcni9" && \
