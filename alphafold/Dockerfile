@@ -14,8 +14,8 @@
 
 # This image is modification of https://raw.githubusercontent.com/uvarc/rivanna-docker/master/alphafold/2.0.0/Dockerfile
 
-ARG CUDA=11.2
-FROM nvidia/cuda:${CUDA}.2-base-ubuntu18.04 AS build
+ARG CUDA=11.1
+FROM nvidia/cuda:${CUDA}.1-cudnn8-devel-ubuntu18.04 AS build
 ARG CUDA
 
 # Use bash to support string substitution.
@@ -40,7 +40,7 @@ RUN cmake -DHAVE_AVX2=1 -DCMAKE_INSTALL_PREFIX=/opt/hhsuite .. \
     && ln -s /opt/hhsuite/bin/* /usr/bin \
     && rm -rf /tmp/hh-suite
 
-# Install Miniconda package manger.
+# Install Miniconda package manager.
 RUN wget -q -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
     && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
     && rm /tmp/Miniconda3-latest-Linux-x86_64.sh
@@ -48,25 +48,25 @@ RUN wget -q -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-
 # Install conda packages.
 ENV PATH="/opt/conda/bin:$PATH"
 RUN /opt/conda/bin/conda create -y -p /opt/alphafoldenv -c conda-forge \
-      python=3.9 \
+      python=3.8 \
       openmm=7.5.1 \
-      cudatoolkit==${CUDA}.0 \
+      cudatoolkit==${CUDA}.1 \
       pdbfixer \
       pip \
     && /opt/conda/bin/conda clean -ya
 
 WORKDIR /app
 # RUN git clone https://github.com/deepmind/alphafold.git
-RUN wget -q -P ./alphafold https://github.com/deepmind/alphafold/archive/refs/tags/v2.3.2.tar.gz \
-    && tar xvf ./alphafold/v2.3.2.tar.gz -C ./alphafold --strip-components 1 \
-    && rm ./alphafold/v2.3.2.tar.gz
+ENV ALPHAFOLD_VERSION=2.3.2
+RUN wget -q -P ./alphafold https://github.com/deepmind/alphafold/archive/refs/tags/v${ALPHAFOLD_VERSION}.tar.gz \
+    && tar xvf ./alphafold/v${ALPHAFOLD_VERSION}.tar.gz -C ./alphafold --strip-components 1 \
+    && rm ./alphafold/v${ALPHAFOLD_VERSION}.tar.gz
 RUN wget -q -P /app/alphafold/alphafold/common/ \
   https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
 
 # Install pip packages.
-# downgrade TF to 2.4.1 https://github.com/deepmind/alphafold/pull/28
 RUN /opt/alphafoldenv/bin/pip install -q --upgrade --no-cache-dir pip \
-    # && sed -i 's/^tensorflow.*$/tensorflow==2.4.1/' /app/alphafold/requirements.txt \
+    && sed -i 's/^tensorflow.*$/tensorflow==2.9.0/' /app/alphafold/requirements.txt \
     && /opt/alphafoldenv/bin/pip install -q --no-cache-dir -r /app/alphafold/requirements.txt \
     && /opt/alphafoldenv/bin/pip install -q --upgrade --no-cache-dir jax==0.3.25 jaxlib==0.3.25+cuda11.cudnn805 -f \
        https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
@@ -74,17 +74,17 @@ RUN /opt/alphafoldenv/bin/pip install -q --upgrade --no-cache-dir pip \
 # Apply OpenMM patch.
 # Per https://github.com/google-deepmind/alphafold/issues/404 patch is not needed anymore
 # for next releases and higher openmm version
-WORKDIR /opt/alphafoldenv/lib/python3.9/site-packages
+WORKDIR /opt/alphafoldenv/lib/python3.8/site-packages
 RUN patch -p0 < /app/alphafold/docker/openmm.patch
 
-FROM nvidia/cuda:${CUDA}.2-base-ubuntu18.04
+FROM nvidia/cuda:${CUDA}.1-cudnn8-devel-ubuntu18.04
 ARG CUDA
 
 SHELL ["/bin/bash", "-c"]
 
 # add cudnn and cusolver
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      libcudnn8 libcusolver-11-0 \
+      libcusolver-11-1 \
       cuda-command-line-tools-${CUDA/./-} \
       hmmer \
       kalign \
@@ -109,8 +109,9 @@ ldconfig\n\
 python /app/alphafold/run_alphafold.py "$@"' > /app/run_alphafold.sh \
   && chmod +x /app/run_alphafold.sh
 
-ENV PATH=/opt/alphafoldenv/bin:$PATH \
+ENV PATH=/opt/alphafoldenv/bin:/usr/local/cuda-11.1/bin:$PATH \
     PYTHONPATH=/opt/alphafoldnev/lib/python3.8/site-packages \
+    LD_LIBRARY_PATH=/usr/local/cuda-11.1/targets/x86_64-linux/lib/:$LD_LIBRARY_PATH \
     LC_ALL=C.UTF-8
 
 # This image is modification of https://raw.githubusercontent.com/uvarc/rivanna-docker/master/alphafold/2.0.0/Dockerfile
