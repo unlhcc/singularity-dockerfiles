@@ -56,3 +56,7 @@
 | CellRanger ARC | 2.0.2 | `apptainer exec docker://unlhcc/cellranger-arc cellranger-arc <cellranger-arc program>` | Replace `<cellranger-arc program>` with any command from the CellRanger ARC suite. If needed, the reference database files can be found in `/work/HCC/BCRF/app_specific/cellranger-arc/2020-A-2.0.0/`. |
 | LROSE | 20230814 | `apptainer exec docker://unlhcc/lrose <lrose program>` | Replace `<lrose program>` with any command from the LROSE suite. |
 | MCell_CellBlender | 4.0.6 | `apptainer exec docker://unlhcc/mcell_cellblender <MCell_CellBlender program>` | Replace `<MCell_CellBlender program>` with any of the MCell_CellBlender arguments (mcell, my_blender). |
+| RELION | 4.0.0, 4.0.1 | `apptainer exec docker://unlhcc/relion <relion program>` | Replace `<relion program>` with the desired RELION program and its arguments. |
+| RELION GPU | 4.0.0, 4.0.1 | `apptainer exec docker://unlhcc/relion-gpu <relion program>` | Replace `<relion program>` with the desired RELION program and its arguments. |
+
+
