@@ -58,5 +58,5 @@
 | MCell_CellBlender | 4.0.6 | `apptainer exec docker://unlhcc/mcell_cellblender <MCell_CellBlender program>` | Replace `<MCell_CellBlender program>` with any of the MCell_CellBlender arguments (mcell, my_blender). |
 | RELION | 4.0.0, 4.0.1 | `apptainer exec docker://unlhcc/relion <relion program>` | Replace `<relion program>` with the desired RELION program and its arguments. |
 | RELION GPU | 4.0.0, 4.0.1 | `apptainer exec docker://unlhcc/relion-gpu <relion program>` | Replace `<relion program>` with the desired RELION program and its arguments. |
-
+| Fair ESM (Python only) | 2.0.0 | `apptainer exec docker://unlhcc/fair-esm python /path/to/fair_esm_code.py` | Provides Python 3.7. Provided Python scripts can be accessed in $ESM_SCRIPTS/scripts (e.g., `apptainer exec docker://unlhcc/fair-esm python $ESM_SCRIPTS/scripts/esmfold_inference.py`). |
 
