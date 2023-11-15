@@ -57,7 +57,7 @@ ADD oneAPI.repo /etc/yum.repos.d
 
 RUN dnf install -y -q dnf-plugins-core
 
-RUN dnf install -y -q intel-oneapi-runtime-libs libtiff libpng libjpeg ghostscript libXft libX11 wxBase3 texlive-latex # fltk
+RUN dnf install -y -q intel-oneapi-runtime-libs intel-oneapi-mpi libtiff libpng libjpeg ghostscript libXft libX11 wxBase3 texlive-latex # fltk
 
 # RESMAP
 RUN curl -sSL --output /opt/relion/bin/resmap "https://downloads.sourceforge.net/project/resmap/ResMap-1.1.4-linux64" && \
@@ -84,9 +84,16 @@ RUN wget -O ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest
          pytorch=*=*cpu* torchvision=*=*cpu* topaz=0.2.5 && \
      /opt/conda/bin/conda clean -ya 
 
-ENV PATH=/opt/relion/bin:/opt/tikzit/bin:/opt/conda/bin/:/opt/conda/envs/${TOPAZ_ENV}/bin/:${PATH} \
+ENV PATH=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/bin:/opt/intel/oneapi/mpi/2021.11/bin:/opt/relion/bin:/opt/tikzit/bin:/opt/conda/bin/:/opt/conda/envs/${TOPAZ_ENV}/bin/:${PATH} \
     RELION_CTFFIND_EXECUTABLE=/opt/relion/bin/ctffind \
     RELION_RESMAP_EXECUTABLE=/opt/relion/bin/resmap \
     RELION_SCRATCH_DIR=/tmp \
     RELION_SHELL=/bin/bash \
-    topaz_path=/opt/conda/envs/topaz-0.2.5/bin
+    topaz_path=/opt/conda/envs/topaz-0.2.5/bin \
+    I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.11 \
+    CPATH=/opt/intel/oneapi/mpi/2021.11/include \
+    FI_PROVIDER_PATH=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/lib/prov:/usr/lib64/libfabric \
+    LD_LIBRARY_PATH=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/lib:/opt/intel/oneapi/mpi/2021.11/lib \
+    LIBRARY_PATH=/opt/intel/oneapi/mpi/2021.11/lib \
+    PKG_CONFIG_PATH=/opt/intel/oneapi/mpi/2021.11/lib/pkgconfig \
+    CLASSPATH=/opt/intel/oneapi/mpi/2021.11/share/java/mpi.jar
