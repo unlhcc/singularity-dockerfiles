@@ -61,7 +61,12 @@ ADD oneAPI.repo /etc/yum.repos.d
 
 RUN dnf install -y -q dnf-plugins-core
 
-RUN dnf install -y -q intel-oneapi-runtime-libs libtiff libpng libjpeg ghostscript libXft libX11 wxBase3 openmpi texlive-latex # fltk
+RUN dnf install -y -q intel-oneapi-runtime-libs libtiff libpng libjpeg ghostscript libXft libX11 wxBase3 texlive-latex # fltk
+
+RUN cp /etc/profile.d/modules.sh /etc/profile.d/hcc-modules.sh && \
+    cp /etc/profile.d/modules.csh /etc/profile.d/hcc-modules.csh
+RUN dnf install -y -q --disablerepo=epel openmpi && \
+    rm -f /etc/profile.d/modules.{sh,csh}
 
 RUN dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-rhel8.repo && \
     dnf --enablerepo=epel -y -q install cuda-libraries-11-4 cuda-nvtx-11-4-11.4.120-1
@@ -93,7 +98,8 @@ RUN wget -O ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest
          pytorch=*=*cuda11* torchvision=*=*cu11* topaz=0.2.5 && \
      /opt/conda/bin/conda clean -ya 
 
-ENV PATH=/opt/relion/bin:/opt/tikzit/bin:/opt/conda/bin/:/opt/conda/envs/${TOPAZ_ENV}/bin/:${PATH} \
+ENV PATH=/usr/lib64/openmpi/bin:/opt/relion/bin:/opt/tikzit/bin:/opt/conda/bin/:/opt/conda/envs/${TOPAZ_ENV}/bin/:${PATH} \
+    LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH \
     RELION_MOTIONCOR2_EXECUTABLE=/opt/relion/bin/motioncor2 \
     RELION_CTFFIND_EXECUTABLE=/opt/relion/bin/ctffind \
     RELION_RESMAP_EXECUTABLE=/opt/relion/bin/resmap \
