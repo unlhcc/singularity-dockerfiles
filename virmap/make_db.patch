@@ -1,0 +1,74 @@
+--- DatabaseConstructor/makeVirmapDb.pl.old	2023-12-30 13:33:05.685947462 -0600
++++ DatabaseConstructor/makeVirmapDb.pl	2023-12-30 13:36:17.503626216 -0600
+@@ -31,22 +31,22 @@
+ 
+ my $totalMem = totalmem();
+ if ($totalMem / (1024 ** 3) < 64) {
+-	die "Machine doesn't have enough memory to safely build the database\n";
++	print "Machine doesn't have enough memory to safely build the database\n";
+ }
+ 
+ 
+ unless ($ENV{'TMPDIR'}) {
+-	die "TMPDIR not set\n";
++	print "TMPDIR not set\n";
+ }
+ unless (-e $ENV{'TMPDIR'}) {
+-	die "TMPDIR set, but doesn't exist: $ENV{'TMPDIR'}\n";
++	print "TMPDIR set, but doesn't exist: $ENV{'TMPDIR'}\n";
+ }
+ my $tmpdir = tempdir( CLEANUP => 1 );
+ unless (testFreeSpaceGb($tmpdir) > 500) {
+-	die "$tmpdir has less than 500GB of free space\n";
++	print "$tmpdir has less than 500GB of free space\n";
+ }
+ if ($saveFasta and testFreeSpaceGb($tmpdir) < 1000) {
+-	die "$tmpdir has less than 1000GB of free space (saveFastaMode)\n";
++	print "$tmpdir has less than 1000GB of free space (saveFastaMode)\n";
+ }
+ 
+ my $startDir = cwd();
+@@ -66,13 +66,13 @@
+ 
+ 
+ unless ($outputDir) {
+-	die "--outputDir not defined\n";
++	print "--outputDir not defined\n";
+ }
+ unless (-e $outputDir) {
+-	die "$outputDir does not exist\n";
++	print "$outputDir does not exist\n";
+ }
+ unless (testFreeSpaceGb($outputDir) > 300) {
+-	die" $outputDir does not have 300GB of free space\n";
++	print" $outputDir does not have 300GB of free space\n";
+ }
+ my $absOutputDir = `readlink -e $outputDir`;
+ chomp $absOutputDir;
+@@ -112,7 +112,7 @@
+ }
+ 
+ unless ($hasVirus) {
+-	die "no viral divisions in wanted divisions\n";
++	print "no viral divisions in wanted divisions\n";
+ }
+ 
+ 
+@@ -160,7 +160,7 @@
+ 	}
+ }
+ if ($fileCheckFail) {
+-	die "not all expected files present\n";
++	print "not all expected files present\n";
+ }
+ 
+ 
+@@ -402,7 +402,7 @@
+ 	my $outdir = $_[1];
+ 	my $halfprocs = $_[2];
+ 	my $saveFasta = $_[3];
+-	system("bbmap.sh -Xmx50G ref=$tmpdir/viral.nuc.fna path=$outdir/virBbmap build=1 2>$outdir/makeVirBbmap.err");
++	system("bbmap.sh -Xmx2000G ref=$tmpdir/viral.nuc.fna path=$outdir/virBbmap build=1 2>$outdir/makeVirBbmap.err");
+ 	if ($saveFasta) {
+ 		system("cat $tmpdir/viral.nuc.fna | lbzip2 -c -n $halfprocs > $outdir/viral.nuc.fna.bz2");
+ 	}

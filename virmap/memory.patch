@@ -1,0 +1,42 @@
+--- Virmap.pl.old	2024-01-12 15:46:34.849106685 -0600
++++ Virmap.pl	2024-01-12 15:45:55.664172929 -0600
+@@ -77,7 +77,7 @@
+ print STDERR "$startMsg\n";
+ 
+ 
+-GetOptions ("interleaved:s{,}" => \@interleaved, "readF:s{,}" => \@readF, "readR:s{,}" => \@readR, "readUnpaired:s{,}" => \@files, "gbBlastx=s" => \$gbBlastx, "gbBlastn=s" => \$gbBlastn, "virBbmap=s" => \$virBbmap, "virDmnd=s" => \$virDmnd, "taxaJson=s" => \$taxaJson, "outputDir=s" => \$outputDir, "fasta" => \$fastaInput, "sampleName=s" => \$sampleName, "threads=i" => \$threads, "tmpdir=s" => \$tmpdir, "bigRam" => \$bigRam, "hugeRam" => \$hugeRam, "whiteList=s" => \$whiteList, "bbMapLimit=s" => \$bbMapLimit, "loose" => \$loose, "improveTimeLimit=s" => \$improveTimeLimit, "useMegahit" => \$useMegaHit, "sensitive" => \$sensitive, "noNucMap" => \$noNucMap, "noAaMap" => \$noAaMap, "noIterImp" => \$noIterative, "skipTaxonomy" => \$skipTaxonomy, "both" => \$bothTadpoleAndMegahit, "noCorrection" => \$noCorrection, "noFilter" => \$noFilter, "noNormalize" => \$noNormalize, "noAssembly" => \$noAssm, "strict" => \$strict, "noMerge" => \$noMerge, "noEntropy" => \$noEntropy, "infoFloor" => \$infoFloor, "keepTemp" => \$keepTemp, "useBbnorm" => \$useBbnorm, "krakenFilter" => \$krakenFilter, "krakenDb=s" => \$krakenDb);
++GetOptions ("interleaved:s{,}" => \@interleaved, "readF:s{,}" => \@readF, "readR:s{,}" => \@readR, "readUnpaired:s{,}" => \@files, "gbBlastx=s" => \$gbBlastx, "gbBlastn=s" => \$gbBlastn, "virBbmap=s" => \$virBbmap, "virDmnd=s" => \$virDmnd, "taxaJson=s" => \$taxaJson, "outputDir=s" => \$outputDir, "fasta" => \$fastaInput, "sampleName=s" => \$sampleName, "threads=i" => \$threads, "tmpdir=s" => \$tmpdir, "bigRam=i" => \$bigRam, "whiteList=s" => \$whiteList, "bbMapLimit=s" => \$bbMapLimit, "loose" => \$loose, "improveTimeLimit=s" => \$improveTimeLimit, "useMegahit" => \$useMegaHit, "sensitive" => \$sensitive, "noNucMap" => \$noNucMap, "noAaMap" => \$noAaMap, "noIterImp" => \$noIterative, "skipTaxonomy" => \$skipTaxonomy, "both" => \$bothTadpoleAndMegahit, "noCorrection" => \$noCorrection, "noFilter" => \$noFilter, "noNormalize" => \$noNormalize, "noAssembly" => \$noAssm, "strict" => \$strict, "noMerge" => \$noMerge, "noEntropy" => \$noEntropy, "infoFloor" => \$infoFloor, "keepTemp" => \$keepTemp, "useBbnorm" => \$useBbnorm, "krakenFilter" => \$krakenFilter, "krakenDb=s" => \$krakenDb);
+ 
+ if ($useMegaHit) {
+ 	$useTadpole = 0;
+@@ -195,23 +195,13 @@
+ my $cdHitRam = "48000";
+ my $megaHitRam = 53687091200;
+ my $diamondParams = "";
+-if ($bigRam) {
+-	print STDERR "Enabling big RAM\n";
+-	$ram = "100g";
+-	$RAM = "100G";
+-	$cdHitRam = 100000;
+-	$megaHitRam = 107374182400;
+-	$diamondParams = "-b 6"
+-}
+-if ($hugeRam) {
+-	print STDERR "Enabling huge RAM\n";
+-	$ram = "1200g";
+-	$RAM = "120G";
+-	$cdHitRam = 1000000;
+-	$megaHitRam = 1073741824000;
+-	$diamondParams = "-b 100";
+-	
+-}
++
++$ram = $bigRam . "g";
++$RAM = $bigRam . "G";
++$cdHitRam = $bigRam * 1000;
++$megaHitRam = 0.9;
++$diamondParams = "-b 6";
++
+ my $diamondPct = "80";
+ my $diamondRad = "8";
+ my $bbmapPct = ".90";

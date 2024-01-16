@@ -60,4 +60,4 @@
 | RELION GPU | 4.0.0, 4.0.1 | `apptainer exec docker://unlhcc/relion-gpu <relion program>` | Replace `<relion program>` with the desired RELION program and its arguments. |
 | Fair ESM (Python only) | 2.0.0 | `apptainer exec docker://unlhcc/fair-esm python /path/to/fair_esm_code.py` | Provides Python 3.7. Provided Python scripts can be accessed in $ESM_SCRIPTS/scripts (e.g., `apptainer exec docker://unlhcc/fair-esm python $ESM_SCRIPTS/scripts/esmfold_inference.py`). |
 | bcl-convert | 4.2.4 | `apptainer exec -B .:/var docker://unlhcc/bcl-convert bcl-convert <options>` | Replace `<options>` with any of the bcl-convert arguments. |
-
+| virMAP | 037156e | `export VIRMAP_DB=/work/HCC/BCRF/app_specific/virmap/037156e/db; apptainer exec -B $WORK:/scratch/tmp/ docker://unlhcc//virmap Virmap.pl --taxaJson ${VIRMAP_DB}/Taxonomy.virmap --virDmnd ${VIRMAP_DB}/virDmnd.dmnd --virBbmap ${VIRMAP_DB}/virBbmap --gbBlastn ${VIRMAP_DB}/gbBlastn --gbBlastx ${VIRMAP_DB}/gbBlastx.dmnd <options>` | Replace `<options>` with any of the virmap arguments. |

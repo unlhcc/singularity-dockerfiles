@@ -1,0 +1,1 @@
+imageCommand="Virmap.pl"
