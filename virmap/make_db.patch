@@ -68,7 +68,7 @@
  	my $halfprocs = $_[2];
  	my $saveFasta = $_[3];
 -	system("bbmap.sh -Xmx50G ref=$tmpdir/viral.nuc.fna path=$outdir/virBbmap build=1 2>$outdir/makeVirBbmap.err");
-+	system("bbmap.sh -Xmx2000G ref=$tmpdir/viral.nuc.fna path=$outdir/virBbmap build=1 2>$outdir/makeVirBbmap.err");
++	system("bbmap.sh -Xms1g -Xmx1200g ref=$tmpdir/viral.nuc.fna path=$outdir/virBbmap build=1 usemodulo=t 2>$outdir/makeVirBbmap.err");
  	if ($saveFasta) {
  		system("cat $tmpdir/viral.nuc.fna | lbzip2 -c -n $halfprocs > $outdir/viral.nuc.fna.bz2");
  	}

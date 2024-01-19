@@ -1,5 +1,5 @@
---- Virmap.pl.old	2024-01-12 15:46:34.849106685 -0600
-+++ Virmap.pl	2024-01-12 15:45:55.664172929 -0600
+--- Virmap.pl.old	2024-01-16 13:14:43.009366540 -0600
++++ Virmap.pl	2024-01-16 15:42:00.186765760 -0600
 @@ -77,7 +77,7 @@
  print STDERR "$startMsg\n";
  
@@ -9,7 +9,15 @@
  
  if ($useMegaHit) {
  	$useTadpole = 0;
-@@ -195,23 +195,13 @@
+@@ -190,28 +190,19 @@
+ unless ($improveTimeLimit =~ m/^\d+$/) {
+ 	$improveTimeLimit = "36000";	
+ }
+-my $ram = "50g";
+-my $RAM = "50G";
++
++my $ram = "50";
++my $RAM = "50";
  my $cdHitRam = "48000";
  my $megaHitRam = 53687091200;
  my $diamondParams = "";
@@ -34,9 +42,59 @@
 +$ram = $bigRam . "g";
 +$RAM = $bigRam . "G";
 +$cdHitRam = $bigRam * 1000;
-+$megaHitRam = 0.9;
++$megaHitRam = $bigRam * 1000000000;
 +$diamondParams = "-b 6";
 +
  my $diamondPct = "80";
  my $diamondRad = "8";
  my $bbmapPct = ".90";
+@@ -275,7 +266,7 @@
+ 	unless ($useBbnorm) {
+ 		system("normalize-by-median.py -M $RAM -C 5 --ksize 31 -o $tmpPrefix.normalized.fa $tmpPrefix.derep.fa 2>$prefix.normalize.err");
+ 	} else {
+-		system("bbnorm.sh -Xmx$ram in=$tmpPrefix.derep.fa out=$tmpPrefix.normalized.fa bits=16 passes=1 tmpdir=$tmpdir fastawrap=0 k=31 target=5 threads=$threads percentile=50 min=0 minprob=0 2>$prefix.normalize.err");
++		system("bbnorm.sh -Xms1g -Xmx$ram in=$tmpPrefix.derep.fa out=$tmpPrefix.normalized.fa bits=16 passes=1 tmpdir=$tmpdir fastawrap=0 k=31 target=5 threads=$threads percentile=50 min=0 minprob=0 2>$prefix.normalize.err");
+ 	}
+ 	system("$compressStdout $tmpPrefix.normalized.fa > $prefix.normalized.fa.bz2");
+ 	$fileToMap = "$tmpPrefix.normalized.fa";
+@@ -285,7 +276,7 @@
+ 
+ #align to virus bbmap
+ unless ($noNucMap) {
+-	system("bbmap.sh -Xmx$ram noheader=t threads=$threads in=$fileToMap path=$virBbmap noheader=t ambiguous=all ignorefrequentkmers=f slow=t excludefraction=0 greedy=f usejni=t maxsites2=10000000 minid=$bbmapPct outm=stdout.sam secondary=t sssr=$bbmapRad maxsites=100000000 sam=1.3 nmtag=t 32bit=t statsfile=$prefix.bbmap.err 2>$tmpPrefix.bbmap.err | zstd -q -c -T$threads > $tmpPrefix.nuc.sam.zst");
++	system("bbmap.sh -Xms1g -Xmx$ram noheader=t threads=$threads in=$fileToMap path=$virBbmap noheader=t ambiguous=all ignorefrequentkmers=f slow=t excludefraction=0 greedy=f usejni=t usemodulo=t maxsites2=10000000 minid=$bbmapPct outm=stdout.sam secondary=t sssr=$bbmapRad maxsites=100000000 sam=1.3 nmtag=t 32bit=t statsfile=$prefix.bbmap.err 2>$tmpPrefix.bbmap.err | zstd -q -c -T$threads > $tmpPrefix.nuc.sam.zst");
+ 	system("zstd -q -dc $tmpPrefix.nuc.sam.zst | sort -k3,3 -k4,4n --buffer-size=$RAM --parallel=$threads --compress-program=lz4 | lbzip2 -c -n$threads > $prefix.nuc.sam.bz2");
+ 	system("cat $tmpPrefix.bbmap.err >> $prefix.bbmap.err");
+ 	($timeDiff, $cpuDiff) = timeDiff($timeDiff, $cpuDiff, "bbmap to virus");
+@@ -316,7 +307,7 @@
+ 
+ 	#self-improve superscaffolds 
+ 	system("cat $prefix.superScaffolds.init.fa | toUC.pl > $tmpPrefix.superScaffolds.fa");
+-	system("bbmap.sh -Xmx$ram in=$tmpPrefix.derep.fa ref=$tmpPrefix.superScaffolds.fa nodisk=t usejni=t vslow=t minid=.8 local=t ignorefrequentkmers=f greedy=f excludefraction=0 ambiguous=random deterministic=t sam=1.3 32bit=t noheader=t outm=$tmpPrefix.superScaffolds.sam threads=$threads 2>>$tmpPrefix.buildSuperScaffolds.err");
++	system("bbmap.sh -Xms1g -Xmx$ram in=$tmpPrefix.derep.fa ref=$tmpPrefix.superScaffolds.fa nodisk=t usejni=t usemodulo=t vslow=t minid=.8 local=t ignorefrequentkmers=f greedy=f excludefraction=0 ambiguous=random deterministic=t sam=1.3 32bit=t noheader=t outm=$tmpPrefix.superScaffolds.sam threads=$threads 2>>$tmpPrefix.buildSuperScaffolds.err");
+ 	system("$compress $tmpPrefix.superScaffolds.sam");
+ 	system("adjustSizesAndFilter.pl build 0 $tmpPrefix.superScaffolds.sam.bz2 $tmpPrefix.superScaffolds.fa /dev/null $threads > $prefix.superScaffolds.fa 2>>$tmpPrefix.buildSuperScaffolds.err");
+ 	if (-s "$tmpPrefix.buildSuperScaffolds.err") {
+@@ -398,11 +389,11 @@
+ 			$superParam = "extra=$superScaffolds";
+ 		}
+ 		if (not $noCorrection) {
+-			system("tadpole.sh -Xmx$ram usejni=t mode=correct ecc=t k=31 reassemble=t pincer=t tail=t eccfull=t conservative=t $tadPoleInputStr fastawrap=0 out=$tmpPrefix.tadpole.fq 1>>$tmpPrefix.assembly.err 2>&1");
++			system("tadpole.sh -Xms1g -Xmx$ram usejni=t mode=correct ecc=t k=31 reassemble=t pincer=t tail=t eccfull=t conservative=t $tadPoleInputStr fastawrap=0 out=$tmpPrefix.tadpole.fq 1>>$tmpPrefix.assembly.err 2>&1");
+ 			$tadPoleInputStr = "in=$tmpPrefix.tadpole.fq interleaved=t";
+ 		}
+ 		for (my $i = 29; $i <= 85; $i += 4) {
+-				system("tadpole.sh -Xmx$ram $tadPoleInputStr $superParam out=$tmpPrefix.assembly.$i.fa k=$i mincontig=500 minprobmain=f threads=$threads mincountseed=3 mincountextend=2 branchmult1=2 branchmult2=2 branchlower=2 shave=t rinse=t contigpasses=256 contigpassmult=1.05 minprob=0 usejni=t 1>>$tmpPrefix.assembly.err 2>&1");
++				system("tadpole.sh -Xms1g -Xmx$ram $tadPoleInputStr $superParam out=$tmpPrefix.assembly.$i.fa k=$i mincontig=500 minprobmain=f threads=$threads mincountseed=3 mincountextend=2 branchmult1=2 branchmult2=2 branchlower=2 shave=t rinse=t contigpasses=256 contigpassmult=1.05 minprob=0 usejni=t 1>>$tmpPrefix.assembly.err 2>&1");
+ 			unless ($sensitive) {
+ 				$i += 4;
+ 			}
+@@ -491,7 +482,7 @@
+ }
+ 
+ system("cat $inFile | toUC.pl all > $tmpPrefix.selfAlign.fa");
+-system("bbmap.sh -Xmx$ram usejni=t in=$tmpPrefix.derep.fa ref=$tmpPrefix.selfAlign.fa nodisk=t vslow=t minid=.8 noheader=t 32bit=t ignorefrequentkmers=f greedy=f excludefraction=0 deterministic=t sam=1.3 threads=$threads local=t outm=stdout ambiguous=random 2>$tmpPrefix.selfAlign.err | lbzip2 -c -n$threads > $tmpPrefix.selfAlign.sam.bz2");
++system("bbmap.sh -Xms1g -Xmx$ram usejni=t in=$tmpPrefix.derep.fa ref=$tmpPrefix.selfAlign.fa nodisk=t vslow=t minid=.8 noheader=t usemodulo=t 32bit=t ignorefrequentkmers=f greedy=f excludefraction=0 deterministic=t sam=1.3 threads=$threads local=t outm=stdout ambiguous=random 2>$tmpPrefix.selfAlign.err | lbzip2 -c -n$threads > $tmpPrefix.selfAlign.sam.bz2");
+ system("adjustSizesAndFilter.pl quant 0 $tmpPrefix.selfAlign.sam.bz2 $inFile /dev/null $threads > $prefix.selfAlign.fa 2>>$tmpPrefix.selfAlign.err");
+ system("$compressStdout $tmpPrefix.selfAlign.err > $prefix.selfAlign.err.bz2");
+ $inFile = "$prefix.selfAlign.fa";
