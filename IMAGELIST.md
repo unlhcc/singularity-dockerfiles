@@ -62,3 +62,4 @@
 | bcl-convert | 4.2.4 | `apptainer exec -B .:/var docker://unlhcc/bcl-convert bcl-convert <options>` | Replace `<options>` with any of the bcl-convert arguments. |
 | virMAP | 037156e | `export VIRMAP_DB=/work/HCC/BCRF/app_specific/virmap/037156e/db; apptainer exec -B $WORK:/scratch/tmp/ docker://unlhcc//virmap Virmap.pl --taxaJson ${VIRMAP_DB}/Taxonomy.virmap --virDmnd ${VIRMAP_DB}/virDmnd.dmnd --virBbmap ${VIRMAP_DB}/virBbmap --gbBlastn ${VIRMAP_DB}/gbBlastn --gbBlastx ${VIRMAP_DB}/gbBlastx.dmnd <options>` | Replace `<options>` with any of the virmap arguments. |
 | ATACgraph | 63526bc | `apptainer exec docker://unlhcc/atacgraph ATACgraph <options>` | Replace `<options>` with any of the ATACgraph arguments. |
+| phyluce | 1.7.3 | `apptainer exec docker://unlhcc/phyluce <command> <option>` | Replace `<command>` with any of the phyluce commands and replace <option> with any of the phyluce arguments. |
