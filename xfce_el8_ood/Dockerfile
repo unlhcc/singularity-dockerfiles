@@ -2,6 +2,7 @@ FROM almalinux:8.9
 
 ADD TurboVNC.repo /etc/yum.repos.d/TurboVNC.repo
 ADD VirtualGL.repo /etc/yum.repos.d/VirtualGL.repo
+ADD hcc-ood-el8-x86_64.repo /etc/yum.repos.d/hcc-ood-el8-x86_64.repo
 
 RUN dnf install -y -q epel-release dnf-plugins-core
 
@@ -13,7 +14,7 @@ RUN dnf -y -q update -x almalinux-release
 
 RUN dnf -y -q groupinstall Xfce
 
-RUN dnf -y -q --disablerepo=* --enablerepo=appstream,baseos --releasever=8.6 install qt5-qtbase qt5-qtbase-gui \
+RUN dnf -y -q --disablerepo=* --enablerepo=appstream,baseos --releasever=8.9 install qt5-qtbase qt5-qtbase-gui \
     qt5-qtdeclarative qt5-qtx11extras qt5-qtquickcontrols qt5-qtquickcontrols2 qt5-qtsvg qt5-qtwayland \
     qt5-qttools-libs-designer qt5-qtxmlpatterns
 
@@ -29,7 +30,7 @@ RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     ipmitool libXp lsof ncdu net-tools nmap-ncat openldap-clients pbzip2 pciutils perf psmisc \
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
     libcgroup-tools libpng12 libpng15 hostname tcl-devel libxcb* xcb-util* libnsl mesa-libOSMesa-devel mesa-libGL-devel freeglut autofs \
-    ncurses-compat-libs apptainer https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince totem motif chromium
+    ncurses-compat-libs apptainer https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince totem motif chromium tcl-togl
 ENV LIBREOFFICE_VERSION=7.6.6
 RUN mkdir /tmp/LO && \
     curl -sSL https://download.documentfoundation.org/libreoffice/stable/${LIBREOFFICE_VERSION}/rpm/x86_64/LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz | tar -zx -C /tmp/LO --strip-components=1 && \

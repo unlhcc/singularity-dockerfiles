@@ -1,0 +1,6 @@
+[hcc-ood-el8-x86_64]
+name=HCC Open OnDemand repo (EL8)
+baseurl=https://t2.unl.edu/repos/ood/el8/x86_64/
+enabled=1
+gpgcheck=0
+priority=50
