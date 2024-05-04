@@ -14,16 +14,13 @@ RUN apt-get install -y -q software-properties-common apt-transport-https wget
 
 RUN apt-get install -y -q xfce4 xfce4-terminal
 
-RUN wget -q https://packagecloud.io/AtomEditor/atom/gpgkey -O- | apt-key add - && \
-    add-apt-repository "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main"
-
 RUN apt-get install -y  python2 python2-dev x11vnc dbus-x11 vim nano geany mousepad ristretto less \
     firefox xdg-user-dirs rsync lua5.3 liblua5.3-dev lua-filesystem lua-json lua-lpeg lua-posix lua-term \
     gvfs-fuse wmctrl file openssl bc bind9-utils bzip2 dstat make gdb htop iotop iperf3 \
     gcc gfortran g++ ipmitool lsof ncdu net-tools pbzip2 pciutils psmisc libpng16-16 default-jdk \
     pv screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind zip \
-    ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer atom=1.46.0 curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt \
-    vlc totem
+    ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt \
+    vlc totem chromium-browser libtogl2
 
 # More recent libreoffice
 RUN apt-add-repository -y  ppa:libreoffice && \
