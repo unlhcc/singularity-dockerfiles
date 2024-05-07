@@ -1,0 +1,15 @@
+# This is a generated file and its contents are an internal implementation detail.
+# The download step will be re-executed if anything in this file changes.
+# No other meaning or use of this file is supported.
+
+method=git
+command=/usr/local/lib/python3.8/dist-packages/cmake/data/bin/cmake;-P;/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/tmp/armadillo-populate-gitclone.cmake
+source_dir=/app/superconga/build/release/_deps/armadillo-src
+work_dir=/app/superconga/build/release/_deps
+repository=https://gitlab.com/conradsnicta/armadillo-code.git
+remote=origin
+init_submodules=TRUE
+recurse_submodules=--recursive
+submodules=
+CMP0097=NEW
+

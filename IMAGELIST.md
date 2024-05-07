@@ -65,3 +65,4 @@
 | phyluce | 1.7.3 | `apptainer exec docker://unlhcc/phyluce <command> <option>` | Replace `<command>` with any of the phyluce commands and replace <option> with any of the phyluce arguments. |
 | RoseTTAFold2 | 0.2 | `module load rosettafold2na; apptainer exec docker://unlhcc/rosettafold2na run_RF2NA.sh <options>` | Replace `<options>` with any of the RoseTTAFold2 arguments. |
 | RFdiffusion | 1.1.0 | `apptainer exec -B /work/HCC/BCRF/app_specific/rfdiffusion/1.1.0/models/:/opt/RFdiffusion/models/ -B $PWD/:/opt/RFdiffusion/schedules/ docker://unlhcc/rfdiffusion run_inference.py <options>` | Replace `<options>` with any of the RFdiffusion arguments. |
+| SuperConga | 1.1.0 | `apptainer exec -B /tmp:/app/superconga/tmp docker://unlhcc/superconga python /app/superconga/superconga.py <options>` | Replace `<options>` with any of the SuperConga arguments. |

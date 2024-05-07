@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/CMakeFiles/armadillo-populate"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/CMakeFiles/armadillo-populate.rule"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/CMakeFiles/armadillo-populate-complete.rule"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-build.rule"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-configure.rule"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-download.rule"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-install.rule"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-mkdir.rule"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-patch.rule"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-test.rule"
+		},
+		{
+			"file" : "/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"armadillo-populate"
+		],
+		"name" : "armadillo-populate"
+	}
+}

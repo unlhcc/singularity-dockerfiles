@@ -1,0 +1,2 @@
+/app/superconga/build/release/CMakeFiles/CheckCUDA/CMakeFiles/edit_cache.dir
+/app/superconga/build/release/CMakeFiles/CheckCUDA/CMakeFiles/rebuild_cache.dir

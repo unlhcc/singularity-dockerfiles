@@ -1,0 +1,21 @@
+# ninja log v5
+5	24	1715050037000000000	armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-mkdir	503b4a74a06bd675
+5	24	1715050037000000000	/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-mkdir	503b4a74a06bd675
+25	6468	1715050043000000000	armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-download	8047c4f2da5670d0
+25	6468	1715050043000000000	/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-download	8047c4f2da5670d0
+6469	6518	0	armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-update	f058cff45108a7a7
+6469	6518	0	/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-update	f058cff45108a7a7
+6519	6537	1715050043000000000	armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-patch	91a9ca2eb95b0df
+6519	6537	1715050043000000000	/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-patch	91a9ca2eb95b0df
+6537	6553	1715050043000000000	armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-configure	9e095c641b470e8b
+6537	6553	1715050043000000000	/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-configure	9e095c641b470e8b
+6554	6571	1715050044000000000	armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-build	3a3de50c5454d601
+6554	6571	1715050044000000000	/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-build	3a3de50c5454d601
+6572	6582	1715050044000000000	armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-install	239c91f581dc2616
+6572	6582	1715050044000000000	/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-install	239c91f581dc2616
+6583	6593	1715050044000000000	armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-test	11c3dfaf90255def
+6583	6593	1715050044000000000	/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-test	11c3dfaf90255def
+6594	6616	1715050044000000000	CMakeFiles/armadillo-populate-complete	4b94dd96627ba34a
+6594	6616	1715050044000000000	armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-done	4b94dd96627ba34a
+6594	6616	1715050044000000000	/app/superconga/build/release/_deps/armadillo-subbuild/CMakeFiles/armadillo-populate-complete	4b94dd96627ba34a
+6594	6616	1715050044000000000	/app/superconga/build/release/_deps/armadillo-subbuild/armadillo-populate-prefix/src/armadillo-populate-stamp/armadillo-populate-done	4b94dd96627ba34a
