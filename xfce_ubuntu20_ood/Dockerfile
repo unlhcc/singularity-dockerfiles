@@ -48,8 +48,8 @@ RUN sed -i s/exo-web-browser/firefox/g /etc/xdg/xfce4/panel/default.xml
 RUN rm -f /etc/xdg/autostart/{xfce-polkit.desktop,xscreensaver.desktop}
 
 # Lmod
-RUN curl -sSL https://github.com/TACC/Lmod/archive/refs/tags/8.5.12.tar.gz | tar -zx -C /tmp && \
-    cd /tmp/Lmod-8.5.12 && ./configure --with-module-root-path=/util/opt/modulefiles --with-caseIndependentSorting=yes --with-settarg=no && \
+RUN curl -sSL https://downloads.sourceforge.net/project/lmod/Lmod-8.7.tar.bz2 | tar -jx -C /tmp && \
+    cd /tmp/Lmod-8.7 && ./configure --with-module-root-path=/util/opt/modulefiles --with-caseIndependentSorting=yes --with-settarg=no && \
     make && make install
 
 # Workaround for different Ubuntu/EL lua install paths
