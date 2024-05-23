@@ -54,9 +54,9 @@ RUN pip2 install -q --no-cache-dir ts nose numpy==1.11 && \
     rm -rf /var/cache/dnf/*
 
 # Lmod
-RUN mkdir /tmp/Lmod-8.5.12 && \
-    curl -sSL https://github.com/TACC/Lmod/archive/refs/tags/8.5.12.tar.gz | tar -zx -C /tmp/Lmod-8.5.12 --strip-components=1 && \
-    pushd /tmp/Lmod-8.5.12 && ls && ./configure --with-module-root-path=/util/opt/modulefiles --with-caseIndependentSorting=yes --with-settarg=no && \
+RUN mkdir /tmp/Lmod-8.7 && \
+    curl -sSL https://downloads.sourceforge.net/project/lmod/Lmod-8.7.tar.bz2 | tar -jx -C /tmp/Lmod-8.7 --strip-components=1 && \
+    pushd /tmp/Lmod-8.7 && ls && ./configure --with-module-root-path=/util/opt/modulefiles --with-caseIndependentSorting=yes --with-settarg=no && \
     make && make install
 
 # Change the "web browser" launcher to firefox directly
