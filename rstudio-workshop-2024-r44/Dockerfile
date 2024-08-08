@@ -1,12 +1,13 @@
 FROM rocker/tidyverse:4.4.0
 
 RUN apt-get update && \
-    apt-get -y -q install default-jdk tk8.6 lua5.3 lua-filesystem lua-posix lua-term lua-json ssh libbz2-dev libglpk-dev > /dev/null
+    apt-get -y -q install default-jdk tk8.6 lua5.3 lua-filesystem lua-posix lua-term lua-json \
+        ssh libbz2-dev libglpk-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev > /dev/null
 
 RUN R CMD javareconf && \
     install2.r rJava > /dev/null 2>&1 && \
     # install workshop libraries
-    install2.r tidyverse gridExtra ggplot2 gdal matrix stringr grDevices vegan tidyr dplyr remotes devtools R.utils Seurat BiocManager > /dev/null 2>&1
+    install2.r tidyverse gridExtra ggplot2 gdal matrix stringr grDevices vegan tidyr dplyr remotes devtools R.utils udunits2 Seurat BiocManager > /dev/null 2>&1
 
 # Install Bioconductor packages
 RUN R -q -s -e 'BiocManager::install("BiocGenerics")' && \
