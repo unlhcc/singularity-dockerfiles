@@ -30,15 +30,17 @@ RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     ipmitool libXp lsof ncdu net-tools nmap-ncat openldap-clients pbzip2 pciutils perf psmisc \
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
     libcgroup-tools libpng12 libpng15 hostname tcl-devel libxcb* xcb-util* libnsl mesa-libOSMesa-devel mesa-libGL-devel freeglut autofs \
-    ncurses-compat-libs apptainer https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince totem motif chromium tcl-togl
-ENV LIBREOFFICE_VERSION=7.6.6
+    ncurses-compat-libs apptainer https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince totem motif chromium tcl-togl \
+    gedit grace
+
+ENV LIBREOFFICE_VERSION=24.8.0
 RUN mkdir /tmp/LO && \
     curl -sSL https://download.documentfoundation.org/libreoffice/stable/${LIBREOFFICE_VERSION}/rpm/x86_64/LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz | tar -zx -C /tmp/LO --strip-components=1 && \
     dnf -y -q localinstall /tmp/LO/RPMS/*.rpm && \
     rm -rf /tmp/LO
 
 # VLC
-RUN dnf install -y -q https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm && \
+RUN dnf install -y -q https://download0.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm && \
     dnf install -y -q vlc && \
     dnf config-manager --set-disabled rpmfusion-free-updates
 
