@@ -2,6 +2,7 @@ FROM almalinux:8.9
 
 ADD TurboVNC.repo /etc/yum.repos.d/TurboVNC.repo
 ADD VirtualGL.repo /etc/yum.repos.d/VirtualGL.repo
+ADD opera.repo /etc/yum.repos.d/opera.repo
 ADD hcc-ood-el8-x86_64.repo /etc/yum.repos.d/hcc-ood-el8-x86_64.repo
 
 RUN dnf install -y -q epel-release dnf-plugins-core
@@ -30,8 +31,12 @@ RUN dnf -y -q install xorg-x11-fonts-Type1 xorg-x11-fonts-misc x11vnc dbus-x11 d
     ipmitool libXp lsof ncdu net-tools nmap-ncat openldap-clients pbzip2 pciutils perf psmisc \
     pv rsync screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind vim-enhanced wget zip \
     libcgroup-tools libpng12 libpng15 hostname tcl-devel libxcb* xcb-util* libnsl mesa-libOSMesa-devel mesa-libGL-devel freeglut autofs \
-    ncurses-compat-libs apptainer https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince totem motif chromium tcl-togl \
-    gedit grace
+    ncurses-compat-libs apptainer https://github.com/atom/atom/releases/download/v1.46.0/atom.x86_64.rpm okular evince totem motif tcl-togl \
+    gedit grace opera-stable
+
+# Opera wrapper to disable sandbox
+RUN mv /usr/bin/opera /usr/bin/opera.bin
+ADD opera-wrapper.sh /usr/bin/opera
 
 ENV LIBREOFFICE_VERSION=24.8.0
 RUN mkdir /tmp/LO && \
