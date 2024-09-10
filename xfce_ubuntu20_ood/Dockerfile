@@ -20,7 +20,7 @@ RUN apt-get install -y  python2 python2-dev x11vnc dbus-x11 vim nano geany mouse
     gcc gfortran g++ ipmitool lsof ncdu net-tools pbzip2 pciutils psmisc libpng16-16 default-jdk \
     pv screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind zip \
     ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt \
-    vlc totem chromium-browser libtogl2 libfftw3-3 gedit grace
+    vlc totem libtogl2 libfftw3-3 gedit grace
 
 # More recent libreoffice
 RUN apt-add-repository -y  ppa:libreoffice && \
@@ -32,6 +32,16 @@ RUN wget -q -O /tmp/turbovnc_2.2.7_amd64.deb https://downloads.sourceforge.net/p
     wget -q -O /tmp/multiarch-support_2.27-3ubuntu1.6_amd64.deb http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.27-3ubuntu1.6_amd64.deb && \
     wget -q -O /tmp/libxp6_1.0.2-2_amd64.deb https://archive.debian.org/debian/pool/main/libx/libxp/libxp6_1.0.2-2_amd64.deb && \
     apt install -y -q /tmp/multiarch-support_2.27-3ubuntu1.6_amd64.deb /tmp/libxp6_1.0.2-2_amd64.deb
+
+ADD opera-browser.gpg /usr/share/keyrings/opera-browser.gpg
+ADD opera-archive.list /etc/apt/sources.list.d/opera-archive.list
+
+RUN apt-get update && \
+    apt-get install -y opera-stable
+
+# Opera wrapper to disable sandbox
+RUN mv /usr/bin/opera /usr/bin/opera.bin
+ADD opera-wrapper.sh /usr/bin/opera
 
 RUN fc-cache -vr
 
