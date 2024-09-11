@@ -37,7 +37,8 @@ ADD opera-browser.gpg /usr/share/keyrings/opera-browser.gpg
 ADD opera-archive.list /etc/apt/sources.list.d/opera-archive.list
 
 RUN apt-get update && \
-    apt-get install -y opera-stable
+    apt-get install -y opera-stable && \
+    rm -f etc/apt/sources.list.d/opera-archive.list
 
 # Opera wrapper to disable sandbox
 RUN mv /usr/bin/opera /usr/bin/opera.bin
