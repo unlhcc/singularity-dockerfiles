@@ -9,7 +9,8 @@ RUN apt-get update && \
     gcc gfortran g++ ipmitool lsof ncdu net-tools pbzip2 pciutils psmisc libpng16-16 default-jdk build-essential \
     pv screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind zip libcanberra-gtk* \
     ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt gtk2-engines-pixbuf \
-    vlc totem libtogl2 libfftw3-3 gedit grace xfce4 xfce4-terminal wget libgconf-2-4 locales apt-utils libgtk2.0-bin libgtk2.0-0 && \
+    vlc totem libtogl2 libfftw3-3 gedit grace xfce4 xfce4-terminal wget libgconf-2-4 locales apt-utils libgtk2.0-bin libgtk2.0-0 \
+    libgtk2.0-dev libgtkgl2.0-dev libgtkglextmm-x11-1.2-dev libgtkglext1-dev libgtkmm-2.4-dev xfwm4 && \
     rm -rf /var/lib/apt/lists/* && \
     locale-gen en_US.UTF-8 && \
     locale
