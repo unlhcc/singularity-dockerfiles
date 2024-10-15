@@ -2,7 +2,7 @@
 | --------       | -------- | --------       | ----- |
 | DREAM3D        | 6.3.29, 6.5.36, 6.5.137, 6.5.138 | `apptainer exec docker://unlhcc/dream3d PipelineRunner`        | |
 | Spades         | 3.11.0    | `apptainer exec docker://unlhcc/spades spades.py` | |
-| Macaulay2      | 1.15, 1.9.2     | `apptainer exec docker://unlhcc/macaulay2 M2 <options>` | Replace `<options>` with the desired options for Macaulay2. |
+| Macaulay2      | 1.24.05, 1.15, 1.9.2    | `apptainer exec docker://unlhcc/macaulay2 M2 <options>` | Replace `<options>` with the desired options for Macaulay2. |
 | CUDA (Ubuntu)  | 10.2       | `apptainer exec docker://unlhcc/cuda-ubuntu <my CUDA program>` | Ubuntu 16.04.1 LTS w/CUDA Toolkit |
 | TensorFlow GPU | 1.4, 1.12, 1.14, 2.0.0, 2.1.0, 2.2.0 | `apptainer exec docker://unlhcc/tensorflow-gpu python /path/to/my_tf_code.py` | Provides Python 3.7 |
 | Keras w/Tensorflow GPU backend| 2.0.4, 2.1.5, 2.2.4, 2.3.1 | `apptainer exec docker://unlhcc/keras-tensorflow-gpu python /path/to/my_keras_code.py` | Use `python3` for Python3 code |
