@@ -15,7 +15,7 @@ CUDA_MEMORY_AVAIL=0
 if ! command -v "nvidia-smi" 2>&1 >/dev/null
 then
     # CPU node
-    echo "`nvidia-smi` could not be found, running on CPU node..."
+    echo "nvidia-smi could not be found, running on CPU node..."
     cuda_compute_7=""
     CUDA_MEMORY_AVAIL=0
 else
