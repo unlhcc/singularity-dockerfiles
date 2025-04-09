@@ -56,7 +56,9 @@ RUN mkdir -p /data
 RUN chown phyluce:phyluce /data
 WORKDIR /data
 
-ENV PATH=/opt/conda/bin:/opt/conda/envs/phyluce/bin:${PATH}
+# activate conda environment
+RUN echo "source activate phyluce" > ~/.bashrc
+ENV PATH /opt/conda/envs/phyluce/bin:/opt/conda/bin:$PATH
 
-#switch to phyluce user
+# switch to phyluce user
 USER phyluce
