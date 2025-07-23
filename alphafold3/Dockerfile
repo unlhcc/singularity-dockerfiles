@@ -10,7 +10,7 @@
 
 # This image is modification of https://github.com/google-deepmind/alphafold3/blob/v3.0.1/docker/Dockerfile
 
-ARG CUDA=12.6
+ARG CUDA=12.8
 FROM nvidia/cuda:${CUDA}.0-base-ubuntu22.04
 ARG CUDA
 
@@ -22,7 +22,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
       build-essential \
       cmake \
       cuda-command-line-tools-${CUDA/./-} \
-      cuda-compat-${CUDA/./-} \
       git \
       libcusolver-12-1 \
       kalign \
@@ -42,6 +41,7 @@ RUN wget -q -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-
 
 # Install conda packages.
 ENV PATH="/opt/conda/bin:$PATH"
+ENV CONDA_PLUGINS_AUTO_ACCEPT_TOS="yes"
 RUN /opt/conda/bin/conda create -y -p /opt/alphafoldenv -c conda-forge \
       python=3.11 \
       bioconda::hmmer=3.4 \
@@ -76,7 +76,7 @@ WORKDIR /app/alphafold
 
 ENV PATH=/opt/alphafoldenv/bin:/usr/local/cuda-12/bin:/usr/local/bin:$PATH \
     PYTHONPATH=/opt/alphafoldenv/lib/python3.11/site-packages/ \
-    LD_LIBRARY_PATH=/usr/local/cuda-12/compat/:/usr/local/cuda-12/targets/x86_64-linux/lib/:$LD_LIBRARY_PATH \
+    LD_LIBRARY_PATH=/.singularity.d/libs:/usr/local/cuda-12/targets/x86_64-linux/lib/:$LD_LIBRARY_PATH \
     LC_ALL=C.UTF-8
 
 # To work around a known XLA issue causing the compilation time to greatly
