@@ -20,7 +20,7 @@ RUN apt-get install -y  python2 python2-dev x11vnc dbus-x11 vim nano geany mouse
     gcc gfortran g++ ipmitool lsof ncdu net-tools pbzip2 pciutils psmisc libpng16-16 default-jdk \
     pv screen smartmontools strace sysstat tcpdump time tmux traceroute tree unzip valgrind zip \
     ncurses* freeglut3 autofs okular evince ttf-mscorefonts-installer curl tcl tcl-dev adwaita-icon-theme-full adwaita-qt \
-    vlc totem libtogl2 libfftw3-3 gedit grace
+    vlc totem libtogl2 libfftw3-3 gedit grace filezilla
 
 # More recent libreoffice
 RUN apt-add-repository -y  ppa:libreoffice && \
