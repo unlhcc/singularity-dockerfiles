@@ -22,7 +22,7 @@
 | ROS Kinetic | 1.3.1, 1.3.2   | `apptainer exec docker://unlhcc/ros-kinetic <ROS program>` | Replace `<ROS program>` with the desired ROS program |
 | Mitsuba        | 1.5.0     | `apptainer exec docker://unlhcc/mitsuba mitsuba` | |
 | FImpute        | 2.2       | `apptainer exec docker://unlhcc/fimpute FImpute <control file>` | Replace `<control file>` with the control file you have prepared |
-| Neurodocker w/FSL | 6.0.5.1, 6.0.3, 5.0.11 | `apptainer run docker://unlhcc/neurodocker-fsl <FSL program>` | Replace `<FSL program>` with the desired FSL program |
+| Neurodocker w/FSL | 6.0.7.8, 6.0.5.1, 6.0.3, 5.0.11 | `apptainer run docker://unlhcc/neurodocker-fsl <FSL program>` | Replace `<FSL program>` with the desired FSL program |
 | gdc-client     | 1.4.0     | `apptainer exec docker://unlhcc/gdc-client gdc-client <sub-command>` | Replace `<sub-command>` with the desired gdc-client sub-command |
 | BLUPF90 | 1.0 | `apptainer exec docker://unlhcc/blupf90 <command>` | Replace `<command>` with any command from the suite (`blupf90`, `renumf90`, etc.) |
 | RMark | 2.2.5 | `apptainer exec docker://unlhcc/rmark Rscript my_r_script.r` | |
