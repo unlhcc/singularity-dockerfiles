@@ -72,3 +72,4 @@
 | RFDiffusion AA | 2024.03.13 | `apptainer exec docker://unlhcc/rf_diffusion_all_atom python /opt/rf_diffusion_all_atom/run_inference.py inference.ckpt_path=${RFDiffusionAA_WEIGHTS} <options>` | Replace `<options>` with any of the RFDiffusion AA arguments. |
 | BirdNET-Analyzer | 1.5.1 | `apptainer exec docker://unlhcc/birdnet-analyzer python3 -m birdnet_analyzer.analyze <options>` | Replace `<options>` with any of the BirdNET-Analyzer arguments. |
 | Qbics | 0.3 | `apptainer exec docker://unlhcc/qbics qbics-linux-cpu <options>` | Replace `<options>` with any of the Qbics arguments. |
+| BoltzGen | 0.2.0 | `apptainer exec -B $NRDSTOR/.cache:/cache docker://unlhcc/boltzgen boltzgen <options>` | Replace `<options>` with any of the BoltzGen arguments. |
