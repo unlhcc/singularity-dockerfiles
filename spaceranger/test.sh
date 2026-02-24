@@ -1,0 +1,1 @@
+imageCommand="spaceranger mkfastq --help"
