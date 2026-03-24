@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get install -y -q curl openjdk-8-jre wget make g++ fuse libfuse2 kmod libgtk-3-0 > /dev/null && \
     apt-get clean
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - && \
     apt -y install nodejs && \
     curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.22.4
 
@@ -23,8 +23,8 @@ RUN mkdir -p /opt/java/linux-x64/jre/lib/amd64 && \
 
 # Download image
 RUN cd /opt && \
-    wget https://installers.lmstudio.ai/linux/x64/0.3.23-3/LM-Studio-0.3.23-3-x64.AppImage && \
-    chmod +x LM-Studio-0.3.23-3-x64.AppImage && \
-    ln -s LM-Studio-0.3.23-3-x64.AppImage LM-Studio.AppImage
+    wget https://installers.lmstudio.ai/linux/x64/0.4.7-4/LM-Studio-0.4.7-4-x64.AppImage && \
+    chmod +x LM-Studio-0.4.7-4-x64.AppImage && \
+    ln -s LM-Studio-0.4.7-4-x64.AppImage LM-Studio.AppImage
 
 ENV PATH=${PATH}:/opt/
