@@ -45,9 +45,9 @@ RUN mkdir -p /opt/java/linux-x64/jre/lib/amd64 && \
 
 # Download LM Studio image
 RUN cd /opt && \
-    wget https://installers.lmstudio.ai/linux/x64/0.4.7-4/LM-Studio-0.4.7-4-x64.AppImage && \
-    chmod +x LM-Studio-0.4.7-4-x64.AppImage && \
-    ln -s LM-Studio-0.4.7-4-x64.AppImage LM-Studio.AppImage
+    wget https://installers.lmstudio.ai/linux/x64/0.4.8-1/LM-Studio-0.4.8-1-x64.AppImage && \
+    chmod +x LM-Studio-0.4.8-1-x64.AppImage && \
+    ln -s LM-Studio-0.4.8-1-x64.AppImage LM-Studio.AppImage
 
 ENV PATH=${PATH}:/opt/
 
