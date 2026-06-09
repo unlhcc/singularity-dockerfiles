@@ -66,6 +66,9 @@ RUN curl -sSL https://downloads.sourceforge.net/project/lmod/Lmod-8.7.tar.bz2 | 
 # Workaround for different Ubuntu/EL lua install paths
 RUN ln -s /usr/lib/x86_64-linux-gnu/lua /usr/lib64/lua
 
+# Workaround for scontrol needing readline 7
+RUN ln -s /lib/x86_64-linux-gnu/libreadline.so.8.0 /lib/x86_64-linux-gnu/libreadline.so.7
+
 # Change the "web browser" launcher to firefox directly
 RUN sed -i s/exo-web-browser/firefox/g /etc/xdg/xfce4/panel/default.xml
 
