@@ -24,6 +24,8 @@ RUN wget -q -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-
 
 # Install conda packages.
 ENV PATH="/opt/conda/bin:$PATH"
+RUN /opt/conda/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main \
+    && /opt/conda/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 RUN /opt/conda/bin/conda create -y -p /opt/birdnet -c hcc -c conda-forge \
       python=3.11 \
       pip \
@@ -31,14 +33,14 @@ RUN /opt/conda/bin/conda create -y -p /opt/birdnet -c hcc -c conda-forge \
 
 WORKDIR /app
 # RUN git clone https://github.com/kahst/BirdNET-Analyzer.git
-ENV BIRDNET_VERSION=1.5.1
+ENV BIRDNET_VERSION=2.4.0
 RUN wget -q -P ./birdnet https://github.com/kahst/BirdNET-Analyzer/archive/refs/tags/v${BIRDNET_VERSION}.tar.gz \
     && tar xvf ./birdnet/v${BIRDNET_VERSION}.tar.gz -C ./birdnet --strip-components 1 \
     && rm ./birdnet/v${BIRDNET_VERSION}.tar.gz
 
 # Install pip packages.
 RUN /opt/birdnet/bin/pip install -q --upgrade --no-cache-dir pip \
-    && /opt/birdnet/bin/pip install -q --no-cache-dir -r /app/birdnet/requirements.txt
+    && /opt/birdnet/bin/pip install -q --no-cache-dir -q /app/birdnet
 
 ENV PATH=/opt/birdnet/bin:/app/birdnet/birdnet_analyzer:$PATH \
     PYTHONPATH=/app/birdnet:/opt/birdnet/lib/python3.11/site-packages \
