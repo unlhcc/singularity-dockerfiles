@@ -27,7 +27,7 @@ RUN wget -q -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-
     && rm /tmp/Miniconda3-latest-Linux-x86_64.sh
 
 ENV CONDA_PLUGINS_AUTO_ACCEPT_TOS="yes"
-#add this
+
 ENV CONDA_OVERRIDE_CUDA="12.4"
 
 # Install conda packages.
@@ -53,7 +53,7 @@ RUN /workspace/.venv/bin/pip install --no-cache-dir /workspace/protein-foundatio
 # No prebuilt wheel matches conda-forge's build tag, so compiles from
 # source; arch list covers V through H (+PTX for newer).
 RUN /workspace/.venv/bin/pip install --no-cache-dir ninja \
-    && TORCH_CUDA_ARCH_LIST="7.0;7.2;7.5;8.0;8.6;8.7;9.0+PTX" \
+    && TORCH_CUDA_ARCH_LIST="6.0;7.0;7.2;7.5;8.0;8.6;8.7;9.0+PTX" \
        /workspace/.venv/bin/pip install --no-cache-dir --no-build-isolation \
          torch-scatter 
 
@@ -66,9 +66,27 @@ RUN /workspace/.venv/bin/pip install --no-cache-dir graphein "atomworks[dev]" \
 # JAX with CUDA (stage [7/8])
 RUN /workspace/.venv/bin/pip install --no-cache-dir -U "jax[cuda12]"
 
+
 # Foundry (stage [8/8])
 RUN /workspace/.venv/bin/pip install --no-cache-dir rc-foundry
 
+
+# MAKE DIRECTORIES WRITABLE FOR complexa init/download
+
+RUN chmod 775 /workspace/protein-foundation-models || true \
+    && mkdir -p /workspace/protein-foundation-models/ckpts \
+    && chmod 775 /workspace/protein-foundation-models/ckpts || true \
+    && mkdir -p /workspace/protein-foundation-models/community_models \
+    && chmod 775 /workspace/protein-foundation-models/community_models || true \
+    && mkdir -p /workspace/protein-foundation-models/outputs \
+    && chmod 775 /workspace/protein-foundation-models/outputs || true \
+    && mkdir -p /workspace/.venv/outputs \
+    && chmod 775 /workspace/.venv/outputs || true
+ 
+# Create placeholder .env so complexa init won't fail
+RUN touch /workspace/protein-foundation-models/.env && chmod 666 /workspace/protein-foundation-models/.env || true
+ 
+ 
 # interactive `docker run` / `singularity run` sessions.
 RUN mkdir -p /workspace/.venv/bin \
     && printf '#!/bin/bash\nsource /opt/conda/etc/profile.d/conda.sh\nconda activate /workspace/.venv\n' \
