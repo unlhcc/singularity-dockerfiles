@@ -41,7 +41,8 @@ WORKDIR /app
 ENV ANNEVO_VERSION=2.3.2
 RUN wget -q -P ./annevo https://github.com/xjtu-omics/ANNEVO/archive/v${ANNEVO_VERSION}.tar.gz \
     && tar xvf ./annevo/v${ANNEVO_VERSION}.tar.gz -C ./annevo --strip-components 1 \
-    && rm ./annevo/v${ANNEVO_VERSION}.tar.gz
+    && rm ./annevo/v${ANNEVO_VERSION}.tar.gz && \
+    chmod +x ./annevo/*.py
 
 WORKDIR /app/annevo
 
@@ -49,3 +50,6 @@ ENV PATH=/opt/annevoenv/bin:/app/annevo:/usr/local/cuda-12/bin:/usr/local/bin:$P
     PYTHONPATH=/opt/annevoenv/lib/python3.10/site-packages/ \
     LD_LIBRARY_PATH=/.singularity.d/libs:/usr/local/cuda-12/targets/x86_64-linux/lib/:$LD_LIBRARY_PATH \
     LC_ALL=C.UTF-8
+ENV NUMBA_CACHE_DIR="/scratch"
+
+ENTRYPOINT [ "python" ]

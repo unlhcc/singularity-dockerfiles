@@ -75,4 +75,4 @@
 | BoltzGen | 0.2.0 | `apptainer exec -B $NRDSTOR/.cache:/cache docker://unlhcc/boltzgen boltzgen <options>` | Replace `<options>` with any of the BoltzGen arguments. |
 | SpaceRanger | 4.0.1 | `apptainer exec docker://unlhcc/spaceranger spaceranger <spaceranger program>` | Replace `<spaceranger program>` with any command from the spaceranger suite. If needed, the reference database files can be found in `/work/HCC/BCRF/app_specific/spaceranger/2024-A/`. |
 | Proteina-Complexa | 2026.05.21 | apptainer exec --nv docker://unlhcc/proteina-complexa complexa <subcommand> <options> | Replace <subcommand> with design, generate, filter, evaluate, analyze, or other subcommands. Run complexa --help for all options. |
-| ANNEVO | 2.3.2 | `apptainer exec docker://unlhcc/annevo python <ANNEVO program>` | Replace `<ANNEVO program>` with the desired ANNEVO program and its arguments. |
+| ANNEVO | 2.3.2 | `export ANNEVO_MODELS=/work/HCC/BCRF/app_specific/annevo/2.3/; apptainer run docker://unlhcc/annevo /app/annevo/<ANNEVO program> -m ${ANNEVO_MODELS}/ANNEVO_Magnoliopsida.pt` | Replace `<ANNEVO program>` with the desired ANNEVO program and its arguments. |
