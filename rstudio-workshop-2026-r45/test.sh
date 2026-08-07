@@ -1,0 +1,1 @@
+imageCommand="Rscript --version"
