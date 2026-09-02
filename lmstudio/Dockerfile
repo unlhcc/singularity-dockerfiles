@@ -2,6 +2,11 @@ FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+#LM Studio version
+ARG LMSTUDIO_VERSION=0.4.23
+ARG LMSTUDIO_BUILD=1
+ARG LMSTUDIO_SHA256=c1bdf195281e25dc921af5c91eb2502035240dce1217140c43036d6cf3038fd8
+
 RUN apt-get update && \
     apt install -y -qq xfce4 xfce4-terminal firefox gcc lua5.3 liblua5.3-dev lua-term lua-posix lua-filesystem lua-json \
     tcl tcl-dev python2.7 build-essential libgtk2.0-0 libgconf-2-4 libcanberra-gtk* chromium-browser python2 python2-dev \
@@ -45,9 +50,12 @@ RUN mkdir -p /opt/java/linux-x64/jre/lib/amd64 && \
 
 # Download LM Studio image
 RUN cd /opt && \
-    wget https://installers.lmstudio.ai/linux/x64/0.4.8-1/LM-Studio-0.4.8-1-x64.AppImage && \
-    chmod +x LM-Studio-0.4.8-1-x64.AppImage && \
-    ln -s LM-Studio-0.4.8-1-x64.AppImage LM-Studio.AppImage
+    wget -q \
+      "https://installers.lmstudio.ai/linux/x64/${LMSTUDIO_VERSION}-${LMSTUDIO_BUILD}/LM-Studio-${LMSTUDIO_VERSION}-${LMSTUDIO_BUILD}-x64.AppImage" \
+      -O "LM-Studio-${LMSTUDIO_VERSION}-${LMSTUDIO_BUILD}-x64.AppImage" && \
+    echo "${LMSTUDIO_SHA256}  LM-Studio-${LMSTUDIO_VERSION}-${LMSTUDIO_BUILD}-x64.AppImage" | sha256sum -c - && \
+    chmod +x "LM-Studio-${LMSTUDIO_VERSION}-${LMSTUDIO_BUILD}-x64.AppImage" && \
+    ln -s "LM-Studio-${LMSTUDIO_VERSION}-${LMSTUDIO_BUILD}-x64.AppImage" LM-Studio.AppImage
 
 ENV PATH=${PATH}:/opt/
 
