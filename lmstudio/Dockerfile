@@ -8,9 +8,22 @@ ARG LMSTUDIO_BUILD=1
 ARG LMSTUDIO_SHA256=c1bdf195281e25dc921af5c91eb2502035240dce1217140c43036d6cf3038fd8
 
 RUN apt-get update && \
-    apt install -y -qq xfce4 xfce4-terminal firefox gcc lua5.3 liblua5.3-dev lua-term lua-posix lua-filesystem lua-json \
-    tcl tcl-dev python2.7 build-essential libgtk2.0-0 libgconf-2-4 libcanberra-gtk* chromium-browser python2 python2-dev \
+    apt install -y -qq xfce4 xfce4-terminal gcc lua5.3 liblua5.3-dev lua-term lua-posix lua-filesystem lua-json \
+    tcl tcl-dev python2.7 build-essential libgtk2.0-0 libgconf-2-4 libcanberra-gtk* python2 python2-dev \
     freeglut3 rsync screen tree file wget zip unzip bzip2 ncdu htop iotop strace gdb curl > /dev/null
+
+# Install Firefox from Mozilla's official APT repository.
+# Ubuntu 22.04's firefox package is a Snap transitional package,
+# which does not work well in a Docker/VNC environment.
+RUN install -d -m 0755 /etc/apt/keyrings && \
+    wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg \
+        -O /etc/apt/keyrings/packages.mozilla.org.asc && \
+    echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" \
+        > /etc/apt/sources.list.d/mozilla.list && \
+    printf 'Package: *\nPin: origin packages.mozilla.org\nPin-Priority: 1000\n' \
+        > /etc/apt/preferences.d/mozilla && \
+    apt-get update && \
+    apt-get install -y firefox
 
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
 
