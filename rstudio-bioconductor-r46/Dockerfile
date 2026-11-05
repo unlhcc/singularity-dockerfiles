@@ -1,4 +1,4 @@
-FROM bioconductor/bioconductor_docker:RELEASE_3_21
+FROM bioconductor/bioconductor_docker:RELEASE_3_23
 
 RUN apt-get -q update && \
     apt-get -y -q install lua5.3 lua-filesystem lua-posix lua-term lua-json ssh > /dev/null
